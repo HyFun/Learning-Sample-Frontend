@@ -3,8 +3,9 @@
  * @Date         : 2021-01-27 13:56:12
  * @Description  : rollup 打包配置
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-01-27 15:11:59
+ * @LastEditTime : 2021-01-29 15:18:01
  */
+import babel from 'rollup-plugin-babel'
 
 export default {
     input: 'src/index.js',

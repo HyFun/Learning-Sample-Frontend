@@ -3,7 +3,7 @@
  * @Date         : 2021-01-29 15:59:50
  * @Description  :
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-01-29 18:35:21
+ * @LastEditTime : 2021-01-29 18:48:02
  */
 import { def } from "./util/index.js";
 // -----------------处理数组--------------
@@ -24,7 +24,7 @@ const ARRAY_INTERCEPTOR_METHODS = [
 ARRAY_INTERCEPTOR_METHODS.forEach((method) => {
   const origin = originArrayProto[method];
   def(transformArray, method, function mutator(...args) {
-    const result = origin.applay(this, args);
+    const result = origin.apply(this, args);
     // 对更新进来的数据进行拦截
     let inserted;
     switch (method) {

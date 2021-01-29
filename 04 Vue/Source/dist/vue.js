@@ -52,7 +52,7 @@
         args[_key] = arguments[_key];
       }
 
-      var result = origin.applay(this, args); // 对更新进来的数据进行拦截
+      var result = origin.apply(this, args); // 对更新进来的数据进行拦截
 
       var inserted;
 

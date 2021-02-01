@@ -3,9 +3,10 @@
  * @Date         : 2021-01-29 15:59:50
  * @Description  :
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-01-29 18:48:02
+ * @LastEditTime : 2021-02-01 18:13:10
  */
 import { def } from "./util/index.js";
+import Dep from "./dep";
 // -----------------处理数组--------------
 
 const originArrayProto = Array.prototype;
@@ -44,20 +45,20 @@ ARRAY_INTERCEPTOR_METHODS.forEach((method) => {
 // -----------------数据拦截--------------
 
 function defineReactive(obj, key, val, enumerable) {
-  // 函数内部就是一个局部作用域, 这个 value 就只在函数内使用的变量 ( 闭包 )
-  if (typeof val === "object" && val != null) {
-    // 是非数组的引用类型
-    observe(val); // 递归
-  }
-
+  const dep = new Dep();
   Object.defineProperty(obj, key, {
     configurable: true,
     enumerable: !!enumerable,
     get() {
+      dep.depend();
       return val;
     },
     set(newVal) {
-      val = newVal;
+      if (newVal != val) {
+        observe(newVal)
+        val = newVal;
+        dep.notify();
+      }
     },
   });
 }
@@ -82,6 +83,12 @@ export function observe(obj) {
     for (let i = 0; i < keys.length; i++) {
       let prop = keys[i]; // 属性名
       defineReactive(obj, prop, obj[prop], true);
+      // 如果是个对象，则继续递归
+      // 函数内部就是一个局部作用域, 这个 value 就只在函数内使用的变量 ( 闭包 )
+      if (typeof obj[prop] === "object" && obj[prop] != null) {
+        // 是非数组的引用类型
+        observe(obj[prop]); // 递归
+      }
     }
   }
 }

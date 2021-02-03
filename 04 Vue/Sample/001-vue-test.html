@@ -1,0 +1,46 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-02-03 14:37:58
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-02-03 14:43:04
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue</title>
+  </head>
+  <body>
+    <div id="app">
+        <h2>用户信息</h2>
+        <div>
+            <p>姓名：{{ user.name }} {{ version }}</p>
+            <p>年龄：{{ user.age }}</p>
+            <p>身高：{{ user.height }}cm</p>
+            <p>体重：{{ user.weight }}kg</p>
+        </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          user: {
+            name: "张三",
+            age: 23,
+            height: 172,
+            weight: 55,
+            hobby: [
+              { id: 1, name: "唱跳" },
+              { id: 2, name: "rap" },
+              { id: 3, name: "篮球" },
+            ],
+          },
+          version: "v0.0.2",
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-02-04 15:48:47
+ * @Description  : Proxy使用
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-02-04 16:36:32
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy使用</title>
+  </head>
+  <body>
+  </body>
+</html>
+<script>
+  var obj = [];
+
+  var nobj = new Proxy(obj, {
+    get(target, key, receiver) {
+      console.log("获取值");
+      return Reflect.get(target, key, receiver);
+    },
+    set(target, key, value, receiver) {
+      console.log("设置值:" + value);
+      return Reflect.set(target, key, value, receiver);
+    },
+  });
+</script>

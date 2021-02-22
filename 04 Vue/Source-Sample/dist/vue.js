@@ -145,7 +145,10 @@
       },
       set: function set(newVal) {
         if (newVal != val) {
-          observe(newVal);
+          if (newVal && _typeof(newVal) === "object") {
+            observe(newVal);
+          }
+
           val = newVal;
           dep.notify();
         }

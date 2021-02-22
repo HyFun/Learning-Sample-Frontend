@@ -3,7 +3,7 @@
  * @Date         : 2021-01-29 15:59:50
  * @Description  :
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-02-01 18:13:10
+ * @LastEditTime : 2021-02-22 14:25:22
  */
 import { def } from "./util/index.js";
 import Dep from "./dep";
@@ -55,7 +55,9 @@ function defineReactive(obj, key, val, enumerable) {
     },
     set(newVal) {
       if (newVal != val) {
-        observe(newVal)
+        if (newVal && typeof newVal === "object") {
+          observe(newVal);
+        }
         val = newVal;
         dep.notify();
       }

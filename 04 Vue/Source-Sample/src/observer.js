@@ -3,7 +3,7 @@
  * @Date         : 2021-01-29 15:59:50
  * @Description  :
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-02-22 14:25:22
+ * @LastEditTime : 2021-02-22 14:56:16
  */
 import { def } from "./util/index.js";
 import Dep from "./dep";
@@ -46,6 +46,10 @@ ARRAY_INTERCEPTOR_METHODS.forEach((method) => {
 
 function defineReactive(obj, key, val, enumerable) {
   const dep = new Dep();
+
+  // 深层次递归
+  observe(val);
+
   Object.defineProperty(obj, key, {
     configurable: true,
     enumerable: !!enumerable,
@@ -55,9 +59,7 @@ function defineReactive(obj, key, val, enumerable) {
     },
     set(newVal) {
       if (newVal != val) {
-        if (newVal && typeof newVal === "object") {
-          observe(newVal);
-        }
+        observe(newVal);
         val = newVal;
         dep.notify();
       }
@@ -70,6 +72,10 @@ function defineReactive(obj, key, val, enumerable) {
  * @param {*} value
  */
 export function observe(obj) {
+  if (!(typeof obj === "object" && obj !== null)) {
+    return;
+  }
+
   // 之前没有对 obj 本身进行操作, 这一次就直接对 obj 进行判断
   if (Array.isArray(obj)) {
     // 对其每一个元素处理
@@ -87,10 +93,10 @@ export function observe(obj) {
       defineReactive(obj, prop, obj[prop], true);
       // 如果是个对象，则继续递归
       // 函数内部就是一个局部作用域, 这个 value 就只在函数内使用的变量 ( 闭包 )
-      if (typeof obj[prop] === "object" && obj[prop] != null) {
-        // 是非数组的引用类型
-        observe(obj[prop]); // 递归
-      }
+      // if (typeof obj[prop] === "object" && obj[prop] != null) {
+      //   // 是非数组的引用类型
+      //   observe(obj[prop]); // 递归
+      // }
     }
   }
 }

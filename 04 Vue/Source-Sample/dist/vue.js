@@ -135,7 +135,9 @@
   }); // -----------------数据拦截--------------
 
   function defineReactive(obj, key, val, enumerable) {
-    var dep = new Dep();
+    var dep = new Dep(); // 深层次递归
+
+    observe(val);
     Object.defineProperty(obj, key, {
       configurable: true,
       enumerable: !!enumerable,
@@ -145,10 +147,7 @@
       },
       set: function set(newVal) {
         if (newVal != val) {
-          if (newVal && _typeof(newVal) === "object") {
-            observe(newVal);
-          }
-
+          observe(newVal);
           val = newVal;
           dep.notify();
         }
@@ -162,7 +161,11 @@
 
 
   function observe(obj) {
-    // 之前没有对 obj 本身进行操作, 这一次就直接对 obj 进行判断
+    if (!(_typeof(obj) === "object" && obj !== null)) {
+      return;
+    } // 之前没有对 obj 本身进行操作, 这一次就直接对 obj 进行判断
+
+
     if (Array.isArray(obj)) {
       // 对其每一个元素处理
       obj.__proto__ = transformArray;
@@ -181,11 +184,10 @@
 
         defineReactive(obj, prop, obj[prop], true); // 如果是个对象，则继续递归
         // 函数内部就是一个局部作用域, 这个 value 就只在函数内使用的变量 ( 闭包 )
-
-        if (_typeof(obj[prop]) === "object" && obj[prop] != null) {
-          // 是非数组的引用类型
-          observe(obj[prop]); // 递归
-        }
+        // if (typeof obj[prop] === "object" && obj[prop] != null) {
+        //   // 是非数组的引用类型
+        //   observe(obj[prop]); // 递归
+        // }
       }
     }
   }

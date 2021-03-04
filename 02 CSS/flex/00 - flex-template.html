@@ -1,0 +1,235 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-03-04 17:28:03
+ * @Description  : flex布局最基本的框架
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-03-04 19:13:21
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flex-template模板</title>
+    <link rel="stylesheet" href="./common.css" />
+    <style>
+      /* flex-direction */
+      .flex_direction .row {
+        flex-direction: row;
+      }
+
+      .flex_direction .row_reverse {
+        flex-direction: row-reverse;
+      }
+
+      .flex_direction .column {
+        flex-direction: column;
+      }
+
+      .flex_direction .column_reverse {
+        flex-direction: column-reverse;
+      }
+
+      /* flex-wrap */
+      .flex_wrapper .nowrap{
+          flex-wrap: nowrap;
+      }
+
+      .flex_wrapper .wrap{
+          flex-wrap: wrap;
+      }
+
+      .flex_wrapper .wrap_reverse{
+          flex-wrap: wrap-reverse;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>父元素属性</h1>
+    <h2>display</h2>
+    <div class="container">
+      <div class="item">
+        <div class="title">flex</div>
+        <div class="description">
+          Flexible Box 模型，通常被称为 flexbox，是一种一维的布局模型。它给
+          flexbox 的子元素之间提供了强大的空间分布和对齐能力。 在 flex
+          容器中默认存在两条轴，水平主轴(main axis) 和垂直的交叉轴(cross
+          axis)，这是默认的设置，当然你可以通过修改使垂直方向变为主轴，水平方向变为交叉轴，这个我们后面再说。
+        </div>
+        <div class="flex_wrap">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- flex-direction -->
+    <h2>flex-direction</h2>
+    <div class="container flex_direction">
+      <div class="item">
+        <div class="title">row</div>
+        <div class="description">
+          是flex-direction的默认值。 flex容器的主轴被定义为与文本方向相同。
+          主轴起点和主轴终点与内容方向相同。
+        </div>
+        <div class="flex_wrap row">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">row-reverse</div>
+        <div class="description">
+          表现和row相同，但是置换了主轴起点和主轴终点
+        </div>
+        <div class="flex_wrap row_reverse">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">column</div>
+        <div class="description">
+            flex容器的主轴和块轴相同。主轴起点与主轴终点和书写模式的前后点相同
+        </div>
+        <div class="flex_wrap column">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+        </div>
+      </div>
+
+      
+      <div class="item">
+        <div class="title">column-reverse</div>
+        <div class="description">
+            表现和column相同，但是置换了主轴起点和主轴终点
+        </div>
+        <div class="flex_wrap column_reverse">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <!-- flex-wrap -->
+    <h2>flex-wrap</h2>
+    <div class="container flex_wrapper">
+      <div class="item">
+        <div class="title">nowrap</div>
+        <div class="description">
+            flex-direction为row时，会压缩子元素
+        </div>
+        <div class="flex_wrap nowrap">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">nowrap</div>
+        <div class="description">
+            flex-direction为row-reverse时，会压缩子元素
+        </div>
+        <div class="flex_wrap nowrap" style="flex-direction: row-reverse;">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">nowrap</div>
+        <div class="description">
+            flex-direction为column时，多余元素会超出
+        </div>
+        <div class="flex_wrap nowrap" style="flex-direction: column;">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">nowrap</div>
+        <div class="description">
+            flex-direction为column-reverse时，多余元素会超出
+        </div>
+        <div class="flex_wrap nowrap" style="flex-direction: column-reverse;">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+        </div>
+      </div>
+
+
+      <div class="item">
+        <div class="title">wrap</div>
+        <div class="description">
+            flex-direction为row时，多余元素会换行
+        </div>
+        <div class="flex_wrap wrap" style="flex-direction: row;">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+        </div>
+      </div>
+
+
+      <div class="item">
+        <div class="title">wrap-reverse</div>
+        <div class="description">
+            flex-direction为row时，会换行，交叉轴位置会交换
+        </div>
+        <div class="flex_wrap wrap_reverse" style="flex-direction: row;">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">wrap-reverse</div>
+        <div class="description">
+            flex-direction为column时，会换行，交叉轴位置会交换
+        </div>
+        <div class="flex_wrap wrap_reverse" style="flex-direction: column;">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

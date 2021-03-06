@@ -3,7 +3,7 @@
  * @Date         : 2021-03-04 17:28:03
  * @Description  : flex布局最基本的框架
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-03-06 16:52:56
+ * @LastEditTime : 2021-03-06 17:30:34
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -796,6 +796,109 @@
       </div>
 
 
+    </div>
+
+
+    <h1>子元素属性</h1>
+    <h2>order</h2>
+    <div class="container">
+
+      <div class="item">
+        <div class="title">number</div>
+        <div class="description">
+          规定了item在父盒子中的排序规则，order值越大，排序约后
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap">
+          <div class="flex_item" style="order: 3;">1</div>
+          <div class="flex_item" style="order: 2;">2</div>
+          <div class="flex_item" style="order: 1;">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>flex-grow</h2>
+    <div class="container">
+
+      <div class="item">
+        <div class="title">number</div>
+        <div class="description">
+          可以看到，3只设置了宽度，所以宽度固定，留下的剩余空间分为3份。1设置的flex-grow：2，占了剩余空间的2/3，2设置的flex-grow：1，占了剩余空间的1/3
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap">
+          <div class="flex_item" style="flex-grow: 2;">1</div>
+          <div class="flex_item" style="flex-grow: 1;">2</div>
+          <div class="flex_item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>flex-shrink</h2>
+    <div class="container">
+
+      <div class="item">
+        <div class="title">number</div>
+        <div class="description">
+          flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
+          <br />
+          结果：5的flex-shrink：0，表示不会缩小；6的flex-shrink：2，表示会比之前的缩小的更多
+        </div>
+        <div class="flex_wrap">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item" style="flex-shrink: 0;">5</div>
+          <div class="flex_item" style="flex-shrink: 2;">6</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>flex</h2>
+    <div class="container">
+
+      <div class="item">
+        <div class="title">0 1 auto</div>
+        <div class="description">
+          flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap">
+          <div class="flex_item" style="flex: 1;">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">6</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>align-self</h2>
+    <div class="container">
+
+      <div class="item">
+        <div class="title">number</div>
+        <div class="description">
+          align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap">
+          <div class="flex_item" style="align-self: flex-start;">1</div>
+          <div class="flex_item" style="align-self: flex-end;">2</div>
+          <div class="flex_item" style="align-self: center;">3</div>
+          <div class="flex_item" style="align-self: baseline;">4</div>
+          <div class="flex_item" style="align-self: stretch;">5</div>
+          <div class="flex_item">6</div>
+        </div>
+      </div>
     </div>
 
 

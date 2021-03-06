@@ -3,7 +3,7 @@
  * @Date         : 2021-03-04 17:28:03
  * @Description  : flex布局最基本的框架
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-03-04 19:13:21
+ * @LastEditTime : 2021-03-06 16:52:56
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -32,17 +32,139 @@
       }
 
       /* flex-wrap */
-      .flex_wrapper .nowrap{
-          flex-wrap: nowrap;
+      .flex_wrapper .nowrap {
+        flex-wrap: nowrap;
       }
 
-      .flex_wrapper .wrap{
-          flex-wrap: wrap;
+      .flex_wrapper .wrap {
+        flex-wrap: wrap;
       }
 
-      .flex_wrapper .wrap_reverse{
-          flex-wrap: wrap-reverse;
+      .flex_wrapper .wrap_reverse {
+        flex-wrap: wrap-reverse;
       }
+
+      /* flex-flow */
+      .flex_flow .row_nowrap {
+        flex-flow: row nowrap;
+      }
+
+      .flex_flow .row_reverse_nowrap {
+        flex-flow: row-reverse nowrap;
+      }
+
+      .flex_flow .column_nowrap {
+        flex-flow: column nowrap;
+      }
+
+      .flex_flow .column_reverse_nowrap {
+        flex-flow: column-reverse nowrap;
+      }
+
+      /* justify-content */
+      .justify_content .flex_start{
+        justify-content: flex-start;
+      }
+
+      .justify_content .flex_end{
+        justify-content: flex-end;
+      }
+
+      .justify_content .center{
+        justify-content: center;
+      }
+
+      .justify_content .space_between{
+        justify-content: space-between;
+      }
+
+      .justify_content .space-around{
+        justify-content: space-around;
+      }
+
+      /* justify-items */
+      .justify_items .start{
+        flex-wrap: wrap;
+        justify-items: start;
+      }
+
+      .justify_items .flex-start{
+        flex-wrap: wrap;
+        justify-items: flex-start;
+      }
+
+      .justify_items .end{
+        flex-wrap: wrap;
+        justify-items: end;
+      }
+
+      .justify_items .flex-end{
+        flex-wrap: wrap;
+        justify-items: flex-end;
+      }
+
+      .justify_items .center{
+        flex-wrap: wrap;
+        justify-items: center;
+      }
+
+      .justify_items .stretch{
+        flex-wrap: wrap;
+        justify-items: stretch;
+      }
+
+      /* .align-content */
+      .align_content .flex-start{
+        flex-wrap: wrap;
+        align-content: flex-start;
+      }
+
+      .align_content .flex-end{
+        flex-wrap: wrap;
+        align-content: flex-end;
+      }
+
+      .align_content .center{
+        flex-wrap: wrap;
+        align-content: center;
+      }
+
+      .align_content .space-between{
+        flex-wrap: wrap;
+        align-content: space-between;
+      }
+
+      .align_content .space-around{
+        flex-wrap: wrap;
+        align-content: space-around;
+      }
+
+      /* align-items */
+      .align_items .start{
+        flex-wrap: wrap;
+        align-items: start;
+      }
+
+      .align_items .flex-start{
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+
+      .align_items .end{
+        flex-wrap: wrap;
+        align-items: end;
+      }
+
+      .align_items .flex-end{
+        flex-wrap: wrap;
+        align-items: flex-end;
+      }
+
+      .align_items .center{
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
     </style>
   </head>
   <body>
@@ -96,7 +218,7 @@
       <div class="item">
         <div class="title">column</div>
         <div class="description">
-            flex容器的主轴和块轴相同。主轴起点与主轴终点和书写模式的前后点相同
+          flex容器的主轴和块轴相同。主轴起点与主轴终点和书写模式的前后点相同
         </div>
         <div class="flex_wrap column">
           <div class="flex_item">1</div>
@@ -105,11 +227,10 @@
         </div>
       </div>
 
-      
       <div class="item">
         <div class="title">column-reverse</div>
         <div class="description">
-            表现和column相同，但是置换了主轴起点和主轴终点
+          表现和column相同，但是置换了主轴起点和主轴终点
         </div>
         <div class="flex_wrap column_reverse">
           <div class="flex_item">1</div>
@@ -117,19 +238,14 @@
           <div class="flex_item">3</div>
         </div>
       </div>
-
-
     </div>
-
 
     <!-- flex-wrap -->
     <h2>flex-wrap</h2>
     <div class="container flex_wrapper">
       <div class="item">
         <div class="title">nowrap</div>
-        <div class="description">
-            flex-direction为row时，会压缩子元素
-        </div>
+        <div class="description">flex-direction为row时，会压缩子元素</div>
         <div class="flex_wrap nowrap">
           <div class="flex_item">1</div>
           <div class="flex_item">2</div>
@@ -143,9 +259,9 @@
       <div class="item">
         <div class="title">nowrap</div>
         <div class="description">
-            flex-direction为row-reverse时，会压缩子元素
+          flex-direction为row-reverse时，会压缩子元素
         </div>
-        <div class="flex_wrap nowrap" style="flex-direction: row-reverse;">
+        <div class="flex_wrap nowrap" style="flex-direction: row-reverse">
           <div class="flex_item">1</div>
           <div class="flex_item">2</div>
           <div class="flex_item">3</div>
@@ -157,10 +273,8 @@
 
       <div class="item">
         <div class="title">nowrap</div>
-        <div class="description">
-            flex-direction为column时，多余元素会超出
-        </div>
-        <div class="flex_wrap nowrap" style="flex-direction: column;">
+        <div class="description">flex-direction为column时，多余元素会超出</div>
+        <div class="flex_wrap nowrap" style="flex-direction: column">
           <div class="flex_item">1</div>
           <div class="flex_item">2</div>
           <div class="flex_item">3</div>
@@ -172,9 +286,9 @@
       <div class="item">
         <div class="title">nowrap</div>
         <div class="description">
-            flex-direction为column-reverse时，多余元素会超出
+          flex-direction为column-reverse时，多余元素会超出
         </div>
-        <div class="flex_wrap nowrap" style="flex-direction: column-reverse;">
+        <div class="flex_wrap nowrap" style="flex-direction: column-reverse">
           <div class="flex_item">1</div>
           <div class="flex_item">2</div>
           <div class="flex_item">3</div>
@@ -182,30 +296,11 @@
           <div class="flex_item">5</div>
         </div>
       </div>
-
 
       <div class="item">
         <div class="title">wrap</div>
-        <div class="description">
-            flex-direction为row时，多余元素会换行
-        </div>
-        <div class="flex_wrap wrap" style="flex-direction: row;">
-          <div class="flex_item">1</div>
-          <div class="flex_item">2</div>
-          <div class="flex_item">3</div>
-          <div class="flex_item">4</div>
-          <div class="flex_item">5</div>
-          <div class="flex_item">6</div>
-        </div>
-      </div>
-
-
-      <div class="item">
-        <div class="title">wrap-reverse</div>
-        <div class="description">
-            flex-direction为row时，会换行，交叉轴位置会交换
-        </div>
-        <div class="flex_wrap wrap_reverse" style="flex-direction: row;">
+        <div class="description">flex-direction为row时，多余元素会换行</div>
+        <div class="flex_wrap wrap" style="flex-direction: row">
           <div class="flex_item">1</div>
           <div class="flex_item">2</div>
           <div class="flex_item">3</div>
@@ -218,18 +313,491 @@
       <div class="item">
         <div class="title">wrap-reverse</div>
         <div class="description">
-            flex-direction为column时，会换行，交叉轴位置会交换
+          flex-direction为row时，会换行，交叉轴位置会交换
         </div>
-        <div class="flex_wrap wrap_reverse" style="flex-direction: column;">
+        <div class="flex_wrap wrap_reverse" style="flex-direction: row">
           <div class="flex_item">1</div>
           <div class="flex_item">2</div>
           <div class="flex_item">3</div>
           <div class="flex_item">4</div>
           <div class="flex_item">5</div>
           <div class="flex_item">6</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">wrap-reverse</div>
+        <div class="description">
+          flex-direction为column时，会换行，交叉轴位置会交换
+        </div>
+        <div class="flex_wrap wrap_reverse" style="flex-direction: column">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- flex-flow -->
+    <h2>flex-flow</h2>
+    <div class="container flex_flow">
+      <div class="item">
+        <div class="title">row nowrap</div>
+        <div class="description">
+          flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row
+          nowrap。
+          <br />
+          结果：item宽度会被压缩，不会换行
+        </div>
+        <div class="flex_wrap nowrap">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">row-reverse nowrap</div>
+        <div class="description">
+          结果：item从右向左排列，item宽度会被压缩，不会换行
+        </div>
+        <div class="flex_wrap row_reverse_nowrap">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">column nowrap</div>
+        <div class="description">
+          结果：item从上到下排列，不会换行（会溢出）
+        </div>
+        <div class="flex_wrap column_nowrap">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">column-reverse nowrap</div>
+        <div class="description">
+          结果：item从下到上排列，不会换行（会溢出）
+        </div>
+        <div class="flex_wrap column_reverse_nowrap">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- justify-content -->
+    <h2>justify-content</h2>
+    <div class="container justify_content">
+
+      <div class="item">
+        <div class="title">flex-start</div>
+        <div class="description">
+          justify-content属性定义了项目在主轴上的对齐方式
+          <br />
+          结果：排列顺序开始位置
+        </div>
+        <div class="flex_wrap flex_start">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">flex-end</div>
+        <div class="description">
+          justify-content属性定义了项目在主轴上的对齐方式
+          <br />
+          结果：排列顺序结束位置
+        </div>
+        <div class="flex_wrap flex_end">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">center</div>
+        <div class="description">
+          justify-content属性定义了项目在主轴上的对齐方式
+          <br />
+          结果：排列顺序中间
+        </div>
+        <div class="flex_wrap center">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">space-between</div>
+        <div class="description">
+          justify-content属性定义了项目在主轴上的对齐方式
+          <br />
+          结果：左右各占一个，中间位置其他item平分
+        </div>
+        <div class="flex_wrap space_between">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">space-around</div>
+        <div class="description">
+          justify-content属性定义了项目在主轴上的对齐方式
+          <br />
+          结果：item被均匀分配
+        </div>
+        <div class="flex_wrap space-around">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- justify-items -->
+    <h2>justify-items</h2>
+    <div class="container justify_items">
+
+      <div class="item">
+        <div class="title">start</div>
+        <div class="description">
+          justify-items 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap start">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+
+      <div class="item">
+        <div class="title">flex-start</div>
+        <div class="description">
+          justify-items 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap flex-start">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">end</div>
+        <div class="description">
+          justify-items 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap end">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">flex-end</div>
+        <div class="description">
+          justify-items 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap flex-end">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">center</div>
+        <div class="description">
+          justify-items 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap center">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+
+      <div class="item">
+        <div class="title">stretch</div>
+        <div class="description">
+          justify-items 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap stretch">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
         </div>
       </div>
 
     </div>
+
+
+    <!-- align-content -->
+    <h2>align-content</h2>
+    <div class="container align_content">
+
+      <div class="item">
+        <div class="title">flex-start</div>
+        <div class="description">
+          align-content 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap flex-start">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">flex-end</div>
+        <div class="description">
+          align-content 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap flex-end">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+
+      <div class="item">
+        <div class="title">center</div>
+        <div class="description">
+          justify-items 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap center">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">space-between</div>
+        <div class="description">
+          justify-items 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap space-between">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">space-around</div>
+        <div class="description">
+          justify-items 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap space-around">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+          <div class="flex_item">8</div>
+          <div class="flex_item">9</div>
+          <div class="flex_item">10</div>
+          <div class="flex_item">11</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- align-items -->
+    <h2>align-items</h2>
+    <div class="container align_items">
+
+      <div class="item">
+        <div class="title">start</div>
+        <div class="description">
+          align-content 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap start">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+
+      <div class="item">
+        <div class="title">flex-start</div>
+        <div class="description">
+          align-content 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap flex-start">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">end</div>
+        <div class="description">
+          align-content 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap end">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">flex-end</div>
+        <div class="description">
+          align-content 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap flex-end">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">center</div>
+        <div class="description">
+          align-content 属性为所有盒中的项目定义了默认的 justify-self ， 可以使这些项目以默认方式沿适当轴线对齐到每个盒子。
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap center">
+          <div class="flex_item">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+          <div class="flex_item">4</div>
+          <div class="flex_item">5</div>
+          <div class="flex_item">6</div>
+          <div class="flex_item">7</div>
+        </div>
+      </div>
+
+
+    </div>
+
+
   </body>
 </html>

@@ -1,0 +1,45 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-03-29 21:52:23
+ * @Description  : 盒子模型
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-03-29 22:08:39
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+
+    <style>
+      .box1 {
+        width: 400px;
+        height: 400px;
+        background-color: pink;
+        margin: 100px auto;
+        overflow: hidden;
+      }
+
+      .box2 {
+        width: 100px;
+        height: 100px;
+        margin: 50px;
+        border: 50px solid red;
+        padding: 50px;
+        background-color: orange;
+        background-repeat: no-repeat;
+        background-image: url(../../00_Resource/assets/html/vue.png);
+        background-origin: content-box;
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box1">
+      <div class="box2"></div>
+    </div>
+  </body>
+</html>

@@ -3,7 +3,7 @@
  * @Date         : 2021-03-29 16:14:10
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-03-29 16:17:18
+ * @LastEditTime : 2021-03-29 21:32:36
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>文本</title>
     <style>
+      .box {
+        width: 200px;
+        border: 1px solid #ddd;
+      }
+
       .left {
         text-align: left;
       }
@@ -21,14 +26,46 @@
         text-align: center;
       }
 
+      .justify {
+        text-align: justify;
+      }
+
       .right {
         text-align: right;
+      }
+
+      .text-blue {
+        color: blue;
       }
     </style>
   </head>
   <body>
+
+    <h3>1. 文字位置</h3>
     <div class="left">文字在左侧</div>
     <div class="center">文字在中间</div>
     <div class="right">文字在右侧</div>
+    <div class="box justify">
+      text-align: justify;
+      “当我年轻的时候，我梦想改变这个世界；当我成熟以后，我发现我不能够改变这个世界，我将目光缩短了些，决定只改变我的国家；当我进入暮年以后，我发现我不能够改变我们的国家，我的最后愿望仅仅是改变一下我的家庭，但是，这也不可能。当我现在躺在床上，行将就木时，我突然意识到：如果一开始我仅仅去改变我自己，然后，我可能改变我的家庭；在家人的帮助和鼓励下，我可能为国家做一些事情；然后，谁知道呢?我甚至可能改变这个世界。”
+    </div>
+
+    <h3>2. 文字颜色</h3>
+    <div class="text-blue">蓝色的文字</div>
+
+    <h3>3.文本修饰</h3>
+    <div style="text-decoration: overline;">上划线</div>
+    <div style="text-decoration: underline;">下划线</div>
+    <div style="text-decoration: line-through;">中划线 （删除线）</div>
+
+    <h3>4. 文本缩进</h3>
+    <div class="box" style="text-indent: 2em;text-align: justify;">
+      “当我年轻的时候，我梦想改变这个世界；当我成熟以后，我发现我不能够改变这个世界，我将目光缩短了些，决定只改变我的国家；当我进入暮年以后，我发现我不能够改变我们的国家，我的最后愿望仅仅是改变一下我的家庭，但是，这也不可能。当我现在躺在床上，行将就木时，我突然意识到：如果一开始我仅仅去改变我自己，然后，我可能改变我的家庭；在家人的帮助和鼓励下，我可能为国家做一些事情；然后，谁知道呢?我甚至可能改变这个世界。”
+    </div>
+
+    <h3>5. 文本转换</h3>
+    <div style="text-transform: lowercase;">Hello Word! 转小写</div>
+    <div style="text-transform: uppercase;">Hello Word! 转大写</div>
+    <div style="text-transform: capitalize;">hello word! 首字母大写</div>
   </body>
 </html>

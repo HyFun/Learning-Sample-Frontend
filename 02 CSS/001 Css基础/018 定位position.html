@@ -1,0 +1,58 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-03-30 15:04:56
+ * @Description  : 定位
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-03-30 15:34:10
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定位</title>
+    <style>
+        .static {
+            position: static;
+            width: 400px;
+            height: 400px;
+            background-color: purple;
+        }
+
+        .relative {
+            position: relative;
+            left: 20px;
+            top: 0;
+            width: 400px;
+            height: 400px;
+            background-color: pink;
+        }
+
+        .absolute {
+            position: absolute;
+            right: 20px;
+            top: 0;
+            width: 400px;
+            height: 400px;
+            background-color: blue;
+        }
+
+        .fixed {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>四种定位方式</h2>
+    <div class="static">static</div>
+    <div class="relative">relative</div>
+    <div class="absolute">absolute</div>
+    <div class="fixed">fixed</div>
+</body>
+</html>

@@ -3,7 +3,7 @@
  * @Date         : 2021-03-06 18:53:52
  * @Description  : 文字换行和内容溢出
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-03-29 16:07:16
+ * @LastEditTime : 2021-03-30 11:16:13
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +37,42 @@
         -webkit-line-clamp: 3;
         overflow: hidden;
       }
+
+      .container {
+        width: 200px;
+        border: 1px solid #ddd;
+      }
+
+
+      .single_line {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .multiple_line {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+
+      .multiple_line_compat {
+        line-height: 20px;
+        height: 60px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .multiple_line_compat::after {
+        content: '...';
+        position: absolute;
+        line-height: 20px;
+        height: 20px;
+        right: 10px;
+        bottom: 0;
+        background-color: #fff;
+      }
     </style>
   </head>
   <body>
@@ -49,5 +85,15 @@
     <div class="box multiple">
       这是多行文本溢出省略！这是多行文本溢出省略！这是多行文本溢出省略！这是多行文本溢出省略！这是多行文本溢出省略！
     </div>
+
+    <h3>文字溢出处理方案</h3>
+    <h4>1. 全部文字</h4>
+    <div class="container">为推动湖北企业复工复产，助力湖北地区经济快速复苏，百度打造12小时直播， 以“宝藏湖北”为核心，选取9个城市9个主人公，带出湖北不止有美食，还有更多美好值得关注的核心信息。 2020年5月27日，百度APP12小时慢直播。带你探索，宝藏湖北和湖北好物背后的故事。</div>
+    <h4>2. 单行溢出</h4>
+    <div class="container single_line">为推动湖北企业复工复产，助力湖北地区经济快速复苏，百度打造12小时直播， 以“宝藏湖北”为核心，选取9个城市9个主人公，带出湖北不止有美食，还有更多美好值得关注的核心信息。 2020年5月27日，百度APP12小时慢直播。带你探索，宝藏湖北和湖北好物背后的故事。</div>
+    <h4>3. 多行溢出 (限制3行)</h4>
+    <div class="container multiple_line">为推动湖北企业复工复产，助力湖北地区经济快速复苏，百度打造12小时直播， 以“宝藏湖北”为核心，选取9个城市9个主人公，带出湖北不止有美食，还有更多美好值得关注的核心信息。 2020年5月27日，百度APP12小时慢直播。带你探索，宝藏湖北和湖北好物背后的故事。</div>
+    <h4>4. 解决多行兼容问题</h4>
+    <div class="container multiple_line_compat">为推动湖北企业复工复产，助力湖北地区经济快速复苏，百度打造12小时直播， 以“宝藏湖北”为核心，选取9个城市9个主人公，带出湖北不止有美食，还有更多美好值得关注的核心信息。 2020年5月27日，百度APP12小时慢直播。带你探索，宝藏湖北和湖北好物背后的故事。</div>
   </body>
 </html>

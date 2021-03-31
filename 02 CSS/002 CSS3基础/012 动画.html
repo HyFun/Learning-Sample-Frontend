@@ -1,0 +1,39 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-03-31 22:48:09
+ * @Description  : 简单动画
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-03-31 22:52:21
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin: 100px auto;
+            animation: rotate 5000ms linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateZ(0deg);
+            }
+            to {
+                transform: rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+</body>
+</html>

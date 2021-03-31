@@ -3,7 +3,7 @@
  * @Date         : 2021-03-31 14:26:59
  * @Description  : 手机app tabbar实现
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-03-31 15:25:05
+ * @LastEditTime : 2021-03-31 16:06:45
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -49,52 +49,58 @@
       }
 
       .nav_item_wrap:hover {
-          color: #09bb07;
+        color: #09bb07;
       }
 
-      .nav_item_wrap:hover i {
-        width: 40px;
-        height: 40px;
-        font-size: 36px;
+      .nav_item_wrap:hover .nav_item_icon_wrap::before{
+        width: 100%;
+        height: 100%;
       }
 
-      .nav_item_wrap i {
+      .nav_item_wrap:hover .nav_item_icon_wrap i{
+        font-size: 30px;
+      }
+
+      .nav_item_icon_wrap {
         position: absolute;
-        left: 50%;
+        width: 50px;
+        height: 46px;
         bottom: 30px;
-        width: 32px;
-        height: 32px;
-        font-size: 18px;
-        z-index: 1;
-        transform: translateX(-50%);
-      }
-
-      .nav_item_wrap i::before {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: 1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-      }
-
-      .nav_item_wrap:hover i::after {
-        content: "";
-        position: absolute;
-        z-index: 0;
-        width: 130%;
-        height: 130%;
-        top: -10px;
         left: 50%;
         transform: translateX(-50%);
-        border-radius: 50% 50% 0 0;
-        border-top: 2px solid #ddd;
-        background-color: #fff;
-        /* transform: scaleX(1.1); */
       }
+
+      .nav_item_icon_wrap::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 0%;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        border-radius: 50%;
+      }
+
+      .nav_item_icon_wrap::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        background-color: #fff;
+      }
+      .nav_item_icon_wrap i{
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        bottom: 5px;
+        font-size: 20px;
+        transform: translateX(-50%);
+      }
+
 
       .nav_item_wrap span {
         position: absolute;
@@ -111,23 +117,33 @@
     <div class="app">
       <div class="nav">
         <div class="nav_item_wrap">
-          <i class="iconfont icon-home_px_rounded"></i>
+          <label class="nav_item_icon_wrap">
+            <i class="iconfont icon-home_px_rounded"></i>
+          </label>
           <span>首页</span>
         </div>
         <div class="nav_item_wrap">
+          <label class="nav_item_icon_wrap">
             <i class="iconfont icon-perm_identity_px_rounded"></i>
+          </label>
           <span>消息</span>
         </div>
         <div class="nav_item_wrap">
+          <label class="nav_item_icon_wrap">
             <i class="iconfont icon-contacts_px_rounded"></i>
+          </label>
           <span>应用</span>
         </div>
         <div class="nav_item_wrap">
+          <label class="nav_item_icon_wrap">
             <i class="iconfont icon-message_px_rounded"></i>
+          </label>
           <span>联系人</span>
         </div>
         <div class="nav_item_wrap">
+          <label class="nav_item_icon_wrap">
             <i class="iconfont icon-dvr_px_rounded"></i>
+          </label>
           <span>我的</span>
         </div>
       </div>

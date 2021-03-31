@@ -1,0 +1,44 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "12343159",
+      "name": "home_24px_rounded",
+      "font_class": "home_px_rounded",
+      "unicode": "ed3e",
+      "unicode_decimal": 60734
+    },
+    {
+      "icon_id": "12343184",
+      "name": "perm_identity_24px_rounded",
+      "font_class": "perm_identity_px_rounded",
+      "unicode": "ed40",
+      "unicode_decimal": 60736
+    },
+    {
+      "icon_id": "12344133",
+      "name": "contacts_24px_rounded",
+      "font_class": "contacts_px_rounded",
+      "unicode": "ed51",
+      "unicode_decimal": 60753
+    },
+    {
+      "icon_id": "12344135",
+      "name": "message_24px_rounded",
+      "font_class": "message_px_rounded",
+      "unicode": "ed52",
+      "unicode_decimal": 60754
+    },
+    {
+      "icon_id": "12345091",
+      "name": "dvr_24px_rounded",
+      "font_class": "dvr_px_rounded",
+      "unicode": "ed67",
+      "unicode_decimal": 60775
+    }
+  ]
+}

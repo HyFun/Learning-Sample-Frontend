@@ -1,0 +1,44 @@
+{
+    /**
+    * "include" 用来指定哪些ts文件需要被编译
+    *   ** 表示任意目录
+    *    * 表示任意文件
+    * "exclude" 用来指定哪些文件不需要被编译
+    *   默认值：['node_modules','bower_components','jspm_packges']
+    */
+    "include": ["*.ts"],
+    // "exclude": ["word.ts"]
+    // -----------------------
+    // 编译器选项
+    "compilerOptions": {
+        // 用来指定ts编译成es的哪个版本
+        "target": "es2015",
+        // "module": "es2015",
+        // 用来指定项目中所指定的库
+        // "lib": ["DOM"],
+        // 用来指定项目编译完成后所在的文件夹
+        "outDir": "./dist",
+        // "outFile": "./dist/app.js"
+        // 是否对js文件进行编译
+        "allowJs": false,
+        // 是否检查js代码符合语法规范
+        "checkJs": false,
+        // 是否移除注释
+        "removeComments": false,
+        // 不生成编译后的文件
+        "noEmit": false,
+        // 当错误时不生成编译文件
+        "noEmitOnError": true,
+        // -----------------------
+        // 是否开启严格模式
+        "alwaysStrict": false,
+        // 不允许隐式any类型
+        "noImplicitAny": true,
+        // 是否允许不确定的this
+        "noImplicitThis": true,
+        // 严格检查空值
+        "strictNullChecks": true,
+        // 开启所有严格模式
+        "strict": true
+    }
+}

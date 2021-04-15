@@ -1,18 +1,14 @@
 "use strict";
 class Dog {
-    constructor() {
-        this.name = '旺财';
-        this.age = 3;
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
     }
     bark() {
         console.log(`汪汪汪~`);
     }
 }
-const dog1 = new Dog();
-const dog2 = new Dog();
-const dog3 = new Dog();
-const dog4 = new Dog();
+const dog1 = new Dog(`小白`, 2);
+const dog2 = new Dog(`小黑`, 3);
 console.log(dog1);
 console.log(dog2);
-console.log(dog3);
-console.log(dog4);

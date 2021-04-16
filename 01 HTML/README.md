@@ -3,7 +3,7 @@
  * @Date         : 2021-01-22 17:15:22
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-01-22 18:07:37
+ * @LastEditTime : 2021-04-16 18:04:36
 -->
 # HTML
 ## 简介
@@ -128,3 +128,27 @@ HTML称为超文本标记语言，是一种标记语言。它包括一系列标�
     - `localStorage` 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据
     - cookie的过期时间会根据服务器返回的`exprise`和`max-age`来管理的，无论设置cookie存活多久，只要浏览器窗口关闭，cookie就会被移除。
     
+
+## 设置cookie的过期时间
+
+cookie的过期时间通过expires来设置的，
+
+### 以`js-cookie`为例
+```js
+import Cookies from 'js-cookie'
+// 设置cookie
+Cookies.set('name','孙悟空',{ expires: 1 }) // 表示存储过期时间为1天
+Cookies.set('name','孙悟空',{ expires: new Date(new Date().getTime() + 1000) }) // 表示存储时间为1s
+```
+针对js-cookie库的cookie过期时间设置expires的值有两种
+
+- Number: 表示设置存储时间时长为x天
+- Date: Date对象，一个过期的时间点
+
+## 以原生document.cookie为例
+```js
+// 设置一个2025年5月1日过期的cookie
+document.cookie = `name=孙悟空,expires=${new Date('2025/05/01').toGMTString()}`
+```
+原生设置cookie过期时间
+- GMT: `new Date().toGMTString()`

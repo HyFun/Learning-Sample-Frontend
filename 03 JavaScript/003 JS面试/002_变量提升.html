@@ -1,0 +1,27 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-04-16 16:03:36
+ * @Description  : 变量提升
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-04-16 16:08:23
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>变量提升</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  name();
+  var name = function () {
+    console.log(1);
+  };
+  function name() {
+    console.log(2);
+  }
+  name();
+</script>

@@ -1,0 +1,48 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-04-19 11:29:34
+ * @Description  : flex综合
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-04-19 13:45:33
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex综合1</title>
+    <style>
+        * {
+          padding: 0;
+          margin: 0;
+        }
+        .container {
+          width: 600px;
+          height: 300px;
+          display: flex;
+        }
+        .left {
+          flex: 1 2 500px;
+          background: red;
+        }
+        .right {
+          flex: 2 1 400px;
+          background: blue;
+        }
+      </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <div>
+      当总宽度大于父级宽度时，则按照缩小比例（flex-shrink）进行计算：
+      <br>
+      left宽度：500+（600 - （500 + 400））*（2 * 500 /（500 * 2 + 400 * 1）） = 285.72
+      <br>
+      right宽度：400+（600 - （500 + 400））*（1 * 400 /（500 * 2 + 400 * 1））= 314.28
+    </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
  * @Date         : 2021-04-16 16:28:10
  * @Description  : js的数据类型
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-04-16 17:14:17
+ * @LastEditTime : 2021-04-19 11:02:02
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +45,7 @@
     console.log(typeof null); // object
     console.log(typeof undefined); // undefined
     console.log(typeof {}); // object
+    console.log(typeof (()=>{})); // function
 
     /**
      * 2. Object.prototype.toString.call()
@@ -66,7 +67,39 @@
      * 3. 其他判断类型的一些方法
      */
     // 1）判断是否是一个数组
+    console.log('------Array.isArray------');
     console.log(Array.isArray([])); // true
+
+
+    /**
+     * 4. instanceof
+     * A instanceof B 判断A是否为B的实例对象
+     * 注意：判断的是实例对象，基本类型除外
+     */
+     console.log('------instanceof------');
+     // 基本类型
+     console.log('' instanceof String); // false
+     console.log(123 instanceof Number); // false
+     console.log(false instanceof Boolean); // false
+     // null undefined 无法判断
+
+     // 引用类型
+     console.log({} instanceof Object); // true
+     console.log((()=>{}) instanceof Function); // true
+     console.log(/[0-9]/ instanceof RegExp); // true
+     console.log(new Date() instanceof Date); // true
+     // 自定义类
+     class Person {
+         constructor(name, age) {
+             this.name = name
+             this.age = age
+         }
+     }
+     const person = new Person(`孙悟空`,18)
+     console.log(person instanceof Object); // true
+     console.log(person instanceof Person); // true
+     console.log(Object.prototype.toString.call(person)); // [object Object]
+
 
 
 </script>

@@ -3,7 +3,7 @@
  * @Date         : 2021-04-10 11:54:18
  * @Description  :
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-04-17 17:44:11
+ * @LastEditTime : 2021-04-19 22:19:03
  */
 
 const path = require("path");
@@ -16,7 +16,8 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     environment: {
-      arrowFunction: false
+      arrowFunction: false,
+      const: false
     }
   },
   module: {
@@ -82,7 +83,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
-      title: "typescript 学习",
+      template: './src/index.html'
     }),
   ],
   // 用来设置引用模块

@@ -3,7 +3,7 @@
  * @Date         : 2021-04-19 15:13:20
  * @Description  : String
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-04-19 18:39:50
+ * @LastEditTime : 2021-04-20 14:00:33
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -90,10 +90,13 @@
    * 从fromIndex出开始查找是否包含searchValue的值
    * 如果包含，返回该处索引；如果不包含，返回-1
    * fromIndex默认值为0，表示从索引0处开始
+   * fromIndex<0 或 为NaN，则fromIndex从0开始
    */
   console.log(`hello world!`.indexOf("w")); // 6
   console.log(`hello world!`.indexOf("o", 5)); // 7
   console.log(`hello world!`.indexOf("a")); // -1
+  console.log(`hello world!`.indexOf("o",-1)); // 4
+  console.log(`hello world!`.indexOf("o",NaN)); // 4
 
   divider();
 
@@ -105,6 +108,8 @@
 
   console.log(`hello world!`.lastIndexOf("o")); // 7
   console.log(`hello world!`.lastIndexOf("o", 5)); // 4
+  console.log(`hello world!`.lastIndexOf("o", -1)); // -1
+  console.log(`hello world!`.lastIndexOf("o", 20)); // 7
 
   divider();
   /**
@@ -114,7 +119,9 @@
    * 如果 正则使用g，则返回一个所有匹配到的数组
    */
   console.log("hello word!".match(/o/)); // ["o", index: 4, input: "hello word!", groups: undefined]
-  console.log("hello word!".match(/o/g)); // ["o", "o"]
+  console.log("hello word!".match(/h/g)); // ["o", "o"]
+  console.log("hello word!".match(/a/)); // null
+  console.log("hello word!".match(/a/g)); // null
 
   divider();
 
@@ -156,6 +163,8 @@
    * 13. repeat(count)
    */
   console.log(`abc`.repeat(2)); // 重复两次 abcabc
+  console.log(`abc`.repeat(1)); // 'abc'
+  console.log(`abc`.repeat(0)); // ''
 //   console.log(`abc`.repeat(-2)); // Error Invalid count value
 
 
@@ -166,6 +175,10 @@
    * 第二个参数：要替换的字符串|方法处理
    */
   console.log(`hello world!`.replace('o','1')); // hell1 world!  只会替换第一个
+  console.log(`hello world!`.replace('o',(...args)=>{
+    console.log(args);
+    return 1
+  })); // hell1 world!  只会替换第一个
   console.log(`hello world!`.replace(/(o)/g,(...args)=>{
       console.log(args);
       return ''
@@ -200,6 +213,7 @@
    */
   console.log(`hello world!`.slice(0,2)); // he
   console.log(`hello world!`.slice(3,-2)); // llo worl
+  console.log(`hello world!`.slice(-3,-2)); // l
   console.log(`hello world!`.slice(-1,-2)); // 没有内容
 
   divider()
@@ -213,6 +227,7 @@
   console.log(`hello world!`.split()); // ["hello world!"]
   // 参数为空字符串 每一个都会被分割为数组的元素
   console.log(`hello world!`.split('')); //  ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", "!"]
+  console.log(`hello world!`.split('',3)); //  ["h", "e", "l"]
   console.log(`hello world!`.split('').toString() == [...`hello world!`].toString()); // true
   
   divider()
@@ -250,6 +265,11 @@
   console.log(`hello world!`.substr(-20)); // hello world!
   console.log(`hello world!`.substr(20)); // ''
   console.log(`hello world!`.substr(1,5)); // 'ello '
+  {
+    let a = 'hello world!'
+    console.log(a.substr(0,2)); // he
+    console.log(a); // 原字符串不受影响
+  }
 
   divider()
 

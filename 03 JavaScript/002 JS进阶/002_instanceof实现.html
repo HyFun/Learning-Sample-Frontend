@@ -1,0 +1,49 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-04-20 14:24:08
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-04-20 15:09:52
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  function instanceOf(a, b) {
+    const prototype = b.prototype;
+    a = a.__proto__;
+    while (true) {
+      if (a === null) {
+        return false;
+      }
+      if (a === prototype) {
+        return true;
+      }
+      a = a.__proto__;
+    }
+  }
+
+function A (){}
+function B (){}
+function C (name){
+    this.name = name
+}
+
+A.prototype = B.prototype = new C("我是C");
+
+  console.log(instanceOf({}, Object)); // true
+  console.log(instanceOf("", String)); // true
+  console.log(instanceOf("", Boolean)); // false
+
+  // 验证是否比较的是prototype
+  const a = new A();
+  console.log(instanceOf(a, B)); // true
+  console.log(a instanceof B); // true
+</script>

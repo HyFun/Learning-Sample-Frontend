@@ -3,7 +3,7 @@
  * @Date         : 2021-04-20 21:41:30
  * @Description  :
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-04-20 23:23:53
+ * @LastEditTime : 2021-04-21 14:01:03
  */
 // 引入
 import Snake from "./snake";
@@ -59,10 +59,19 @@ export default class Control {
         this.direction = -1;
       }
     } else if (LEGAL_KEYS.includes(code)) {
-      // 说明是方向键
-      this.direction = e.keyCode;
-      // 开始走
-      //   this.run()
+      const code = e.keyCode;
+      // 判断当前蛇的前进方向
+      const snakeDirection = this.snake.direction;
+      if (
+        (snakeDirection === 37 && code === 39) ||
+        (snakeDirection === 38 && code === 40) ||
+        (snakeDirection === 39 && code === 37) ||
+        (snakeDirection === 40 && code === 38)
+      ) {
+      } else {
+        // 说明是方向键
+        this.direction = code;
+      }
     }
   };
 

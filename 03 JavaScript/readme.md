@@ -3,7 +3,7 @@
  * @Date         : 2021-04-19 13:58:53
  * @Description  : 学习笔记
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-04-20 14:05:31
+ * @LastEditTime : 2021-04-21 16:39:26
 -->
 # Javascript
 
@@ -263,4 +263,119 @@ console.log(new String('hello') === 'hello'); // false
 console.log(new String('hello').valueOf() === 'hello'); // true
 ```
 
+## 内置对象Number
+
+### 1. 属性 Number.MAX_SAFE_INTEGER
+- 9007199254740991
+- 在 JavaScript 中最大的安全整数
+### 2. 属性 Number.MIN_SAFE_INTEGER
+- -9007199254740991
+- 在JavaScript中最小安全的整数
+```js 
+console.log(Number.MAX_SAGE_INTEGER) // 9007199254740991
+```
+### 3. 属性 Number.MAX_VALUE
+- 1.7976931348623157e+308
+- 在JavaScript中最大的数
+
+### 4. 属性 Number.MIN_VALUE
+- 5e-324
+- 在JavaScript中最小的正数
+
+**注意：是最小的正值，而不是负值**
+
+### 5. 属性 Number.NaN
+- NaN表示not a number
+- typeof NaN 结果为：number
+**注意：两个NaN互不相等**
+```js
+console.log(Number.NaN == Number.NaN); // false
+console.log(Number.NaN === Number.NaN); // false
+```
+
+### 6. 属性 Number.NEGATIVE_INFINITY 负无穷 | Number.POSITIVE_INFINITY 正无穷
+
+### 7. 静态方法 Number.isFinite(number)
+- 判断number是否是一个有穷数
+- 返回boolean类型
+
+```js
+console.log(Number.isFinite(1)) // true 
+console.log(Number.isFinite(Number.POSITIVE_INFINITY)) // false 
+```
+
+### 8. 静态方法 Number.isInteger(number)
+- 判断number是否是一个整数
+- 返回：boolean类型值
+```js
+console.log(Number.isInteger(1)) // true
+console.log(Number.isInteger(-1)) // true
+console.log(Number.isInteger(1.2)) // false
+```
+
+### 9. 静态方法 Number.isNaN(number)
+- 判断number是否是一个NaN
+- 比全局的`isNaN()`方法更为严格
+
+全局isNaN()方法实现：
+```js
+const isNaN = (value) => {
+  // 使用全局的parseInt进行解析
+  const n = parseInt(value)
+  // 利用 NaN不等于NaN的特性，进行判断
+  return n !== n
+}
+isNaN(111) // false
+isNaN(NaN) // true
+isNaN(`123abcd`) // false  parseInt解析出的是  123  
+isNaN(`a123`) // true   parseInt解析出来的结果是 NaN，所以是NaN
+```
+
+Number.isNaN(number)实现方法：
+```js
+Number.isNaN = (value) => {
+  return isNaN(value) && typeof value === 'number'
+}
+```
+可以看到，Number.isNaN()在全局的基础上，还要判断值是否是一个number类型的值。
+
+### 10. 静态方法 Number.isSafeInteger(number)
+- 用于判断number是否是一个安全的整数
+
+```js
+console.log(Number.isSageInteger(Number.MAX_SAFE_INTEGER)) // true
+console.log(Number.isSageInteger(Number.MIN_SAFE_INTEGER)) // true
+console.log(Number.isSageInteger(Number.MAX_SAFE_INTEGER + 1)) // false
+console.log(Number.isSageInteger(Number.MIN_SAFE_INTEGER - 1)) // false
+```
+
+### 11. 静态方法 Number.parseFloat(number)
+- 将number解析成一个浮点型小数
+- 同全局方法`parseFloat(number)`
+
+### 12. 静态方法 Number.parseInt(number)
+- 将number解析成整数
+- 同全局方法`parseInt(number)`
+```js
+parseInt(123) // 123
+parseInt(`123aaa`) // 123
+parseInt(`a123`) // NaN
+```
+
+### 13. 原型方法 Number.prototype.isFixed(number)
+- 保留number位小数
+- 会四舍五入
+- 返回：字符串
+
+**注意：调用此方法需要使用包装类型的值来进行调用。直接`1.toFixed()`则会报错，可以使用`Number(1).toFixed(2)`才会成功。`new Number(1).toFixed(2)`也可以使用。**
+
+### 14. 原型方法 Number.prototype.toString()
+- 将数字转换为字符串
+
+### 15. 原型方法 Number.prototype.valueOf()
+- 拆箱，将包装类型的值转换为基本类型的值
+```js
+console.log(typeof new Number(1)); // object
+console.log(typeof new Number(1).valueOf()); // number
+```
 

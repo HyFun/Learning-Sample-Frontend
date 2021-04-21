@@ -1,0 +1,48 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-04-20 18:18:33
+ * @Description  : flex-grow
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-04-21 11:07:51
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex-grow</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+.container {
+    width: 600px;
+    height: 300px;
+    display: flex;
+}
+
+.left {
+    width: 500px;
+    flex-grow: 1;
+    flex-shrink: 2;
+    background-color: orange;
+}
+
+.right {
+    width: 400px;
+    flex-grow: 2;
+    flex-shrink: 1;
+    background-color: pink;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-04-21 16:42:21
+ * @Description  : 内置对象Object
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-04-21 18:00:07
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>内置对象Object</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  function divider() {
+    console.log(`-----------------`);
+  }
+
+  /**
+   * 1. 静态方法 Obeject.assign(target, sources)
+   * - 将源对象(sources)合并到目标对象(target)中去
+   * - 如果target中有相同的键，则target中的键将会被覆盖
+   * - 如果target值为undefined或null将会报错
+   *
+   */
+  console.log(Object.assign({ name: "孙悟空" }, { name: "猪八戒", sex: "男" })); // {name: "猪八戒", sex: "男"}
+  console.log(Object.assign([1, 2, 3], [4, 5])); // [4,5,3]
+  console.log(Object.assign({ name: "孙悟空" }, [1, 2, 3])); // {0:1,1:2,2:3,name: '孙悟空'}
+  console.log(Object.assign([1, 2, 3], { name: "孙悟空" })); // [1, 2, 3, name: "孙悟空"]
+  console.log(Object.assign({ name: "孙悟空" }, undefined)); // {name: "孙悟空"}
+  //   console.log(Object.assign(undefined, { name: "孙悟空" })); // 报错
+  console.log(Object.assign({ name: "孙悟空" }, null)); // {name: "孙悟空"}
+  //   console.log(Object.assign(null, { name: "孙悟空" })); // 报错
+  console.log(Object.assign(1, { name: "孙悟空" })); // Number {1, name: "孙悟空"}
+  console.log(Object.assign("", { name: "孙悟空" })); // String {"", name: "孙悟空"}
+  divider();
+
+  /**
+   * 2. 静态方法 Object.create(proto)
+   * - proto 表示新创建对象的原型对象
+   * - 返回一个__proto__是proto的对象
+   * 多用于原型式继承
+   */
+  {
+    function Parent(name) {
+      this.name = name;
+    }
+    Parent.prototype.say = function () {
+      console.log(`我是父母`);
+    };
+    const son = Object.create(Parent.prototype);
+    console.log(son);
+  }
+  divider();
+
+  /**
+   * 3. 静态方法 Object.defineProperty(target, prop, descriptor)
+   * - 会在target中定义一个新属性prop，或者修改一个对象的现有属性prop
+   * - 返回此对象 target
+   * - descriptor 要定义或修改的属性描述符
+   *    - configurable: false。当设置该属性为true时，表示该属性的描述符能够被改变，同时也能被删除
+   *    - enumerable: false。 当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。
+   */
+  // configurable 测试
+  {
+    const obj = { name: "孙悟空" };
+    Object.defineProperty(obj, "name", {
+      configurable: false, // 默认为false
+    });
+    // 删除
+    delete obj.name; // 删除不掉
+    console.log(obj);
+    // 此时再重新定义，则会报错 Cannot redefine property: name
+    // Object.defineProperty(obj, 'name', {
+    //     configurable: true // 默认为false
+    // })
+  }
+  // enumerable 测试
+  {
+    const obj1 = { name: "孙悟空",age: 18 };
+    const obj2 = { name: "猪八戒",age: 16 };
+    Object.defineProperty(obj2, "name", {
+      configurable: false,
+      enumerable: false,
+    });
+    console.log(obj1);
+    console.log(obj2);
+    // 遍历obj1
+    for (let key in obj1) {
+      console.log(`${key}的值为：${obj1[key]}`);
+    }
+    // 遍历obj2
+    for (let key in obj2) {
+      console.log(`${key}的值为：${obj2[key]}`);
+    }
+    // 由于obj2的 enumerable属性设置为false，那么在遍历的时候就遍历不出来了
+
+    // 如果想将obj2的key遍历出来，需要使用 Object.getOwnPropertyNames()
+    const props = Object.getOwnPropertyNames(obj2)
+    console.log(props);
+  }
+</script>

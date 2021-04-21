@@ -3,16 +3,12 @@
  * @Date         : 2021-04-17 17:26:06
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-04-19 22:55:56
+ * @LastEditTime : 2021-04-20 21:44:55
  */
 import './index.less'
-import Food from './modules/food'
-import Score from './modules/score'
-import Snake from './modules/snake'
 
-const food = new Food()
-food.change()
+import Control from './modules/control'
 
-const score = new Score()
+const control = new Control()
 
 

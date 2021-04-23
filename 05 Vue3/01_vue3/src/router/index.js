@@ -3,12 +3,12 @@
  * @Date         : 2021-04-21 22:09:08
  * @Description  :
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-04-21 22:58:51
+ * @LastEditTime : 2021-04-22 13:31:06
  */
 import { createRouter, createWebHashHistory } from "vue-router";
 import Layout from "../App.vue";
 
-const routes = [
+export const routes = [
   {
     path: "/",
     component: Layout,
@@ -16,14 +16,30 @@ const routes = [
       {
         path: "/",
         component: () => import("../views/index.vue"),
+        meta: {
+          hidden: true
+        }
       },
       {
         path: "/lesson1",
         component: () => import("../views/lesson1/index.vue"),
+        meta: {
+          title: '课时一'
+        }
       },
       {
         path: "/lesson2",
         component: () => import("../views/lesson2/index.vue"),
+        meta: {
+          title: '课时二'
+        }
+      },
+      {
+        path: "/lesson3",
+        component: () => import("../views/lesson3/index.vue"),
+        meta: {
+          title: '课时三'
+        }
       },
     ],
   },

@@ -3,7 +3,7 @@
  * @Date         : 2021-04-21 22:58:20
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-04-21 23:28:57
+ * @LastEditTime : 2021-04-22 13:24:20
 -->
 <template>
   <p>课时2内容：事件方法、绑定类、绑定样式</p>

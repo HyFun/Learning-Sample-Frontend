@@ -3,18 +3,24 @@
  * @Date         : 2021-04-21 22:06:53
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-04-21 22:59:14
+ * @LastEditTime : 2021-04-22 13:33:34
 -->
 <template>
   <div>
     <ul>
-      <li>
-        <router-link to="/lesson1"> 课时一 </router-link>
-      </li>
-
-      <li>
-        <router-link to="/lesson2"> 课时二 </router-link>
+      <li v-for="(item,index) in routes" :key="index">
+        <router-link :to="item.path"> {{item.meta.title}} </router-link>
       </li>
     </ul>
   </div>
 </template>
+<script>
+import {routes} from '../router'
+export default {
+  computed: {
+    routes() {
+      return routes.find(v=>v.path==='/').children.filter(v=>v.meta&&!v.meta.hidden)
+    }
+  }
+}
+</script>

@@ -1,7 +1,7 @@
 <!--
  * @Author       : heyongfeng
  * @Date         : 2021-04-21 22:58:20
- * @Description  : 
+ * @Description  :
  * @LastEditors  : heyongfeng
  * @LastEditTime : 2021-04-22 13:24:20
 -->
@@ -15,14 +15,14 @@
   <h3>2. 绑定class类（数组方式）</h3>
   <div :class="classList" class="a d">
     绑定class类（数组方式）
-    <br />
+    <br>
     原始的class会和:class进行合并
   </div>
 
   <h3>3. 绑定class类（对象方式）</h3>
   <div :class="{ a: true, b: false }" class="b c">
     对象方式绑定，属性名是class类名，值是一个boolean类型的值，如果是true，则会使用这个类，否则不会使用这个类
-    <br />
+    <br>
     原始的class会和:class进行合并
   </div>
 
@@ -46,24 +46,24 @@
 export default {
   data() {
     return {
-      className: "a b c",
-      classList: ["a", "b", "c"],
+      className: 'a b c',
+      classList: ['a', 'b', 'c'],
       style1: {
-        width: "200px",
-        height: "100px",
+        width: '200px',
+        height: '100px'
       },
       style2: {
-        backgroundColor: "pink",
-      },
-    };
+        backgroundColor: 'pink'
+      }
+    }
   },
   methods: {
     clickButton() {
-      alert("点击了");
+      alert('点击了')
     },
     onMousehover() {
-      console.log("鼠标经过了....");
-    },
-  },
-};
+      console.log('鼠标经过了....')
+    }
+  }
+}
 </script>

@@ -1,3 +1,10 @@
+/*
+ * @Author       : heyongfeng
+ * @Date         : 2021-04-24 23:19:20
+ * @Description  : Vue3.0 支持的eslint
+ * @LastEditors  : heyongfeng
+ * @LastEditTime : 2021-04-24 23:35:28
+ */
 module.exports = {
   root: true,
   parserOptions: {
@@ -29,6 +36,9 @@ module.exports = {
     'vue/no-parsing-error': 'off',
     'vue/name-property-casing': ['error', 'PascalCase'],
     'vue/no-v-html': 'off',
+    'vue/no-v-model-argument':'off',
+    // vue3中template支持多个根
+    'vue/no-multiple-template-root':'off',
     'accessor-pairs': 2,
     'arrow-spacing': [
       2,

@@ -10,7 +10,7 @@
   <div>{{ msg }}</div>
 
   <h3>2. 绑定html</h3>
-  <div v-html="html"></div>
+  <div v-html="html" />
 
   <h3>3. 绑定属性</h3>
   <div :[myProp]="'我是自定义的属性哦'">绑定属性</div>
@@ -28,15 +28,15 @@
 export default {
   data() {
     return {
-      msg: "Hello Vue3!",
+      msg: 'Hello Vue3!',
       html: "<span style='color:red'>我是html哦</span>",
-      myProp: "title",
+      myProp: 'title',
       list: [1, 2, 3, 4, 5],
       person: {
-        name: "孙悟空",
-        age: 18,
-      },
-    };
-  },
-};
+        name: '孙悟空',
+        age: 18
+      }
+    }
+  }
+}
 </script>

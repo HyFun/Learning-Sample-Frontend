@@ -3,7 +3,7 @@
  * @Date         : 2021-04-21 22:09:08
  * @Description  :
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-04-24 23:21:55
+ * @LastEditTime : 2021-04-25 19:57:19
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '../App.vue'
@@ -53,6 +53,13 @@ export const routes = [
         component: () => import('../views/lesson5/index.vue'),
         meta: {
           title: '课时五：插槽slot'
+        }
+      },
+      {
+        path: '/lesson6',
+        component: () => import('../views/lesson6/index.vue'),
+        meta: {
+          title: '生命周期函数、动态组件、keep-alive'
         }
       }
     ]

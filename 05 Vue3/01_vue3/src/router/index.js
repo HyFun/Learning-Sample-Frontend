@@ -3,7 +3,7 @@
  * @Date         : 2021-04-21 22:09:08
  * @Description  :
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-04-26 22:14:24
+ * @LastEditTime : 2021-05-04 01:06:27
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '../App.vue'
@@ -67,6 +67,13 @@ export const routes = [
         component: () => import('../views/lesson7/index.vue'),
         meta: {
           title: '课时七：全局属性'
+        }
+      },
+      {
+        path: '/lesson8',
+        component: () => import('../views/lesson8/index.vue'),
+        meta: {
+          title: '课时八：provider和inject'
         }
       }
     ]

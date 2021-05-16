@@ -3,7 +3,11 @@
  * @Date         : 2021-04-21 22:09:08
  * @Description  :
  * @LastEditors  : heyongfeng
+<<<<<<< HEAD
  * @LastEditTime : 2021-05-04 01:06:27
+=======
+ * @LastEditTime : 2021-04-30 12:27:45
+>>>>>>> 4061ed64a30c6ba4c622123e343d14584498f8a6
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '../App.vue'
@@ -73,7 +77,11 @@ export const routes = [
         path: '/lesson8',
         component: () => import('../views/lesson8/index.vue'),
         meta: {
+<<<<<<< HEAD
           title: '课时八：provider和inject'
+=======
+          title: '课时八：Composition API'
+>>>>>>> 4061ed64a30c6ba4c622123e343d14584498f8a6
         }
       }
     ]

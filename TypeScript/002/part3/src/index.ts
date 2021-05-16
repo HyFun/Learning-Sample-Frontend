@@ -1,9 +1,14 @@
 /*
  * @Author       : HyFun
- * @Date         : 2021-04-30 13:20:35
+ * @Date         : 2021-04-10 11:53:45
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-04-30 13:21:10
+ * @LastEditTime : 2021-05-16 22:09:45
  */
+const word: string = `hello typescript!`
+console.log(word);
 
-document.write(`哈哈哈哈~`)
+
+
+
+

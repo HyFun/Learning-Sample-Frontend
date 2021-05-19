@@ -3,7 +3,7 @@
  * @Date         : 2021-05-19 22:40:55
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-05-19 22:49:45
+ * @LastEditTime : 2021-05-19 23:03:25
  */
 /**
  * 1. any 类型表示变量可以设置任意类型的值
@@ -48,3 +48,11 @@ function a7():void {
 function a8():void {
     return 'hello'
 }
+
+
+/**
+ * 3. void 修饰 变量
+ */
+let a9: void = undefined
+let a10: void = null   // 不能将类型“null”分配给类型“void”
+let a11:void = 0 // 不能将类型“number”分配给类型“void”

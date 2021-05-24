@@ -3,7 +3,7 @@
  * @Date         : 2021-05-19 23:21:32
  * @Description  : 接口
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-05-19 23:42:26
+ * @LastEditTime : 2021-05-21 23:25:55
  */
 (()=>{
 
@@ -40,6 +40,18 @@ console.log(xiaoming.age);
 
 // xiaoming.age = 1 // 无法分配到 "age" ，因为它是只读属性
 
+/**
+ * 2. 函数的调用签名
+ */
+interface Fn {
+    (name:string,age:number):void
+}
+
+const fn:Fn = function (name:string,age:number):void {
+    console.log(name,age); 
+}
+
+fn('小明',12)
 
 
 

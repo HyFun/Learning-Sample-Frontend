@@ -2,9 +2,10 @@
  * @Author       : heyongfeng
  * @Date         : 2021-05-16 23:00:31
  * @Description  : 基础类型
- * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-05-16 23:15:40
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-05-25 12:46:20
  */
+(()=>{
 
 /**
  * 1. boolean
@@ -50,3 +51,5 @@ let nu:null = null
 // nu = 123 // 报错
 let nu2 = null
 nu2 = 123 // 正确
+
+})()

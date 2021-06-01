@@ -3,7 +3,7 @@
  * @Date         : 2021-06-01 10:48:03
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-06-01 14:15:38
+ * @LastEditTime : 2021-06-01 17:22:16
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../App.vue'
@@ -23,7 +23,35 @@ export const routes: Array<RouteRecordRaw> = [
         path: '/lesson01',
         component: () => import('../views/lesson01/index.vue'),
         meta: {
-          title: '课时一：setup ref'
+          title: '课时1： setup ref'
+        }
+      },
+      {
+        path: '/lesson02',
+        component: () => import('../views/lesson02/index.vue'),
+        meta: {
+          title: '课时2： toRefs'
+        }
+      },
+      {
+        path: '/lesson03',
+        component: () => import('../views/lesson03/index.vue'),
+        meta: {
+          title: '课时3： reactive声明响应式对象'
+        }
+      },
+      {
+        path: '/lesson04',
+        component: () => import('../views/lesson04/index.vue'),
+        meta: {
+          title: '课时4： setup参数'
+        }
+      },
+      {
+        path: '/lesson05',
+        component: () => import('../views/lesson05/index.vue'),
+        meta: {
+          title: '课时5： v-model实现'
         }
       }
     ]

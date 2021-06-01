@@ -3,11 +3,11 @@
  * @Date         : 2021-06-01 11:23:10
  * @Description  :
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-06-01 14:24:26
+ * @LastEditTime : 2021-06-01 14:58:39
 -->
 <template>
   <div>
-    <h1>我是首页，请学习~</h1>
+    <h1>Vue3.0</h1>
     <ul>
       <li v-for="(item,index) in routeList" :key="index">
         <router-link :to="item.path">

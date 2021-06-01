@@ -3,7 +3,7 @@
  * @Date         : 2021-06-01 13:18:52
  * @Description  :
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-06-01 14:50:13
+ * @LastEditTime : 2021-06-01 17:33:24
 -->
 <template>
   <div>
@@ -21,7 +21,7 @@
     <input v-model="msg" type="text">
   </div>
 </template>
-<script>
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'lesson01',

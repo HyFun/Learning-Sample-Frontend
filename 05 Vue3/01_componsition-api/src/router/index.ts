@@ -3,7 +3,7 @@
  * @Date         : 2021-06-01 10:48:03
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-06-01 17:22:16
+ * @LastEditTime : 2021-06-01 21:39:23
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../App.vue'
@@ -52,6 +52,13 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/lesson05/index.vue'),
         meta: {
           title: '课时5： v-model实现'
+        }
+      },
+      {
+        path: '/lesson06',
+        component: () => import('../views/lesson06/index.vue'),
+        meta: {
+          title: '课时6： project和inject'
         }
       }
     ]

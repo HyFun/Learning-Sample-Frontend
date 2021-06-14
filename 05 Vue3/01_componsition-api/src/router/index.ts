@@ -3,7 +3,7 @@
  * @Date         : 2021-06-01 10:48:03
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-06-03 23:25:44
+ * @LastEditTime : 2021-06-12 23:56:10
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../App.vue'
@@ -66,6 +66,20 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/lesson07/index.vue'),
         meta: {
           title: '课时7： proxy实现代理数据'
+        }
+      },
+      {
+        path: '/lesson08',
+        component: () => import('../views/lesson08/index.vue'),
+        meta: {
+          title: '课时8： ref和reactive细节'
+        }
+      },
+      {
+        path: '/lesson09',
+        component: () => import('../views/lesson09/index.vue'),
+        meta: {
+          title: '课时9： computed和watch'
         }
       }
     ]

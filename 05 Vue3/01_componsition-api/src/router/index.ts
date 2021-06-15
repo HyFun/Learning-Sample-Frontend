@@ -3,7 +3,7 @@
  * @Date         : 2021-06-01 10:48:03
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-06-12 23:56:10
+ * @LastEditTime : 2021-06-15 21:56:11
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../App.vue'
@@ -80,6 +80,20 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/lesson09/index.vue'),
         meta: {
           title: '课时9： computed和watch'
+        }
+      },
+      {
+        path: '/lesson10',
+        component: () => import('../views/lesson10/index.vue'),
+        meta: {
+          title: '课时10： 声明周期'
+        }
+      },
+      {
+        path: '/lesson11',
+        component: () => import('../views/lesson11/index.vue'),
+        meta: {
+          title: '课时11： 自定义hooks'
         }
       }
     ]

@@ -3,7 +3,7 @@
  * @Date         : 2021-06-01 10:48:03
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-06-15 21:56:11
+ * @LastEditTime : 2021-06-16 23:05:25
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../App.vue'
@@ -94,6 +94,20 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/lesson11/index.vue'),
         meta: {
           title: '课时11： 自定义hooks'
+        }
+      },
+      {
+        path: '/lesson12',
+        component: () => import('../views/lesson12/index.vue'),
+        meta: {
+          title: '课时12： toRefs使用'
+        }
+      },
+      {
+        path: '/lesson13',
+        component: () => import('../views/lesson13/index.vue'),
+        meta: {
+          title: '课时13： ref获取元素对象'
         }
       }
     ]

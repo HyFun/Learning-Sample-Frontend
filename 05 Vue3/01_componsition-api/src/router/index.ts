@@ -3,7 +3,7 @@
  * @Date         : 2021-06-01 10:48:03
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-06-16 23:05:25
+ * @LastEditTime : 2021-06-24 20:54:07
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../App.vue'
@@ -108,6 +108,13 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/lesson13/index.vue'),
         meta: {
           title: '课时13： ref获取元素对象'
+        }
+      },
+      {
+        path: '/lesson14',
+        component: () => import('../views/lesson14/index.vue'),
+        meta: {
+          title: '课时14： shallowReactive使用'
         }
       }
     ]

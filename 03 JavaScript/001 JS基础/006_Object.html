@@ -3,17 +3,20 @@
  * @Date         : 2021-04-21 16:42:21
  * @Description  : 内置对象Object
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-04-21 18:00:07
+ * @LastEditTime : 2021-06-29 17:39:51
 -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>内置对象Object</title>
-  </head>
-  <body></body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>内置对象Object</title>
+</head>
+
+<body></body>
+
 </html>
 <script>
   function divider() {
@@ -52,8 +55,9 @@
     Parent.prototype.say = function () {
       console.log(`我是父母`);
     };
+    const parent = new Parent('parent')
     const son = Object.create(Parent.prototype);
-    console.log(son);
+    console.log(son.__proto__ === parent.__proto__); // true
   }
   divider();
 
@@ -64,6 +68,13 @@
    * - descriptor 要定义或修改的属性描述符
    *    - configurable: false。当设置该属性为true时，表示该属性的描述符能够被改变，同时也能被删除
    *    - enumerable: false。 当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。
+   *    - value 该属性对应的值。可以是任何有效的js值
+   *    - writable  是否可写，值为true时，value值才能被改变
+   * 
+   *    - get()  函数，返回值就是取该属性值时返回的值
+   *    - set(val) 函数，用于控制该属性赋值时的操作
+   * 
+   * - 注意：value、writable和get()、set(val)互斥的，这两组配置不能同时出现在 descriptor 对象中。否则会报错
    */
   // configurable 测试
   {
@@ -81,14 +92,19 @@
   }
   // enumerable 测试
   {
-    const obj1 = { name: "孙悟空",age: 18 };
-    const obj2 = { name: "猪八戒",age: 16 };
-    Object.defineProperty(obj2, "name", {
-      configurable: false,
-      enumerable: false,
-    });
+    const obj1 = { name: "孙悟空", age: 18 };
+    const obj2 = { name: "猪八戒", age: 16 };
+
+    Object.keys(obj2).forEach(key => {
+      Object.defineProperty(obj2, key, {
+        configurable: false,
+        enumerable: false,
+      });
+    })
+
     console.log(obj1);
     console.log(obj2);
+
     // 遍历obj1
     for (let key in obj1) {
       console.log(`${key}的值为：${obj1[key]}`);
@@ -97,10 +113,358 @@
     for (let key in obj2) {
       console.log(`${key}的值为：${obj2[key]}`);
     }
+
+    Object.keys(obj2).forEach(v => {
+      console.log(`obj2的key：${v}`);
+    })
     // 由于obj2的 enumerable属性设置为false，那么在遍历的时候就遍历不出来了
 
     // 如果想将obj2的key遍历出来，需要使用 Object.getOwnPropertyNames()
     const props = Object.getOwnPropertyNames(obj2)
     console.log(props);
   }
+  divider()
+  // value wratable
+  {
+    const obj = { name: '孙悟空', age: 500 }
+    Object.defineProperty(obj, 'name', {
+      configurable: true,
+      enumerable: true,
+      value: obj['name']
+    })
+    // 可读 可写
+    console.log(obj.name);
+    obj.name = '猪八戒' // 写
+    console.log(obj.name);
+
+    // 配置不可写
+    Object.defineProperty(obj, 'name', {
+      configurable: true,
+      enumerable: true,
+      value: obj['name'],
+      writable: false
+    })
+    // 此时  obj.name 已经被修改成了猪八戒
+    console.log(obj.name);
+    obj.name = '唐三藏' // 写
+    console.log(obj.name); // 可以看到，修改值没有被修改成功
+  }
+  divider()
+  // set get
+  {
+    const obj = { name: '孙悟空', age: 200 }
+    Object.keys(obj).forEach(key => {
+      let value = obj[key]
+      Object.defineProperty(obj, key, {
+        configurable: true,
+        enumerable: true,
+        get() {
+          return value
+        },
+        set(val) {
+          // 每次设置的值为 原值+新值
+          value += val
+        }
+      })
+    })
+    console.log(obj.name);
+    obj.name = '猪八戒'
+    console.log(obj.name); // 孙悟空猪八戒
+    obj.name = '沙悟净'
+    console.log(obj.name); // 孙悟空猪八戒沙悟净
+    obj.name = '唐三藏'
+    console.log(obj.name); // 孙悟空猪八戒唐三藏
+  }
+
+
+  /**
+   * 4. Object.defineProperties(obj, { propName: {  } })
+   * 对象多个属性配置，第二个参数为一个对象。key为target中的key，value表示descriptor
+   */
+
+
+  /**
+    * 5. Object.entries()
+    * 返回一个给定对象自身可枚举属性的键值对数据
+    */
+  divider()
+  {
+    const person = {
+      name: '孙悟空',
+      age: 200
+    }
+    console.log(Object.entries(person));
+    // [["name","孙悟空"], ["age",200]]
+  }
+
+  /**
+   * 6. Object.freeze()
+   * 冻结某个对象。一个被冻结的对象再也不能被修改；冻结了一个对象 则不能向这个对象添加新的属性，不能删除已有属性
+   * 类似于 readonly
+   */
+  divider()
+  {
+    const person = {
+      name: '孙悟空',
+      age: 200
+    }
+    Object.freeze(person)
+    // 新增
+    person.sex = '男'
+    console.log(person); // 未被修改
+    // 修改
+    person.name = '猪八戒'
+    console.log(person); // 未被修改
+    // 删除
+    delete person.name
+    console.log(person); // 未被删除
+    // 查看
+    console.log(person.name); // 可以查看
+  }
+
+
+  /**
+   * 7. Object.fromEntries()
+   * 把键值对列表转换为一个对象。与 Object.entries()相反
+   */
+  divider()
+  {
+    console.log(Object.fromEntries(Object.entries({ name: '张三' }))); // {name: "张三"}
+    console.log(Object.fromEntries(new Map([["name", "孙悟空"], ["age", "500"]]))); // {name: "孙悟空", age: "500"}
+  }
+
+  /**
+   * 8. Object.getOwnPropertyDescriptor()
+   * 返回指定对象上一个自有属性对应的属性描述符
+   */
+  divider()
+  {
+    // 获取默认的描述
+    const obj = { name: '张三' }
+    const descriptorObj = Object.getOwnPropertyDescriptor(obj, 'name')
+    console.log(descriptorObj); // {value: "张三", writable: true, enumerable: true, configurable: true}
+
+    // 获取自定义的描述
+    const person = { name: '孙悟空', age: 18 }
+    Object.keys(person).forEach(key => {
+      let value = person[key]
+      Object.defineProperty(person, key, {
+        configurable: true,
+        enumerable: true,
+        get() {
+          return value
+        },
+        set(val) {
+          // 每次设置的值为 原值+新值
+          value += val
+        }
+      })
+    })
+
+    const descriptorPerson = Object.getOwnPropertyDescriptor(person, 'name')
+    console.log(descriptorPerson);
+  }
+
+
+  /**
+   * 9. Object.getOwnPropertyDescriptors()
+   * 用来获取一个对象的所有自身属性的描述符
+   */
+  divider()
+  {
+    const obj = { name: '张三', sex: '男' }
+    const descriptors = Object.getOwnPropertyDescriptors(obj)
+    console.log(descriptors);
+
+    // Object.assign()方法只能拷贝源对象的可枚举的自身属性，无法拷贝属性的特性（descriptor）
+    // 使用 Object.getOwnPropertyDescriptors()可以获取全部属性的描述
+    // 获取自定义的描述
+    const person = { name: '孙悟空', age: 18 }
+    Object.keys(person).forEach(key => {
+      let value = person[key]
+      Object.defineProperty(person, key, {
+        configurable: true,
+        enumerable: true,
+        get() {
+          return value
+        },
+        set(val) {
+          // 每次设置的值为 原值+新值
+          value += val
+        }
+      })
+    })
+    console.log(person);
+    const person2 = Object.create(Object.getPrototypeOf(person), Object.getOwnPropertyDescriptors(person))
+    console.log(person2);
+  }
+
+  /**
+   * 10. Object.getOwnPropertyNames()
+   * 返回一个由指定对象自身属性的属性名
+   * 包括不可枚举的属性！
+   */
+  divider()
+  {
+    const person = { name: '孙悟空', age: 500 }
+    // 将name属性设置为不可枚举
+    Object.defineProperty(person, 'name', {
+      enumerable: false
+    })
+    // 使用for in循环只会遍历出age
+    for (const key in person) {
+      console.log(`key: ${key}; value: ${person[key]}`);
+    }
+    // 使用Object.keys() 循环遍历也只会遍历出age
+    Object.keys(person).forEach(key => {
+      console.log(`key: ${key}; value: ${person[key]}`);
+    })
+
+    // 使用Object.getOwnPropertyNames()可以将 不可枚举的 属性 遍历出来
+    Object.getOwnPropertyNames(person).forEach(key => {
+      console.log(`key: ${key}; value: ${person[key]}`);
+    })
+  }
+
+  /**
+   * 11. Object.getOwnPropertySymbols()
+   * 返回一个给定对象自身的所有 Symbol 属性的数组。
+   */
+  divider()
+  {
+    const obj = {}
+    const a = Symbol('a')
+    const b = Symbol('b')
+    obj[a] = 'this is a'
+    obj[b] = 'this is b'
+    console.log(obj);
+    // 使用for in 循环遍历  结果： 遍历为空
+    for (const key in obj) {
+      console.log(`key: ${key}; value: ${obj[key]}`);
+    }
+    // 使用getOwnPropertySymbols 遍历
+    Object.getOwnPropertySymbols(obj).forEach(key => {
+      console.log(key, `value: ${obj[key]}`);
+    })
+  }
+
+
+
+  /**
+   * 12. Object.getPrototypeOf()
+   * 返回指定对象的原型（内部[[Prototype]]属性的值）。
+   */
+  divider()
+  {
+    const parent = { name: 'parent' }
+    const son = Object.create(parent)
+    console.log(Object.getPrototypeOf(son) === parent); // true
+    console.log(Object.getPrototypeOf(son) === son.__proto__); // true
+    console.log(parent === son.__proto__); // true
+  }
+
+
+  /**
+   * 13. Object.prototype.hasOwnProperty()
+   * 返回一个布尔值，指示对象自身属性中是否具有指定的属性
+   */
+  divider()
+  {
+    // 1) 作用1：for...in循环的时候，用于区分是自己的属性还是父级属性
+    const parent = { age: '20' }
+    const son = Object.create(parent)
+    son.name = 'zhangsan'
+    for (const key in son) {
+      if (Object.hasOwnProperty.call(son, key)) {
+        console.log(key, son[key]);
+      }
+    }
+
+    // 2) Object.prototype.hasOwnProperty() 也可以得到 不可枚举的属性
+    const obj = { name: '孙悟空' }
+    Object.defineProperty(obj, 'name', {
+      enumerable: false
+    })
+    console.log(Object.hasOwnProperty.call(obj, 'name')); // true
+  }
+
+
+  /**
+   * 14. Object.is(value1, value2)
+   * 判断两个值是否为同一个值。
+   */
+  divider()
+  {
+    console.log(Object.is({}, {})); // false
+    console.log(Object.is(NaN, NaN)); // true
+    console.log(Object.is(null, null)); // true
+    console.log(Object.is(undefined, undefined)); // true
+    console.log(Object.is(2, 2)); // true
+    console.log(Object.is(true, true)); // true
+    console.log(Object.is('000', '000')); // true
+  }
+
+  /**
+   * 15. Object.prototype.isPrototypeOf()
+   * 用于测试一个对象是否存在于另一个对象的原型链上。
+   * 参数传需要检测的对象
+   */
+  divider()
+  {
+    const parent1 = { name: '孙悟空' }
+    const parent2 = { name: '猪八戒' }
+    const son = Object.create(parent1)
+    console.log(Object.isPrototypeOf.call(parent1, son)) // true
+    console.log(Object.isPrototypeOf.call(parent2, son)) // false
+  }
+
+  /**
+   * 16. Object.keys()
+   * 返回一个由一个给定对象的自身可枚举属性组成的数组
+   * 遍历自己的可枚举的属性
+   */
+  divider()
+  {
+    const parent = { name: '孙悟空', age: 200 }
+    const son = Object.create(parent)
+    son.sex = '男'
+    son.height = 180
+    Object.defineProperty(son,'sex', {
+      enumerable: false
+    })
+    Object.keys(son).forEach(key=>{
+      console.log(key);  // height
+    })
+  }
+
+
+  /**
+   * 17. Object.setPrototypeOf(obj, prototype)
+   * 设置 obj 的原型对象为 prototype
+   */
+  
+
+  /**
+   * 18. Object.prototype.toString()
+   */
+
+
+  /**
+   * 19. Object.prototype.valueOf()
+   */
+
+
+  /**
+   * 20. Object.prototype.values()
+   * 返回一个给定对象自身的所有可枚举属性值的数组
+   */
+  divider()
+  {
+    const person = {name: '孙悟空', age: 200}
+    Object.values(person).forEach(v=>{
+      console.log(v);
+    })
+  }
+
+
 </script>

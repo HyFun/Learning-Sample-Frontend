@@ -3,7 +3,7 @@
  * @Date         : 2021-06-01 10:53:14
  * @Description  :
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-06-01 17:14:51
+ * @LastEditTime : 2021-07-01 23:43:35
  */
 module.exports = {
   root: true,
@@ -20,6 +20,7 @@ module.exports = {
   // add your custom rules here
   //it is base on https://github.com/vuejs/eslint-config-vue
   rules: {
+    '@typescript-eslint/ban-types':'off',
     'vue/no-v-model-argument': 0,
     "vue/max-attributes-per-line": [
       2,

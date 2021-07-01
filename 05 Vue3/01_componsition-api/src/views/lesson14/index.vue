@@ -3,7 +3,7 @@
  * @Date         : 2021-06-24 20:53:01
  * @Description  : shallow
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-06-24 22:01:41
+ * @LastEditTime : 2021-07-01 23:17:11
 -->
 <template>
   <div>
@@ -26,7 +26,7 @@
 import { reactive, ref, shallowReactive, shallowRef } from '@vue/reactivity'
 export default {
   name: 'shallow',
-  setup(prop) {
+  setup():any {
     const m1 = reactive({
       name: '张三1',
       age: 20,

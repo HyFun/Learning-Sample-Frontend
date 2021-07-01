@@ -1,0 +1,253 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-01 15:40:49
+ * @Description  : 数组相关方法
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-01 18:45:00
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组相关方法</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  function divider() {
+    console.log(`-----------------`)
+  }
+  /**
+   * 1. Array.prototype.concat(array|value...)
+   * 方法用于合并两个或多个数组。此方法不会更改现有数组，而是返回一个新数组。
+   * 不会改变原数组
+   *
+   * 参数：array[] | value....多个
+   * 返回：添加元素后的新数组
+   */
+  {
+    const list = []
+    const list2 = list.concat(1, '2', 3)
+    console.log(list2)
+  }
+  divider()
+
+  /**
+   * 2. Array.prototype.copyWithin(targetIndex, startIndex, endIndex)
+   * 从startIndex至endIndex复制元素到targetIndex处开始。
+   * 会改变原数组，不会改变长度
+   *
+   * 参数： targetIndex, startIndex
+   * 返回：已经改变后的原数组
+   */
+  {
+    const list = [1, 2, 3, 4, 5, 6]
+    console.log(list.copyWithin())
+    console.log(list.copyWithin(0, 2))
+    // 需求：把前两个挪动到最后
+    const list2 = list.copyWithin(list.length - 2, 0, 2)
+    console.log(`原数组`, list)
+    console.log(`挪动后数组`, list2)
+  }
+  divider()
+
+  /**
+   * 3. Array.prototype.entries()
+   * 将数组转化为 Array iterator
+   * 不会改变原数组
+   *
+   * 参数： 无
+   * 返回：新的Array Iterator
+   */
+  {
+    const list = [1, 2, 3]
+    const iterator1 = list.entries()
+    console.log(iterator1)
+    // 1）iterator数组对象使用while变量
+    let down = false
+    while (!down) {
+      const result = iterator1.next()
+      if (!result.done) {
+        console.log(result.value)
+      }
+      down = result.done
+    }
+    // 2) 使用for of 遍历
+    const iterator2 = list.entries() // 因为iterator1已经遍历完了
+    for (const it of iterator2) {
+      console.log(it)
+    }
+  }
+  divider()
+
+  /**
+   * 4. Array.prototype.every(v=>boolean)
+   * 判断数组中所有元素都满足 条件
+   * 不会改变原数组
+   *
+   * 参数：Function v=>boolean
+   * 返回：boolean
+   * 注意：被检测的是空数组则返回 true
+   */
+  {
+    // 1） 检测数组元素是否都大于 1
+    const list0 = [],
+      list1 = [1, 2, 3],
+      list2 = [2, 3]
+    const greaterThan1 = (v) => v > 1
+    console.log(list0.every(greaterThan1)) // true
+    console.log(list1.every(greaterThan1)) // false
+    console.log(list2.every(greaterThan1)) // true
+  }
+  divider()
+
+  /**
+   * 5. Array.prototype.fill(value, startIndex, endIndex)
+   * 将value填充到数组 startIndex至endIndex元素
+   * 会改变原数组
+   *
+   * 参数：value=undefined, startIndex=0, endIndex = length
+   * 返回：已被修改的原数组
+   *
+   * 注意：参数为空，数组中所有元素被填充为了 undefined
+   */
+  {
+    // 1) 一个参数， 将数组所有的值填充为 该参数
+    const list = [1, 2, 3, 4, 5, 6]
+    const list1 = list.fill(0)
+    console.log(list)
+    console.log(list.fill())
+  }
+  divider()
+
+  /**
+   * 6. Array.prototype.filter()
+   * 创建一个新数组, 其包含通过所提供函数实现的测试的所有元素
+   * 不会改变原数组
+   *
+   * 参数： function: v=>boolean
+   * 返回： 满足条件的数组元素  新数组
+   */
+  {
+    const list = [1, 2, 3]
+    const list2 = list.filter((v) => v > 1)
+    console.log(list) // [1, 2, 3] 原数组内容不变
+    console.log(list2) // [2, 3]  2,3 满足条件 > 1 过滤掉了不满足条件的元素
+    console.log(list === list2) // false  两个数组不相等
+  }
+  divider()
+
+  /**
+   * 7. Array.prototype.find()
+   * 返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined。
+   * 不会改变原数组
+   *
+   * 参数： function: v=>boolean
+   * 返回：满足条件的第一个元素 | undefine
+   */
+  {
+    const list = [1, 2, 3]
+    console.log(list.find((v) => v > 1)) // 2  满足条件的有 2，3  返回第一个元素
+    console.log(list.find((v) => v > 3)) // undefined  没有满足条件的元素
+  }
+  divider()
+
+  /**
+   * 8. Array.prototype.findIndex()
+   * 返回数组中满足提供的测试函数的第一个元素的索引。若没有找到对应元素则返回-1。
+   * 不会改变原数组
+   *
+   * 参数：function: v=>boolean
+   * 返回：元素在数组中的索引 | -1
+   */
+  {
+    const list = [1, 2, 3]
+    console.log(list.findIndex((v) => v > 1)) // 1
+    console.log(list.findIndex((v) => v > 3)) // -1
+  }
+  divider()
+
+  /**
+   * 9. Array.prototype.flat()
+   * 数组扁平化，按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。
+   * 不会改变原数组
+   *
+   * 参数： depth: number = 1  展开的层级，默认值为 1
+   * 返回：新数组
+   *
+   * [数组扁平化实现方法](https://juejin.cn/post/6844903805876699150)
+   */
+  {
+    const list = [
+      [0, 1],
+      [2, 3, [4, 5, 6], [7, 8, 9, [10, 11, 12, 13]]]
+    ]
+    console.log(list.flat()) // 只展开一级
+    // 参数使用 Infinity 可以展开任意层级
+    console.log(list.flat(Infinity)) //  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    // 1) for + 递归  (2种：concat 和 push+展开运算符)
+    {
+      function flatten(arr) {
+        let result = []
+        arr.forEach((v) => {
+          if (Array.isArray(v)) {
+            // concat
+            // result = result.concat(flatten(v))
+            // push + 展开运算符
+            result.push(...flatten(v))
+          } else {
+            result.push(v)
+          }
+        })
+        return result
+      }
+
+      console.log(flatten(list))
+    }
+
+    // 2) while + some + concat
+    {
+      function flatten(arr) {
+        while (arr.some((v) => Array.isArray(v))) {
+          arr = [].concat(...arr)
+        }
+        return arr
+      }
+      console.log(flatten(list))
+    }
+
+    // 3) reduce + 递归
+    {
+      function flatten(arr) {
+        return arr.reduce((res, item) => {
+          return res.concat(Array.isArray(item) ? flatten(item) : item)
+        }, [])
+      }
+      console.log(flatten(list))
+    }
+
+    // 4) 中间变量暂存 数组元素
+    {
+      function flatten(arr) {
+        let brige = [...arr]
+        const result = []
+        while (brige.length) {
+          const first = brige.shift()
+          if (Array.isArray(first)) {
+            brige.unshift(...first)
+          } else {
+            result.push(first)
+          }
+        }
+      }
+    }
+
+    // 5) toString + split  缺点：a. 会失去原来元素的类型  b. 只针对所有元素为基本数据类型的
+    {
+      console.log(list.toString().split(','))
+    }
+  }
+</script>

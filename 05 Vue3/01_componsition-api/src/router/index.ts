@@ -3,7 +3,7 @@
  * @Date         : 2021-06-01 10:48:03
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-07-01 23:32:06
+ * @LastEditTime : 2021-07-03 00:58:08
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../App.vue'
@@ -164,6 +164,13 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/lesson21/index.vue'),
         meta: {
           title: '课时21： 自定义readonly和shallowReadOnly'
+        }
+      },
+      {
+        path: '/lesson22',
+        component: () => import('../views/lesson22/index.vue'),
+        meta: {
+          title: '课时22： 手写ref和shallowRef'
         }
       }
     ]

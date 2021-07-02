@@ -3,7 +3,7 @@
  * @Date         : 2021-06-01 10:48:03
  * @Description  : 
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-07-03 00:58:08
+ * @LastEditTime : 2021-07-03 01:49:27
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../App.vue'
@@ -171,6 +171,20 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/lesson22/index.vue'),
         meta: {
           title: '课时22： 手写ref和shallowRef'
+        }
+      },
+      {
+        path: '/lesson23',
+        component: () => import('../views/lesson23/index.vue'),
+        meta: {
+          title: '课时23： teleport标签使用'
+        }
+      },
+      {
+        path: '/lesson24',
+        component: () => import('../views/lesson24/index.vue'),
+        meta: {
+          title: '课时24： suspense组件'
         }
       }
     ]

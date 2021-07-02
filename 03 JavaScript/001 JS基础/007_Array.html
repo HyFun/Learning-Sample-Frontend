@@ -3,7 +3,7 @@
  * @Date         : 2021-07-01 15:40:49
  * @Description  : 数组相关方法
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-01 18:45:00
+ * @LastEditTime : 2021-07-02 16:59:57
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -249,5 +249,407 @@
     {
       console.log(list.toString().split(','))
     }
+
+    // 6) flatMap展开
+    {
+      function flatten(list = []) {
+        while (list.some((v) => Array.isArray(v))) {
+          list = list.flatMap((v) => v)
+        }
+        return list
+      }
+      console.log(flatten(list))
+    }
+  }
+  divider()
+
+  /**
+   * 10. Array.prototype.flatMap()
+   * 首先使用映射函数映射每个元素，然后将结果压缩成一个新数组。它与 map 连着深度值为1的 flat 几乎相同，但 flatMap 通常在合并成一种方法的效率稍微高一些。
+   * 不会改变原数组
+   *
+   * 参数：callback(function(current, index, array){}), thisArg
+   * 返回： 新数组
+   */
+  {
+    const list = [1, 2, 3, 4, 5]
+    console.log(list.flatMap((v) => v)) // [1,2,3,4,5]
+    console.log(list.flatMap((v) => [v, v * 2])) // [1, 2, 2, 4, 3, 6, 4, 8, 5, 10]
+    const list2 = [['中'], ['华'], ['人'], ['民'], ['共'], ['和'], ['国']]
+    console.log(list2.flatMap((v) => v)) // ["中", "华", "人", "民", "共", "和", "国"]
+  }
+  divider()
+
+  /**
+   * 11. Array.prototype.forEach()
+   * 对数组的每个元素执行一次给定的函数。
+   * 不会改变原数组
+   *
+   * 参数：function(ele, index, array){}
+   * 返回：undefined
+   *
+   * 注意：forEach不会跳出循环，如果需要跳出循环，可使用 every、some、find、findIndex
+   */
+  {
+    ;[1, 2, 3].forEach((v) => {
+      if (v === 1) {
+        // continue、break  使用会报错
+        // return  结束本次循环，继续下次循环
+      }
+      console.log(v)
+    })
+  }
+  divider()
+
+  /**
+   * 12. Array.from()
+   * 一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例
+   *
+   * 参数：类似数组|可迭代对象
+   * 返回：新数组对象
+   */
+  {
+    // 需求：获取html所有节点
+    const elements = document.querySelectorAll('*')
+    console.log(Array.isArray(elements)) // false 得到的并不是一个真的数组
+    console.log(elements) //
+    const elementsArray = Array.from(elements) // 将类数组转换为数组
+    console.log(Array.isArray(elementsArray)) // true
+    console.log(elementsArray)
+  }
+  divider()
+
+  /**
+   * 13. Array.prototype.includes()
+   * 方法用来判断一个数组是否包含一个指定的值
+   * 不会改变原数组
+   *
+   * 参数：value
+   * 返回：boolean
+   */
+  {
+    const list = [1, 2, 3]
+    // 有参数
+    console.log(list.includes(1)) // true
+    // 无参数
+    console.log(list.includes()) // false
+    // null
+    console.log(list.includes(null)) // false
+    // undefined
+    console.log(list.includes(undefined)) // false
+    // boolean
+    console.log(list.includes(true)) // false
+  }
+  divider()
+
+  /**
+   * 14. Array.prototype.indexOf()
+   * 方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+   * 不会改变原数组
+   *
+   * 参数：value, fromIndex = 0
+   * 返回：index | -1
+   *
+   * 注意：如果fromIndex是个负值，则 fromIndex = this.length + fromIndex
+   */
+  {
+    const list = [1, 2, 3, 4, 5, 1, 2]
+    console.log(list.indexOf(1)) // 0
+    console.log(list.indexOf(8)) // -1
+    console.log(list.indexOf(1, -2)) // 5
+  }
+  divider()
+
+  /**
+   * 15. Array.isArray()
+   * 用于确定传递的值是否是一个 Array。
+   *
+   * 参数：value 需要检测的值
+   * 返回：boolean
+   */
+  {
+    console.log(Array.isArray()) // false
+    console.log(Array.isArray(1)) // false
+    console.log(Array.isArray('')) // false
+    console.log(Array.isArray(null)) // false
+    console.log(Array.isArray(true)) // false
+    console.log(Array.isArray(undefined)) // false
+    console.log(Array.isArray(Symbol())) // false
+    console.log(Array.isArray([])) // true
+    console.log(Array.isArray(document.querySelectorAll('*'))) // false
+  }
+  divider()
+
+  /**
+   * 16. Array.prototype.join()
+   * 方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个项目，那么将返回该项目而不使用分隔符。
+   * 不会改变原数组
+   *
+   * 参数：(separator?=',')
+   * 返回：string
+   */
+  {
+    const list = [1, 2, 3]
+    console.log(list.join()) // 默认按照逗号分隔  1,2,3
+    console.log(list.join('|')) // 1|2|3
+  }
+  divider()
+
+  /**
+   * 17. Array.prototype.keys()
+   * 返回一个包含数组中每个索引键的Array Iterator对象。
+   * 不会改变原数组
+   *
+   * 参数：无
+   * 返回：Array Iterator对象
+   */
+  {
+    const list = [1, 2, 3, 4]
+    const keys = list.keys()
+    for (const it of keys) {
+      console.log(it)
+    }
+  }
+  divider()
+
+  /**
+   * 18. Array.prototype.values()
+   * 方法返回一个新的 Array Iterator 对象，该对象包含数组每个索引的值
+   * 不会改变原数组
+   *
+   * 参数：无
+   * 返回：Array iterator 对象
+   */
+  {
+    const list = [1, 2, 3, 4, 5]
+    const values = list.values()
+    for (const iterator of values) {
+      console.log(iterator)
+    }
+  }
+  divider()
+
+  /**
+   * 19. Array.prototype.lastIndexOf()
+   * 从数组的后面向前查找，从 fromIndex 处开始。
+   * 不会改变原数组
+   *
+   * 参数：(value?, fromIndex?=this.length-1)
+   * 返回：1|-1
+   * 注意：如果 fromIndex > 0，则会从索引往前查找；如果fromIndex < 0，fromIndex = this.length + fromIndex
+   */
+  {
+    const list = [1, 2, 3, 4, 5, 1]
+    console.log(list.lastIndexOf(1)) // 5
+    console.log(list.lastIndexOf(1, -2)) // 0
+  }
+  divider()
+
+  /**
+   * 20. Array.prototype.map()
+   * 方法创建一个新数组，其结果是该数组中的每个元素是调用一次提供的函数后的返回值。
+   * 不会改变原数组
+   *
+   * 参数：(function(v,index, array){})
+   * 返回：新生成的数组
+   */
+  {
+    const list = [1, 2, 3, 4, 5]
+    console.log(list.map((v) => v * 2))
+  }
+  divider()
+
+  /**
+   * 21. Array.of()
+   * 方法创建一个具有可变数量参数的新数组实例，而不考虑参数的数量或类型。
+   *
+   * 参数：(value...)
+   * 返回：数组实例
+   */
+  {
+    // 1) Array实例创建的数组
+    // 1个参数
+    console.log(new Array(5)) // [undefined, undefined, undefined, undefined, undefined]
+    // 多个参数
+    console.log(new Array(5, 6)) // [5, 6]
+
+    // 2) 为了解决以上冲突问题，使用Array.of创建数组
+    // 1个参数
+    console.log(Array.of(5)) // [5]
+    // 多个参数
+    console.log(Array.of(5, 6)) // [5, 6]
+  }
+  divider()
+
+  /**
+   * 22. Array.prototype.pop()
+   * 数组中删除最后一个元素，并返回该元素的值。此方法更改数组的长度。
+   * 会改变数组
+   *
+   * 参数：无
+   * 返回：被删除的元素
+   */
+  {
+    const list = [1, 2, 3, 4, 5]
+    console.log(list.pop()) // 5 返回最后一个元素
+    console.log(list) // 原数组
+  }
+  divider()
+
+  /**
+   * 23. Array.prototype.push()
+   * 将一个或多个元素添加到数组的末尾，并返回该数组的新长度。
+   * 会改变数组
+   *
+   * 参数：(element....)
+   * 返回：数组最新长度
+   */
+  {
+    const list = [1, 2, 3, 4, 5]
+    console.log(list.push(...[6, 7])) // 7  返回数组长度
+    console.log(list) // [1, 2, 3, 4, 5, 6, 7]
+  }
+  divider()
+
+  /**
+   * 24. 对数组中的每个元素执行一个由您提供的reducer函数(升序执行)，将其结果汇总为单个返回
+   * 不会改变原数组
+   *
+   * 参数：(callback(res, item, index, array), initialValue)
+   * 返回：新值 initialValue
+   */
+  {
+    const list = [1, 8, 7, 3, 8, 0, 7, 9, 9, 5, 0]
+    // 需求：记录数组中每个数字出现的次数
+    console.log(
+      list.reduce((res, item) => {
+        res[item] = (res[item] || 0) + 1
+        return res
+      }, {})
+    )
+  }
+  divider()
+
+  /**
+   * 25. Array.prototype.reverse()
+   * 颠倒数组
+   * 会改变原数组
+   *
+   * 参数：无
+   * 返回：调到后的新数组
+   */
+  {
+    const list = [1, 2, 3, 4, 5]
+    console.log(list.reverse()) // [5,4,3,2,1]
+    console.log(`原数组`, list) // 原数组已改变
+  }
+  divider()
+
+  /**
+   * 26. Array.prototype.shift()
+   * 方法从数组中删除第一个元素，并返回该元素的值。此方法更改数组的长度。
+   * 会改变原数组
+   *
+   * 参数：无
+   * 返回：被删除的元素
+   */
+  {
+    const list = [1, 2, 3, 4, 5]
+    console.log(list.shift()) // 1
+    console.log(list) // [2, 3, 4, 5]
+  }
+  divider()
+
+  /**
+   * 27. Array.prototype.slice()
+   * 方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）。原始数组不会被改变。
+   * 不会改变原数组
+   *
+   * 参数：(begin包含，end不包含)
+   * 结果：新数组的拷贝
+   * 类似于string.slice(start, end)
+   */
+  {
+    const list = [0, 1, 2, 3, 4, 5, 6]
+    console.log(list.slice()) // 无参数表示不截取，返回原数组
+    console.log(list.slice(-1)) // 参数如果为负值 真正的值 = this.length + 1
+    console.log(list.slice(-8)) // 参数负值且大于length 截取全部
+    console.log(list.slice(5, 4)) // 第一个参数大于第二个参数 []
+  }
+  divider()
+
+  /**
+   * 28. Array.prototype.some()
+   * 方法测试数组中是不是至少有1个元素通过了被提供的函数测试。
+   * 不会改变原数组
+   *
+   * 参数：callback((ele, index, array)=>{}): condition
+   * 返回：boolean
+   * 注意：空数组在任意情况下都返回 false
+   */
+  {
+    const list = [1, 2, 3, 4, 5]
+    console.log([].some((v) => v === 2)) // false 空数组在任意情况下都返回 false
+    console.log(list.some((v) => v > 3)) // true 数组中是否存在任何一个数 > 3
+    console.log(list.some((v) => v > 10)) // false   数组中是否存在任何一个数 > 10
+  }
+  divider()
+
+  /**
+   * 29. Array.prototype.sort()
+   * 数组排序
+   * 会改变原数组
+   *
+   * 参数：((v1,v2)={})
+   * 返回：排序后的原数组
+   * 注意：参数返回-1升序；1降序
+   */
+  {
+    const list = [5, 2, 1, 6, 9, 2, 3, 1]
+    console.log(list.sort((v1, v2) => v1 - v2)) // 升序
+    console.log(list.sort((v1, v2) => v2 - v1)) // 降序
+  }
+  divider()
+
+  /**
+   * 30. Array.prototype.splice()
+   * 方法通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被修改的内容。此方法会改变原数组。
+   * 会改变原数组
+   *
+   * 参数：(begin?=0, count?, values)
+   * 返回：被删除的元素数组
+   */
+  {
+    const list = [1, 2, 3, 4, 5]
+    console.log(list.splice()) // 参数为空，则什么都做
+    // console.log(list.splice(0)) // 表示从0开始删
+    // console.log(list.splice(0, 2)) // [1,2] 表示从0开始删2个元素
+    // console.log(list.splice(0, 10)); // count超过数组长度，则会全部删除
+    console.log(list.splice(0, 10, '我', '是', '中', '国', '人')) // 删除全部元素后添加新元素
+    console.log(`原数组`, list)
+  }
+  divider()
+
+  /**
+   * 31. Array.prototype.toString()
+   * Array对象覆盖了Object的 toString 方法。对于数组对象，toString 方法连接数组并返回一个字符串，其中包含用逗号分隔的每个数组元素。
+   * 不会改变原数组
+   *
+   * 参数：无
+   * 返回：字符串，用,分割
+   */
+
+  /**
+   * 32. Array.prototype.unshift()
+   * 方法将一个或多个元素添加到数组的开头，并返回该数组的新长度(该方法修改原有数组)。
+   * 会改变原数组
+   *
+   * 参数：value...
+   * 返回：number: 最新数组的长度
+   */
+  {
+    const list = [1, 2, 3, 4]
+    console.log(list.unshift(5, 6, 7)) // 7  添加后数组的长度
+    console.log(list) // [5,6,7,1,2,3,4]
   }
 </script>

@@ -1,0 +1,78 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-03 15:53:49
+ * @Description  : Function
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-03 16:11:31
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Function对象</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  function divider() {
+    console.log(`-----------------`)
+  }
+  /**
+   * 1. Function.length
+   * 属性指明函数的形参个数。
+   *
+   * 返回：函数参数个数
+   */
+  {
+    function fn1() {}
+    function fn2(a, b) {}
+
+    console.log(fn1.length) // 0
+    console.log(fn2.length) // 2
+  }
+  divider()
+
+  /**
+   * 2. Function.name
+   * 属性返回函数实例的名称。
+   *
+   * 返回：函数名
+   */
+  {
+    function fn1() {}
+    function fn2(a, b) {}
+
+    console.log(fn1.name) // fn1
+    console.log(fn2.name) // fn2
+  }
+  divider()
+
+  /**
+   * 3. Function.prototype.apply()
+   * 改变函数内部的this指向，并执行函数
+   *
+   * 参数：thisArg, arrayArguments
+   */
+  {
+    // 以Math.max为例
+    const list = [5, 6, 4, 7, 3, 8, 2, 9, 1]
+    const max = Math.max.apply(null, list)
+    console.log(max) // 9
+  }
+  divider()
+
+  /**
+   * 4. Function.prototype.call()
+   *
+   */
+
+  /**
+   * 5. Function.prototype.bind()
+   * 改变函数指向，不会自执行
+   * 
+   * 参数：thisArg, param1,param2...
+   * 返回：改变this后的方法
+   */
+</script>

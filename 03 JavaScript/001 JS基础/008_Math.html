@@ -1,0 +1,220 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-03 14:29:34
+ * @Description  : Math
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-03 15:51:58
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  function divider() {
+    console.log(`-----------------`)
+  }
+  /**
+   * 1. Math.PI
+   * 表示一个圆的周长与直径的比例，约为 3.14159
+   */
+  {
+    console.log(Math.PI) //3.141592653589793
+  }
+  divider()
+
+  /**
+   * 2. Math.abs()
+   * 函数返回指定数字 “x“ 的绝对值
+   *
+   * 参数：number
+   * 返回：绝对值
+   */
+  {
+    console.log(Math.abs()) // NaN 没有参数的时候
+    console.log(Math.abs(2)) // 2
+    console.log(Math.abs(-2)) // 2
+    console.log(Math.abs(Infinity)) // Infinity
+    console.log(Math.abs(-Infinity)) // Infinity
+  }
+  divider()
+
+  /**
+   * 3. Math.ceil()
+   * 向上取整
+   *
+   * 参数：number
+   * 返回：正整数
+   */
+  {
+    console.log(Math.ceil()) // NaN 没有参数的时候
+    console.log(Math.ceil(222)) // 222
+    console.log(Math.ceil(-2)) // -2
+    console.log(Math.ceil(-2.111)) // -2 // 因为比 -2.111大的最小正整数就是-2
+    console.log(Math.ceil(1)) // 1
+    console.log(Math.ceil(1.2)) // 2
+    console.log(Math.ceil(Infinity)) // Infinity
+    console.log(Math.ceil(-Infinity)) // -Infinity
+    console.log(Math.ceil(undefined)) // NaN
+    console.log(Math.ceil(null)) // 0
+    console.log(Math.ceil('')) // 0
+    console.log(Math.ceil('123abc')) // NaN
+    console.log(Math.ceil('123')) // 123
+  }
+  divider()
+
+  /**
+   * 4. Math.floor()
+   * 向下取整
+   */
+  {
+    console.log(Math.floor()) // NaN
+    console.log(Math.floor(-1)) // -1
+    console.log(Math.floor(1)) // 1
+    console.log(Math.floor(-1.1)) // -2
+    console.log(Math.floor(1.1)) // 1
+    console.log(Math.floor(undefined)) // NaN
+    console.log(Math.floor(null)) // 0
+    console.log(Math.floor('')) // 0
+    console.log(Math.floor('123abc')) // NaN
+    console.log(Math.floor('123')) // 123
+    console.log(Math.floor('123.123')) // 123
+    console.log(Math.floor(true)) // 1
+    console.log(Math.floor(false)) // 0
+  }
+  divider()
+
+  /**
+   * 5. Math.max()
+   * 函数返回一组数中的最大值。
+   *
+   * 参数：number...
+   * 返回值：最大值|NaN
+   */
+  {
+    console.log(Math.max()) // -Infinity
+    console.log(Math.max(1, 2)) // 2
+    console.log(Math.max(1, '2')) // 2
+    console.log(Math.max(1, '2abc')) // NaN 如果参数中有 非数字的参数，则会返回NaN
+    console.log(Math.max(true, false)) // 1
+    console.log(Math.max(undefined, 1)) // NaN
+    console.log(Math.max(null, -1)) // 0
+    console.log(Math.max(...[1, 2, 3, 4])) // 4
+  }
+  divider()
+
+  /**
+   * 6. Math.min()
+   * 函数返回一组数中的最小值。
+   *
+   * 参数：number...
+   * 返回值：最小值|NaN
+   */
+  {
+    console.log(Math.min()) // Infinity
+    console.log(Math.min(1)) // 1
+    console.log(Math.min(1, 2)) // 1
+    console.log(Math.min(undefined)) // NaN
+    console.log(Math.min(true, false)) // 0
+    console.log(Math.min(1, '123')) // 123
+    console.log(Math.min(1, '123abc')) // NaN
+    console.log(Math.min(...[1, 2, 3, 4, 5, 6])) // 1
+  }
+  divider()
+
+  /**
+   * 7. Math.pow()
+   * 函数返回基数（base）的指数（exponent）次幂，即 baseex^ponent。
+   *
+   * 参数：（base:number，exponent:number）
+   * 返回：number | NaN
+   */
+  {
+    console.log(Math.pow()) // NaN
+    console.log(Math.pow(2)) // NaN
+    console.log(Math.pow(2, 0)) // 1
+    console.log(Math.pow(2, -1)) // 0.5
+    console.log(Math.pow(2, -2)) // 0.25
+    console.log(Math.pow(2, -3)) // 0.125
+    console.log(Math.pow(2, 1)) // 2
+    console.log(Math.pow(2, 2)) // 4
+    console.log(Math.pow(2, 3)) // 8
+    console.log(Math.pow(2, '3')) // 8
+    console.log(Math.pow(2, '3a')) // NaN
+    console.log(Math.pow(2, true)) // 2
+    console.log(Math.pow(2, false)) // 1
+    console.log(Math.pow(true, false)) // 1
+    console.log(Math.pow(false, false)) // 1
+  }
+  divider()
+
+  /**
+   * 8. Math.random()
+   * 返回一个浮点数，范围[0,1)
+   *
+   * 参数：无
+   * 返回：[0,1)的浮点数
+   */
+  {
+    for (let i = 0; i < 10; i++) {
+      console.log(Math.random())
+    }
+    // 1) 取 [10, 20)的随机数
+    {
+      const random = (min, max) => {
+        min = Math.ceil(min)
+        max = Math.floor(max)
+        return Math.floor(Math.random() * (max - min)) + min
+      }
+      console.log(random(10, 20))
+      console.log(random(19, 20)) // 永远是19
+    }
+
+    // 2) 取[10, 20] 的随机数
+    {
+      function random(min, max) {
+        min = Math.ceil(min)
+        max = Math.floor(max)
+        return Math.floor(Math.random() * (max - min + 1)) + min
+      }
+      console.log(random(10, 20))
+      console.log(random(20, 20)) // 20
+    }
+  }
+  divider()
+
+  /**
+   * 9. Math.round()
+   * 返回一个四舍五入的整数
+   *
+   * 参数：number
+   * 返回：正整数
+   */
+  {
+    console.log(Math.round()) // NaN
+    console.log(Math.round(1.23)) // 1
+    console.log(Math.round(2.56)) // 3
+    console.log(Math.round(true)) // 1
+    console.log(Math.round('2.56')) // 3
+    console.log(Math.round('2.56aaa')) // NaN
+    console.log(Math.round(false)) // 0
+    console.log(Math.round(undefined)) // NaN
+    console.log(Math.round(null)) // 0
+
+    // 可以四舍五入小数
+    function round(number, precision = 0) {
+      return Math.round(`${number}e${precision}`) / Math.pow(10, precision)
+    }
+    console.log(round(1.222))
+    console.log(round(1.222, 2))
+    console.log(round(3.1415926, 3))
+  }
+  divider()
+
+  console.log(Number(`1.2e2`)); // 相当于 1.2 * 100
+</script>

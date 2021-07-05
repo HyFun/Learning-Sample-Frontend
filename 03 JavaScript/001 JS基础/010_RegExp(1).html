@@ -1,0 +1,128 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-05 15:02:00
+ * @Description  : 正则表达式
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-05 17:30:22
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>正则表达式</title>
+  </head>
+  <body>
+    <a
+      href="https://github.com/qdlaoyao/js-regex-mini-book/blob/master/JavaScript%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%B7%E4%BD%A0%E4%B9%A6%EF%BC%881.1%E7%89%88%EF%BC%89.pdf"
+    >
+      正则表达式mini书
+    </a>
+  </body>
+</html>
+<script>
+  function divider() {
+    console.log(`-----------------`)
+  }
+  /**
+   * 1. 匹配模式：横向模糊匹配、纵向模糊匹配
+   */
+  {
+    // 横向模糊匹配: 一个正则可匹配的字符串的长度不是固定的，可以是多种情况的。
+    const reg1 = /ab{1,2}c/g
+    const str1 = 'abc ac ab abbc abbbc abbbbc'
+    console.log(str1.match(reg1)) // ["abc", "abbc"]
+
+    // 纵向模糊匹配: 一个正则匹配的字符串，具体到某一位字符时，它可以不是某个确定的字符，可以有多种可能。
+    const reg2 = /a[abc]c/g
+    const str2 = 'abc aac acc ac bc cc aa bb abbbc'
+    console.log(str2.match(reg2)) // ["abc", "aac", "acc"]
+  }
+  divider()
+
+  /**
+   * 2. 字符组
+   */
+  {
+    const reg = /[a-z]/g
+    console.log(reg.test('123')) // false
+    console.log(reg.test('123a')) // true
+  }
+  divider()
+
+  /**
+   * 3. 排除字符组
+   */
+  {
+    console.log(/^[^a-z]$/g.test('123a')) // false
+  }
+  divider()
+  /**
+   * 4. 简写
+   * \s 空格
+   * \S 非空格
+   * \d 数字
+   * \D 非数字
+   * \w [0-9a-zA-Z_]
+   * \W [^0-9a-zA-Z_]
+   */
+
+  /**
+   * 5. 量词
+   * { m, }  >=m
+   * { m }  ==m
+   * ？  0|1
+   * +   >=1
+   * *   >=0
+   */
+
+  /**
+   * 6. 贪婪匹配
+   */
+  {
+    const reg = /\d{2,5}/g
+    console.log(`123 1234 12345 123456`.match(reg)) // ["123", "1234", "12345", "12345"]
+  }
+
+  /**
+   * 7. 惰性匹配
+   */
+  {
+    const reg = /\d{2,5}?/g
+    console.log(`123 1234 12345 123456`.match(reg)) // ["12", "12", "34", "12", "34", "12", "34", "56"]
+  }
+  divider()
+  // 案例  移除 style 样式
+  {
+    const reg = /(style="[^"]*")|(style='[^']*')/g
+    console.log(`<div style='color:red;'>123</div>`.match(reg))
+    console.log(`<div style="color:red;">123</div>`.match(reg))
+  }
+  divider()
+
+  // 匹配颜色
+  {
+    const reg = /#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})/g
+    const str = `#ffbbad #Fc01DF #FFF #ffE`
+    console.log(str.match(reg))
+  }
+  divider()
+
+  // 匹配时间
+  {
+    const reg = /^([0]?[0-9]|[1][0-9]|[2][0-3]):(0?[0-9]|[1-5][0-9])$/g
+    console.log(`1:9`.match(reg))
+    console.log(`1:09`.match(reg))
+    console.log(`23:59`.match(reg))
+  }
+  divider()
+  // 匹配年月日
+  {
+    const reg = /^[0-9]{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2][0-9]|3[0-1])$/g
+    console.log(`2021-1-1`.match(reg))
+    console.log(`2021-1-31`.match(reg))
+    console.log(`2021-12-31`.match(reg))
+    console.log(`2021-10-31`.match(reg))
+  }
+</script>

@@ -3,7 +3,7 @@
  * @Date         : 2021-04-19 13:58:53
  * @Description  : 学习笔记
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-05 14:07:18
+ * @LastEditTime : 2021-07-05 14:14:15
 -->
 
 # Javascript
@@ -1107,3 +1107,7 @@ function round(target, number) {
 -
 - 参数：thisArg, param1,param2...
 - 返回：改变 this 后的方法
+
+
+## RegExp 正则表达式
+参考：[《JS 正则迷你书》](https://github.com/qdlaoyao/js-regex-mini-book/blob/master/JavaScript%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%B7%E4%BD%A0%E4%B9%A6%EF%BC%881.1%E7%89%88%EF%BC%89.pdf)

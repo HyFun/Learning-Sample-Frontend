@@ -1,0 +1,82 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-05 15:02:00
+ * @Description  : 正则表达式3
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-06 18:52:56
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>正则表达式</title>
+  </head>
+  <body>
+    <a
+      href="https://github.com/qdlaoyao/js-regex-mini-book/blob/master/JavaScript%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%B7%E4%BD%A0%E4%B9%A6%EF%BC%881.1%E7%89%88%EF%BC%89.pdf"
+    >
+      正则表达式mini书
+    </a>
+  </body>
+</html>
+<script>
+  function divider() {
+    console.log(`-----------------`)
+  }
+  /**
+   * 括号的作用
+   */
+  {
+    var regex = /^I love (JavaScript|Regular Expression)$/
+    console.log(regex.test('I love JavaScript'))
+    console.log(regex.test('I love Regular Expression'))
+  }
+  divider()
+
+  /**
+   * 分组提取年-月-日
+   */
+  {
+    const reg1 = /\d{4}-\d{2}-\d{2}/
+    const reg2 = /(\d{4})-(\d{2})-(\d{2})/
+    const str = '2021-07-11'
+    console.log(str.match(reg1))
+    console.log(str.match(reg2)) // 匹配一组
+    console.log(reg2.exec(str))
+
+    // 把 年-月-日 换为 年/月/日
+    const str2 = str.replace(reg2, (str, year, month, day) => {
+      return `${year}/${month}/${day}`
+    })
+    console.log(str2)
+  }
+  divider()
+  /**
+   * 匹配时间统一的分隔符
+   */
+  {
+    const str1 = '2020-07-11'
+    const str2 = '2020/07/11'
+    const str3 = '2020.07.11'
+    const str4 = '2020-07/11'
+    const reg = /\d{4}(-|\/|\.)\d{2}\1\d{2}/
+    console.log(`str1`, str1.match(reg)) // 匹配到了
+    console.log(`str2`, str2.match(reg)) // 匹配到了
+    console.log(`str3`, str3.match(reg)) // 匹配到了
+    console.log(`str4`, str4.match(reg)) // null
+  }
+  divider()
+
+  /**
+   * 分组最后有两次匹配到的是最后的数
+   */
+  {
+    const str1 = '12345 4'
+    const str2 = '12345 5'
+    const reg = /(\d)+ \1/
+    console.log(str1.match(reg))
+    console.log(str2.match(reg)) // ["12345 5", "5", index: 0, input: "12345 5", groups: undefined]
+  }
+</script>

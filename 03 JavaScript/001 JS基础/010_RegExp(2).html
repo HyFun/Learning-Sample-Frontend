@@ -3,7 +3,7 @@
  * @Date         : 2021-07-05 15:02:00
  * @Description  : 正则表达式2
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-05 18:39:20
+ * @LastEditTime : 2021-07-06 15:24:09
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +70,16 @@
         .replace(/\B(?=(\d{3})+\b)/g, ',')
         .replace(/^/, '$ ')
     }
-    console.log(format(1888));
+    console.log(format(1888))
+  }
+  divider()
+  {
+    // 密码 6-12位
+    const reg1 = /^[0-9a-zA-Z]{6,12}$/
+    // 密码 必须包含数字
+    const reg2 = /^(?=.*[0-9])[0-9a-zA-Z]{6,12}$/
+
+    const reg3 = /\{\{([\}]?[.]+|[.]+[\}]?|[.]+[\}]?[.]+)\}\}/g
+    console.log(`{{哈哈哈hah}ahah}}`.match(reg3))
   }
 </script>

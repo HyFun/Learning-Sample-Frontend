@@ -3,7 +3,7 @@
  * @Date         : 2021-01-22 17:15:22
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-04-16 18:04:36
+ * @LastEditTime : 2021-07-07 13:43:48
 -->
 # HTML
 ## 简介
@@ -84,14 +84,14 @@ HTML称为超文本标记语言，是一种标记语言。它包括一系列标�
     - image
     - input
     - select
-    - i
-    - em
-    - b
-    - strong
-    - del
-    - strike
-    - ins
-    - u
+    - i 斜线
+    - em 斜线
+    - b 加粗
+    - strong 加粗
+    - del 删除
+    - strike 删除
+    - u 下划
+    - ins 下划
 
 
 

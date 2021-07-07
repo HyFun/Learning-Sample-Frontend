@@ -3,45 +3,47 @@
  * @Date         : 2021-04-20 18:18:33
  * @Description  : flex-grow
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-04-21 11:06:47
+ * @LastEditTime : 2021-07-07 17:24:55
 -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>flex-grow</title>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
-.container {
-    width: 600px;
-    height: 300px;
-    display: flex;
-}
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        width: 600px;
+        height: 300px;
+        display: flex;
+      }
 
-.left {
-    width: 300px;
-    flex-grow: 1;
-    background-color: orange;
-}
+      .left {
+        width: 300px;
+        flex-grow: 1;
+        background-color: orange;
+      }
 
-.right {
-    width: 200px;
-    flex-grow: 2;
-    background-color: pink;
-}
+      .right {
+        width: 200px;
+        flex-grow: 2;
+        background-color: pink;
+      }
     </style>
-</head>
-<body>
-<div class="container">
-    <div class="left"></div>
-    <div class="right"></div>
-</div>
-    <p>flex-grow主要用于平分剩余空间的，当子元素总宽度|高度不足父级的宽度，则按照flex-grow来拆分</p>
-</body>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left"></div>
+      <div class="right"></div>
+    </div>
+    <p>
+      flex-grow主要用于平分剩余空间的，当子元素总宽度|高度不足父级的宽度，则按照flex-grow来拆分
+    </p>
+  </body>
 </html>

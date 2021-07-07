@@ -3,7 +3,7 @@
  * @Date         : 2021-03-04 17:28:03
  * @Description  : flex布局最基本的框架
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-07 17:24:23
+ * @LastEditTime : 2021-07-07 23:29:53
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -825,13 +825,31 @@
       <div class="item">
         <div class="title">number</div>
         <div class="description">
+          剩余空间大于默认宽度
+          <br>
           可以看到，3只设置了宽度，所以宽度固定，留下的剩余空间分为3份。1设置的flex-grow：2，占了剩余空间的2/3，2设置的flex-grow：1，占了剩余空间的1/3
           <br />
           结果：
         </div>
         <div class="flex_wrap">
-          <div class="flex_item" style="flex-grow: 2">1</div>
-          <div class="flex_item" style="flex-grow: 1">2</div>
+          <div class="flex_item" style="flex-grow: 2;width: 0;">1</div>
+          <div class="flex_item">2</div>
+          <div class="flex_item">3</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="title">number</div>
+        <div class="description">
+          剩余空间小于默认宽度
+          <br>
+          可以看到，3只设置了宽度，所以宽度固定，留下的剩余空间分为3份。1设置的flex-grow：2，占了剩余空间的2/3，2设置的flex-grow：1，占了剩余空间的1/3
+          <br />
+          结果：
+        </div>
+        <div class="flex_wrap">
+          <div class="flex_item" style="flex-grow: 2;width: 1000px;">1</div>
+          <div class="flex_item">2</div>
           <div class="flex_item">3</div>
         </div>
       </div>

@@ -3,7 +3,7 @@
  * @Date         : 2021-07-05 15:02:00
  * @Description  : 正则表达式3
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-06 18:52:56
+ * @LastEditTime : 2021-07-07 11:00:27
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -78,5 +78,87 @@
     const reg = /(\d)+ \1/
     console.log(str1.match(reg))
     console.log(str2.match(reg)) // ["12345 5", "5", index: 0, input: "12345 5", groups: undefined]
+  }
+  divider()
+
+  /**
+   * trim
+   */
+  {
+    const reg1 = /^\s+|\s+$/g
+    const reg2 = /^\s*(.*?)\s*$/g // 这里使用了惰性匹配 *?，不然也会匹配最后一个空格之前的所有空格的。
+    const str = '  haha hahha  '
+    console.log(str.replace(reg1, ''))
+    console.log(str.replace(reg2, '$1'))
+    console.log(str.match(reg2))
+  }
+
+  /**
+   * 将每个单词的首字母转换为大写
+   */
+  {
+    const str = ' my name is china!ops~ '
+    const reg = /((?=\b)[a-z])+/g
+    console.log(str.match(reg))
+    console.log(
+      str.replace(reg, (...arg) => {
+        return arg[1].toUpperCase()
+      })
+    )
+  }
+  divider()
+
+  /**
+   * 驼峰命名
+   */
+  {
+    const str = 'hello-world-china'
+    const reg = /((?=(\b|-))[a-z-])+/g
+    console.log(str.match(reg))
+    console.log(
+      str.replace(reg, (...arg) => {
+        return arg[1].toUpperCase()
+      })
+    )
+  }
+
+  divider()
+  /**
+   * 脏话替换
+   */
+  {
+    const fuckList = [
+      '妈的',
+      '艹',
+      '操',
+      '操你',
+      '草',
+      '他妈的',
+      '操你大爷',
+      'fuck'
+    ]
+    const str = '张三，你他妈的是个人吗，草，操你大爷的，操!Fuck!'
+    console.log(
+      str.match(
+        new RegExp(
+          `${fuckList.sort((v1, v2) => v2.length - v1.length).join('|')}`,
+          'ig'
+        )
+      )
+    )
+
+    console.log(
+      str.replace(
+        new RegExp(
+          new RegExp(
+            `${fuckList.sort((v1, v2) => v2.length - v1.length).join('|')}`,
+            'ig'
+          )
+        ),
+        function (word) {
+          return '*'.repeat(word.length)
+        }
+      )
+    )
   }
 </script>

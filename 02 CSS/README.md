@@ -3,7 +3,7 @@
  * @Date         : 2021-07-07 17:26:19
  * @Description  : css 笔记
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-07 19:16:23
+ * @LastEditTime : 2021-07-07 19:20:21
 -->
 
 # CSS
@@ -113,4 +113,4 @@ dom.getBoundingClientRect().width / height
 
 ![](./../00_Resource/assets/css/border.png)
 
-[相关css代码](../02 CSS/003 CSS进阶/002 通过css绘制各种形状.html)
+<a href="../02 CSS/003 CSS进阶/002 通过css绘制各种形状.html">相关css代码</a>

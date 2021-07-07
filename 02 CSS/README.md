@@ -3,7 +3,7 @@
  * @Date         : 2021-07-07 17:26:19
  * @Description  : css 笔记
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-07 19:20:21
+ * @LastEditTime : 2021-07-07 20:59:00
 -->
 
 # CSS
@@ -73,7 +73,7 @@ dom.getBoundingClientRect().width / height
 - 伪元素法
 - 双伪元素
 
-## 6. `<img/>`1px 留白解决
+## 6. 解决`<img/>`1px 留白
 
 - 父级和`img`宽高写一样
 - display：block
@@ -82,7 +82,7 @@ dom.getBoundingClientRect().width / height
 - 父级：font-size：0
 - 父级：line-height：0
 
-## 7. background
+## 7. css: background
 
 - background-image
 - background-color
@@ -92,21 +92,21 @@ dom.getBoundingClientRect().width / height
 - background-origin
 - background-clip
 
-## 8. position 几种值
+## 8. css: position
 
 - static
 - absolute
 - relative
 - fixed
 
-## 9. 鼠标取值
+## 9. css: cursor
 
-- auto  输入框focus样式
-- pointer  小手
-- progress  等待loading
-- not-allowed 不允许
-- default 默认样式
-- help 帮助
+- <span style="cursor: auto;">auto  输入框focus样式 </span>
+- <span style="cursor: pointer;">pointer  小手</span>
+- <span style="cursor: progress;">progress  等待loading</span>
+- <span style="cursor: not-allowed;">not-allowed 不允许</span>
+- <span style="cursor: default;">default 默认样式</span>
+- <span style="cursor: help;">help 帮助</span>
 
 
 ## 10. css3: border-radius

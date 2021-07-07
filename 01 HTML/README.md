@@ -3,7 +3,7 @@
  * @Date         : 2021-01-22 17:15:22
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-07 13:43:48
+ * @LastEditTime : 2021-07-07 21:18:55
 -->
 # HTML
 ## 简介
@@ -103,6 +103,7 @@ HTML称为超文本标记语言，是一种标记语言。它包括一系列标�
 - 语义化标签`header、section、article、nav、aside、footer`
 - audio、video媒体标签
 - 增强的form-input类型`email、color、data、datatime、month、number、search、tel、time、url、week`等
+- css: 媒体查询、flex布局、border-radius、渐变等属性。
 - WebStorage：localStorage、sessionStorage
 - canvas绘图
 - 地理定位
@@ -116,17 +117,12 @@ HTML称为超文本标记语言，是一种标记语言。它包括一系列标�
 - 都遵循浏览器同源策略
 
 不同点
-- 作用不同。
-    - cookie中的数据会在同源的http请求中携带，在客户端和服务端之间进行来回传递；
-    - sessionStorage和localStorage只会存储在客户端本地。
-- 存储大小不同。
-    - cookie的数据存储大小不能超过4k；
-    - sessionStorage和localStorage虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
 
-- 有效时间
-    - `sessionStorage` 数据在当前浏览器tab关闭后会被删除
-    - `localStorage` 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据
-    - cookie的过期时间会根据服务器返回的`exprise`和`max-age`来管理的，无论设置cookie存活多久，只要浏览器窗口关闭，cookie就会被移除。
+|  | cookie | LocalStorage | SessionStorage |
+| - | - | - | - |
+| 功能 | cookie中的数据会在同源的http请求中携带，在客户端和服务端之间进行来回传递； | 只会存储在客户端本地 | 同LocalStorage |
+| 存储大小 | 每条最大支持4k左右 | 根据浏览器的不同存储大小也有所不同，5M甚至更大 | 同LocalStorage |
+| 存储时长 | 通过`express`或`max-age`可以设置cookie的存储时长，但是无论设置多久，只要浏览器关闭，cookie就会消失 | 只要用户不手动清除，就会一直存在 | 浏览器tab关闭就会清除 |
     
 
 ## 设置cookie的过期时间

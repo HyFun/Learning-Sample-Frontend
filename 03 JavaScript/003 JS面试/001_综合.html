@@ -1,32 +1,46 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-04-17 16:34:28
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-03 16:13:53
+-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body></body>
 </html>
 <script>
-    
-function Foo() {
-    getName = function () { console.log (1); };
-    return this;
-}
-Foo.getName = function () { console.log (2);};
-Foo.prototype.getName = function () { console.log (3);};
-var getName = function () { console.log (4);};
-function getName() { console.log (5);}
- 
-//请写出以下输出结果：
-Foo.getName();  // 2
-getName(); // 4
-Foo().getName();  // 1
-getName(); // 1
-new Foo.getName();  // 2
-new Foo().getName(); // 3   调用实例方法
-new new Foo().getName(); // 3  new构造函数Foo的getName的构造函数
+  function Foo() {
+    getName = function () {
+      console.log(1)
+    }
+    return this
+  }
+  Foo.getName = function () {
+    console.log(2)
+  }
+  Foo.prototype.getName = function () {
+    console.log(3)
+  }
+  var getName = function () {
+    console.log(4)
+  }
+  function getName() {
+    console.log(5)
+  }
+
+  //请写出以下输出结果：
+  Foo.getName() // 2
+  getName() // 4
+  Foo().getName() // 1
+  getName() // 1
+  new Foo.getName() // 2
+  new Foo().getName() // 3   调用实例方法
+  new new Foo().getName() // 3  new构造函数Foo的getName的构造函数
 </script>

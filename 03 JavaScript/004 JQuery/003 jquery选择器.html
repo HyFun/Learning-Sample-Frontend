@@ -1,0 +1,80 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 21:29:18
+ * @Description  : jquery对象和dom对象
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-08 22:10:54
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jquery对象和dom对象</title>
+    <script src="../../00_Resource/assets/js/jquery-3.6.0.js"></script>
+  </head>
+  <body>
+    <ul>
+      <li id="first">1</li>
+      <li class="box">2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+    </ul>
+
+    <ul class="box2">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+      <li>11</li>
+      <li>12</li>
+    </ul>
+  </body>
+</html>
+<script>
+  /**
+   * jquery中的选择器
+   */
+  
+  /**
+   * 1. id选择器
+   */
+  $('#first').text('我是第一个')
+
+  /**
+   * 2. 类选择器
+   */
+  $('.box').text(`我是类选择器`)
+
+  /**
+   * 3. 标签选择器
+   */
+  $('ul li:nth-child(3)').css('background','orange')
+
+  /**
+   * 5. eq
+   */
+  $('ul li:eq(3)').css('background', 'red')
+  $('ul li').eq(4).css('background', 'green')
+
+  /**
+   * 6. 基数 odd
+   */
+  $('.box2 li:odd').css('color','red')
+
+  /**
+   * 7. 偶数 even
+   */
+   $('.box2 li:even').css('color','green')
+</script>

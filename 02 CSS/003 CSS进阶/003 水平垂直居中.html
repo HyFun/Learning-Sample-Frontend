@@ -1,0 +1,101 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 17:17:10
+ * @Description  : 水平垂直居中
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-08 17:33:33
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>水平垂直居中</title>
+    <style>
+      .box {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        box-sizing: border-box;
+        border: 1px solid skyblue;
+      }
+      .box > div {
+        background-color: orange;
+      }
+      .box1 {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -50px;
+        margin-top: -50px;
+      }
+
+      .box2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        margin: auto;
+      }
+
+      .box3 {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: inline-block;
+      }
+
+      .box4 {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>1. position:absolute + left、top 50% + -margin</h3>
+    <div class="box">
+      <div class="box1"></div>
+    </div>
+
+    <h3>2. position: absolute + left、top、right、bottom 0 + margin: auto</h3>
+    <div class="box">
+      <div class="box2"></div>
+    </div>
+
+    <h3>3. position: absolute|relative + left、top 50% + transform</h3>
+    <div class="box">
+      <div class="box3">我是未知大小盒子</div>
+    </div>
+
+    <h3>4. flex + justify-content + align-items</h3>
+    <div
+      class="box"
+      style="display: flex; justify-content: center; align-items: center"
+    >
+      <div class="box4">我是未知大小盒子</div>
+    </div>
+
+    <h3>5. flex + margin:auto</h3>
+    <div class="box" style="display: flex">
+      <div class="box5" style="display: inline-block; margin: auto">
+        我是未知大小盒子
+      </div>
+    </div>
+
+    <h3>5. flex + margin:auto</h3>
+    <div class="box" style="display: flex">
+      <div class="box5" style="display: inline-block; margin: auto">
+        我是未知大小盒子
+      </div>
+    </div>
+
+    <h3>6. table-ceil居中</h3>
+  </body>
+</html>

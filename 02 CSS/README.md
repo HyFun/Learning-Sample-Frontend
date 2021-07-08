@@ -3,7 +3,7 @@
  * @Date         : 2021-07-07 17:26:19
  * @Description  : css 笔记
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-08 16:52:43
+ * @LastEditTime : 2021-07-08 18:07:12
 -->
 
 # CSS
@@ -435,34 +435,47 @@ flex-shrink 属性定义了项目的缩小比例，默认为 1，即如果空间
    right = 500 + ( 600 - ( 500 + 400 ) * ( 1 * 400 / ( 500 * 2 + 400 * 1))) = 314.28
    ```
 
-- 计算 left、right 的宽度
+2. 计算 left、right 的宽度
 
-  ```css
-  .container {
-    width: 600px;
-    height: 300px;
-    display: flex;
-  }
-  .left {
-    flex: 1 2 300px;
-    background: orange;
-  }
-  .right {
-    flex: 2 1 200px;
-    background: skyblue;
-  }
-  ```
+   ```css
+   .container {
+     width: 600px;
+     height: 300px;
+     display: flex;
+   }
+   .left {
+     flex: 1 2 300px;
+     background: orange;
+   }
+   .right {
+     flex: 2 1 200px;
+     background: skyblue;
+   }
+   ```
 
-  ```html
-  <div class="container">
-    <div class="left"></div>
-    <div class="right"></div>
-  </div>
-  ```
+   ```html
+   <div class="container">
+     <div class="left"></div>
+     <div class="right"></div>
+   </div>
+   ```
 
-  解题思路：当总宽度小于父元素宽度时，剩余宽度则按照`flex-grow`来进行伸缩
+   解题思路：当总宽度小于父元素宽度时，剩余宽度则按照`flex-grow`来进行伸缩
 
-  ```js
-  left = 300 + (600 - ( 300 + 200 ) ) * (1 / 3) = 333.33
-  right = 300 + (600 - ( 300 + 200 ) ) * (2 / 3) = 266.67
-  ```
+   ```js
+   left = 300 + (600 - ( 300 + 200 ) ) * (1 / 3) = 333.33
+   right = 300 + (600 - ( 300 + 200 ) ) * (2 / 3) = 266.67
+   ```
+
+## 17. 实现水平垂直居中
+
+<a href="./003 CSS进阶/003 水平垂直居中.html">水平垂直居中代码</a>
+
+- position + left、top = 50% + margin = -宽高
+- position + l、t、r、b = 0 + margin: auto
+- position + l、t: 50% + transform
+- flex 布局 + justify-content + align-items
+- flex 布局 + margin: auto
+- table + table-ceil + vertical-align: middle
+
+

@@ -3,7 +3,7 @@
  * @Date         : 2021-03-04 17:28:03
  * @Description  : flex布局最基本的框架
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-07 23:29:53
+ * @LastEditTime : 2021-07-08 16:50:55
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -825,14 +825,25 @@
       <div class="item">
         <div class="title">number</div>
         <div class="description">
-          剩余空间大于默认宽度
-          <br>
-          可以看到，3只设置了宽度，所以宽度固定，留下的剩余空间分为3份。1设置的flex-grow：2，占了剩余空间的2/3，2设置的flex-grow：1，占了剩余空间的1/3
+          父宽度 > 元素总宽度 500 > 200 + 100 + 100
           <br />
-          结果：
+          box1: flex-grow:2; width: 200px;
+          <br />
+          box2|box3: width: 100px;
+          <br />
+          计算公式：width = 自身宽度 + ( 父宽度 - (box1宽度 + box2宽度 +
+          box3宽度) ) * (自身flex-grow / 总flex-grow)
+          <br />
+          box1 = 200 + (500 - (200 + 100 + 100)) * (2/2) = 300
+          <br />
+          box2 = 100 + (500 - (200 + 100 + 100)) * (0/2) = 100 //
+          没有设置flex-grow 默认为0
+          <br />
+          box3 = 100 + (500 - (200 + 100 + 100)) * (0/2) = 100 //
+          没有设置flex-grow 默认为0
         </div>
         <div class="flex_wrap">
-          <div class="flex_item" style="flex-grow: 2;width: 0;">1</div>
+          <div class="flex_item" style="flex-grow: 2; width: 200px">1</div>
           <div class="flex_item">2</div>
           <div class="flex_item">3</div>
         </div>
@@ -841,14 +852,18 @@
       <div class="item">
         <div class="title">number</div>
         <div class="description">
-          剩余空间小于默认宽度
-          <br>
-          可以看到，3只设置了宽度，所以宽度固定，留下的剩余空间分为3份。1设置的flex-grow：2，占了剩余空间的2/3，2设置的flex-grow：1，占了剩余空间的1/3
+          父宽度 < 元素总宽度 500 < (1000 + 100 + 100)
           <br />
-          结果：
+          计算公式：自身宽度 + (500 - (1000 + 100 + 100)) * (flex-shrink *
+          自身宽度) / (flex-shrink * box1 + flex-shrink * box2 + flex-shrink *
+          box2)
+          <br />
+          box1 = 1000 + -700 * (1 * 1000) / (1 * 1000 + 1 * 100 + 1 * 100) = 416.67
+          box2 = 100 + -700 * (1 * 100) / (1 * 1000 + 1 * 100 + 1 * 100) = 41.67
+          box3 = 100 + -700 * (1 * 100) / (1 * 1000 + 1 * 100 + 1 * 100) = 41.67
         </div>
         <div class="flex_wrap">
-          <div class="flex_item" style="flex-grow: 2;width: 1000px;">1</div>
+          <div class="flex_item" style="flex-grow: 2; width: 1000px">1</div>
           <div class="flex_item">2</div>
           <div class="flex_item">3</div>
         </div>

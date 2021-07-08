@@ -3,7 +3,7 @@
  * @Date         : 2021-07-07 17:26:19
  * @Description  : css 笔记
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-07 23:37:26
+ * @LastEditTime : 2021-07-08 16:52:43
 -->
 
 # CSS
@@ -187,6 +187,105 @@ transform: translateZ(-150px) rotateY(180deg);
   - running 当前动画正在运行。
   - paused 当前动画已被停止。
 
+### 动画 step
+
+[网易梦幻西游参考(在最下方)](https://xyq.163.com/)
+
+动态图片展示：
+
+![](../00_Resource/assets/css/animate-net.gif)
+
+#### 代码实现：
+
+css
+
+```css
+<style>
+  .wrap {
+    position: relative;
+    margin: 100px auto;
+    width: 780px;
+    background-color: orange;
+  }
+
+  .west {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 200px;
+    height: 180px;
+    animation: walk 1.4s steps(8) infinite;
+  }
+  @keyframes walk {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -1600px 0;
+    }
+  }
+  .west-1 {
+    margin-left: -390px;
+    background-image: url(../../00_Resource/assets/css/animate-step-1.png);
+  }
+
+  .west-2 {
+    margin-left: -190px;
+    background-image: url(../../00_Resource/assets/css/animate-step-2.png);
+  }
+
+  .west-3 {
+    margin-left: 10px;
+    margin-top: -30px;
+    width: 170px;
+    height: 240px;
+    background-image: url(../../00_Resource/assets/css/animate-step-3.png);
+    animation-name: walk-3;
+  }
+
+  @keyframes walk-3 {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -1360px 0;
+    }
+  }
+
+  .west-4 {
+    margin-left: 180px;
+    width: 210px;
+    height: 200px;
+    background-image: url(../../00_Resource/assets/css/animate-step-4.png);
+    animation-name: walk-4;
+  }
+
+  @keyframes walk-4 {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -1680px 0;
+    }
+  }
+</style>
+```
+
+html
+
+```html
+<div class="wrap">
+  <div class="west-1 west"></div>
+  <div class="west-2 west"></div>
+  <div class="west-3 west"></div>
+  <div class="west-4 west"></div>
+</div>
+```
+
+效果：
+
+![](../00_Resource/assets/css/animate-step.gif)
+
 ## 15. css3: 媒体查询
 
 ```css
@@ -290,14 +389,80 @@ transform: translateZ(-150px) rotateY(180deg);
 - 剩余空间 > size: size = 剩余空间
 - 剩余空间 < size:
 
-
 ### 11. flex-shrink
-flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
 
+flex-shrink 属性定义了项目的缩小比例，默认为 1，即如果空间不足，该项目将缩小。
 
 ### 12. flex-basis
-指定了 flex 元素在主轴方向上的初始大小。如果不使用  box-sizing 改变盒模型的话，那么这个属性就决定了 flex 元素的内容盒（content-box）的尺寸。
+
+指定了 flex 元素在主轴方向上的初始大小。如果不使用 box-sizing 改变盒模型的话，那么这个属性就决定了 flex 元素的内容盒（content-box）的尺寸。
 
 ### 13. flex
 
 `flex-grow flex-shrink flex-basis`简写
+
+### 14. 两道 flex 题
+
+1. 计算 left、right 的宽度
+
+   ```css
+   .container {
+     width: 600px;
+     height: 300px;
+     display: flex;
+   }
+   .left {
+     flex: 1 2 500px;
+     background: orange;
+   }
+   .right {
+     flex: 2 1 400px;
+     background: skyblue;
+   }
+   ```
+
+   ```html
+   <div class="container">
+     <div class="left"></div>
+     <div class="right"></div>
+   </div>
+   ```
+
+   解题思路：当总宽度大于父级宽度时，则按照缩小比例`flex-shrink`进行计算，和`flex-grow`完全没关系!
+
+   ```js
+   left = 500 + ( 600 - ( 500 + 400 ) * ( 2 * 500 / ( 500 * 2 + 400 * 1))) = 285.72
+   right = 500 + ( 600 - ( 500 + 400 ) * ( 1 * 400 / ( 500 * 2 + 400 * 1))) = 314.28
+   ```
+
+- 计算 left、right 的宽度
+
+  ```css
+  .container {
+    width: 600px;
+    height: 300px;
+    display: flex;
+  }
+  .left {
+    flex: 1 2 300px;
+    background: orange;
+  }
+  .right {
+    flex: 2 1 200px;
+    background: skyblue;
+  }
+  ```
+
+  ```html
+  <div class="container">
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
+  ```
+
+  解题思路：当总宽度小于父元素宽度时，剩余宽度则按照`flex-grow`来进行伸缩
+
+  ```js
+  left = 300 + (600 - ( 300 + 200 ) ) * (1 / 3) = 333.33
+  right = 300 + (600 - ( 300 + 200 ) ) * (2 / 3) = 266.67
+  ```

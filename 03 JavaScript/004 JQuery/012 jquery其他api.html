@@ -1,0 +1,70 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 21:29:18
+ * @Description  : jquery 模板
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-09 17:34:22
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模板</title>
+    <script src="../../00_Resource/assets/js/jquery-3.6.0.js"></script>
+  </head>
+  <body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+  </body>
+</html>
+<script>
+  $(function () {
+    /**
+     * 1. each() 遍历元素
+     */
+    $('li').each((index, ele) => {
+      console.log(index, ele)
+    })
+    /**
+     * 2. $.each() 遍历数据
+     */
+    $.each([1, 2, 3, 4], function (index, ele) {
+      console.log(index, ele)
+    })
+    /**
+     * 3. $.extend 复制对象
+     * 参数：(deep?:boolean, target, obj1,[obj2...])
+     */
+    {
+      const wife = {
+        name: '小红',
+        age: 20,
+        date: new Date()
+      }
+      const person = {
+        name: '张三',
+        age: 21,
+        wife
+      }
+      const person2 = {}
+      $.extend(true, person2, person)
+      // 修改之前的值
+      person.name = '李四'
+      person.wife.name = '王五'
+      console.log(person) // 改变
+      console.log(person2) // 未改变
+    }
+    /**
+     * 4. clone()
+     * 克隆一份dom对象
+     */
+    $('ul').eq(0).after($('ul').eq(0).clone())
+  })
+</script>

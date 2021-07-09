@@ -1,0 +1,134 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 21:29:18
+ * @Description  : jquery 模板
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-09 14:14:13
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模板</title>
+    <script src="../../00_Resource/assets/js/jquery-3.6.0.js"></script>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="show">
+      <h3>1. show() hide() toggle()</h3>
+      <button>显示</button>
+      <button>隐藏</button>
+      <button>toggle</button>
+      <div class="box"></div>
+    </div>
+
+    <div class="fade">
+      <h3>2. fadeIn() fadeOut() fadeToggle()</h3>
+      <button>显示</button>
+      <button>隐藏</button>
+      <button>toggle</button>
+      <div class="box"></div>
+    </div>
+
+    <div class="slide">
+      <h3>3. slideDown() slideUp() slideToggle()</h3>
+      <button>显示</button>
+      <button>隐藏</button>
+      <button>toggle</button>
+      <div class="box"></div>
+    </div>
+
+    <div class="animate">
+      <h3>4. animate() 自定义动画</h3>
+      <button>开始动画</button>
+      <button>停止动画</button>
+      <div class="box"></div>
+    </div>
+  </body>
+</html>
+<script>
+  $(function () {
+    /**
+     * 1. show() hide() toggle()
+     * 参数: fast slow 毫秒
+     */
+    $('.show button')
+      .eq(0)
+      .click(function () {
+        $('.show .box').show(300)
+      })
+      .next()
+      .click(function () {
+        $('.show .box').hide(300)
+      })
+      .next()
+      .click(function () {
+        $('.show .box').toggle(300)
+      })
+
+    /**
+     * 2.fadeIn() fadeOut() fadeToggle()
+     * 参数: fast slow 毫秒
+     */
+    $('.fade button')
+      .eq(0)
+      .click(function () {
+        $('.fade .box').fadeIn(300)
+      })
+      .next()
+      .click(function () {
+        $('.fade .box').fadeOut(300)
+      })
+      .next()
+      .click(function () {
+        $('.fade .box').fadeToggle('fast')
+      })
+
+    /**
+     * 3.slideDown() slideUp() slideToggle()
+     * 参数: fast slow 毫秒
+     */
+    $('.slide button')
+      .eq(0)
+      .click(function () {
+        $('.slide .box').slideDown(300)
+      })
+      .next()
+      .click(function () {
+        $('.slide .box').slideUp(300)
+      })
+      .next()
+      .click(function () {
+        $('.slide .box').slideToggle('fast')
+      })
+
+    /**
+     * 4. animate() 自定义动画
+     */
+    $('.animate button')
+      .eq(0)
+      .click(() => {
+        $('.animate .box').animate(
+          {
+            width: '400px',
+            height: '400px',
+            opacity: 0.5,
+            backgroundColor: 'red'
+          },
+          2000
+        )
+      })
+      .next()
+      .click(function () {
+        $('.animate .box').stop()
+      })
+  })
+</script>

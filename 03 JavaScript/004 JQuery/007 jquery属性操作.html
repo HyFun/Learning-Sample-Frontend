@@ -1,0 +1,69 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 21:29:18
+ * @Description  : jquery 模板
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-09 12:40:36
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模板</title>
+    <script src="../../00_Resource/assets/js/jquery-3.6.0.js"></script>
+  </head>
+  <body>
+    <button id="prop">prop设置图片地址</button>
+    <button id="attr">attr设置图片地址</button>
+    <br />
+    <br />
+    <img src="" alt="周杰伦" />
+    <p></p>
+  </body>
+</html>
+<script>
+  $(function () {
+    /**
+     * 1. prop()
+     * 获取|设置 dom节点自身的属性
+     * 只能获取标签的自身属性，不能获取自定义的属性
+     */
+    var toggle = false
+    $('#prop').click(function () {
+      if (toggle) {
+        $('img').prop('src', '')
+      } else {
+        $('img').prop(
+          'src',
+          'https://img1.baidu.com/it/u=4242937846,1962669844&fm=26&fmt=auto&gp=0.jpg'
+        )
+      }
+      toggle = !toggle
+    })
+
+    /**
+     * 2. attr()
+     */
+    $('#attr').click(function () {
+      if (toggle) {
+        $('img').attr('src', '')
+      } else {
+        $('img').attr(
+          'src',
+          'https://img1.baidu.com/it/u=4242937846,1962669844&fm=26&fmt=auto&gp=0.jpg'
+        )
+      }
+      toggle = !toggle
+    })
+
+    /**
+     * 3. data(key, value?)
+     * 会在标签上加上 data-[key]的值
+     * 在元素标签上看不到，但是可以获取
+     */
+    $('img').data('hello', '我是img上data-hello的值哦~')
+    $('p').text($('img').data('hello'))
+  })
+</script>

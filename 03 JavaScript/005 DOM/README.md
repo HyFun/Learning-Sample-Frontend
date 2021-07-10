@@ -3,7 +3,7 @@
  * @Date         : 2021-07-10 21:15:29
  * @Description  : readme
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-10 23:29:53
+ * @LastEditTime : 2021-07-11 00:01:38
 -->
 
 # DOM
@@ -101,3 +101,48 @@ style
 - `.offsetTop/offsetLeft`: 当前元素距离`offsetParent`的 top、left 距离。**_（border 距离 border 的距离）_**
 - `.scrollWidth/scrollHeight`: 滑动内容的宽高
 - `.scrollTop/scrollLeft`: 内容已经滑动了 top、left 距离
+
+## 事件
+
+注册事件
+
+- `.onclick=`: 只能注册一个事件，不能注册多个
+- `.addEventListener(event, listener, options?)`: event 事件名，没有`on`；listener 是处理事件方法，参数为 event 对象；options 可带可不带，可以设置事件的类型
+- `.attachEvent(event, listener)`: 针对 IE9 一下的注册
+
+注销
+
+- `.onclick=null`: 直接置 null 就不会有事件了
+- `.removeEventListener(event, listener?)`: 如果没有 listener，那么所有的事件就会被移除；如果有 listener，那么只会移除 listener 这个事件。
+- `detachEvent(event, listener?)`: 针对 IE9 一下的事件移除
+
+常用事件
+
+- `click`: 点击事件
+- `input`: 输入框输入事件
+- `focus`: 输入框 focus 事件
+- `blur`: 输入框 blur 事件
+- `change`: 输入框`blur`时值有改变时的事件
+- `mousemove`: 鼠标移动时触发
+- `mouseover`: 鼠标悬浮时事件
+- `mouseout`: 鼠标离开时事件
+- `mouseenter`: 鼠标进入时事件。**_不会冒泡_**
+- `mouseleave`: 鼠标离开时事件。**_不会冒泡_**
+- `keydowm`: 按下键盘时
+- `keyup`: 抬起键盘时
+- `keypress`: 只有按下字符键时才会触发，对大小写敏感，能通过keyCode区分大小写
+- `contextmenu`: 单击右键
+- `selectstart`: 开始拖动选择文字
+
+事件委托
+- 如果需要给后添加的元素添加事件，此时元素没有在dom上，可以给父元素添加事件，父元素可以通过 `e.target` 来找到点击的真正的元素
+
+## 事件对象event
+
+阻止默认行为
+- `e.preventDefault()`: 标准
+- `e.returnValue = false`: IE
+
+阻止冒泡
+- `e.stopPropagation()`: 标准
+- `e.cancelBubble = true`: IE

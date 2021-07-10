@@ -3,7 +3,7 @@
  * @Date         : 2021-07-09 15:24:27
  * @Description  : JQuery
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-09 17:36:44
+ * @LastEditTime : 2021-07-10 22:59:13
 -->
 
 # JQuery
@@ -98,6 +98,13 @@ $(selector).get(0)
 - `remove(selector?)`: 删除当前满足 selector 的元素。**_(删除自己)_**
 - `empty()`: 删除元素的子级元素。**_(删除所有儿子)_**
 - `html('')`: 当前元素的 html 内容设置为空。也同样达到`empty()`的效果
+
+克隆
+- `clone(event?)`: 克隆当前节点及其子节点。`event`默认为false，即不克隆事件。true则会克隆事件。
+
+遍历
+
+- `each((index, ele)=>{})`: 遍历元素
 
 样式
 
@@ -208,7 +215,6 @@ click:function() {
 
 ## 其他 API
 
-- `each((index, ele)=>{})`: 遍历元素
 - `$.each(array, handler)`: 遍历数组
 - `$.extend()`: 复制对象
   ```js
@@ -232,4 +238,3 @@ click:function() {
     console.log(person2) // 未改变
   }
   ```
-- `clone()`: 克隆当前节点

@@ -1,0 +1,151 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-10 21:19:33
+ * @Description  : 大小获取
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-10 22:21:12
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大小获取</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .parent {
+        width: 400px;
+        height: 400px;
+        border: 20px solid black;
+        position: relative;
+        margin: 20px;
+      }
+
+      .son {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+        padding: 10px;
+        border: 10px solid black;
+      }
+
+      .parent2 {
+        width: 400px;
+        height: 400px;
+        border: 20px solid black;
+        margin: 20px;
+        overflow: auto;
+      }
+
+      .son2 {
+        width: 1000px;
+        height: 1000px;
+        background-color: pink;
+        padding: 20px;
+        border: 20px solid purple;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      400 x 400
+      <div class="son">200 x 200</div>
+    </div>
+
+    <div class="parent2">
+      <div class="son2"></div>
+    </div>
+  </body>
+</html>
+<script>
+  function divider() {
+    console.log(`----------------`)
+  }
+  /**
+   * 1. 获取屏幕尺寸
+   */
+  divider()
+  console.log('屏幕尺寸')
+  console.log(screen.width, screen.height)
+  divider()
+
+  /**
+   * 2. 屏幕可用高度
+   * 软件最大化时的高度和宽度
+   */
+  console.log('可用高度')
+  console.log(screen.availWidth, screen.availHeight)
+  divider()
+  /**
+   * 3. 浏览器尺寸
+   */
+  {
+    console.log('浏览器尺寸')
+    console.log(window.outerWidth, window.outerHeight)
+  }
+  divider()
+
+  /**
+   * 4. 浏览器页面尺寸
+   */
+  {
+    console.log('浏览器页面尺寸')
+    console.log(window.innerWidth, window.innerHeight)
+  }
+  divider()
+
+  /**
+   * 5. offset相关
+   * offsetWidth/offsetHeight = content + padding + border  = jquery.outerWidth / jquery.outerHeight
+   * offsetTop/offsetLeft = 相对于父级position除了为static外的 border距离border的位置
+   * offsetParent = parent
+   */
+  const parent = document.querySelector('.parent')
+  const son = document.querySelector('.son')
+  {
+    // offsetWidth offsetHeight
+    console.log('offsetWidth/offsetHeight')
+    console.log(son.offsetWidth, son.offsetHeight)
+    console.log('offsetTop/offsetLeft')
+    console.log(son.offsetTop, son.offsetLeft)
+    console.log(son.offsetParent)
+  }
+  divider()
+
+  /**
+   * 6. client
+   * clientWidth/clientHeight = content + padding
+   * clientTop/clientLeft = border
+   */
+  {
+    console.log('son: clientWidth/clientHeight')
+    console.log(son.clientWidth, son.clientHeight)
+    console.log('son: clientTop/clientLeft')
+    console.log(son.clientTop, son.clientLeft)
+  }
+  divider()
+
+  /**
+   * 7. scroll
+   * scrollWidth/scrollHeight
+   */
+  const parent2 = document.querySelector('.parent2')
+  {
+    // 获取滚动高度和宽度
+    console.log(`parent2: scrollWidth/scrollHeight`)
+    console.log(parent2.scrollWidth, parent2.scrollHeight)
+    // 滚动事件 scrollWidth = scrollLeft + offsetWidth
+    parent2.addEventListener('scroll', () => {
+      console.log(parent2.scrollLeft, parent2.scrollTop)
+    })
+  }
+</script>

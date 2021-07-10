@@ -3,7 +3,7 @@
  * @Date         : 2021-07-10 16:42:37
  * @Description  : 常用事件
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-10 16:57:12
+ * @LastEditTime : 2021-07-10 21:15:07
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +30,13 @@
   <body>
     <div class="parent">
       <div class="son"></div>
+    </div>
+    <p>
+      <input type="text" id="change" />
+    </p>
+    <div>
+      <button>+</button>
+      <ul></ul>
     </div>
   </body>
 </html>
@@ -67,12 +74,75 @@
    * 只触发一次
    * 会冒泡，出发了子元素的mouseover 也会触发父元素的mouseover
    */
-   {
+  {
     parent.addEventListener('mouseover', () => {
       console.log('parent', 'mouseover')
     })
     son.addEventListener('mouseover', () => {
       console.log('son', 'mouseover')
+    })
+  }
+
+  /**
+   * 4. contextmenu
+   * 单击右键
+   */
+  {
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault()
+      alert('单击右键触发')
+    })
+  }
+
+  /**
+   * 5. selectstart
+   * 鼠标托选开始
+   */
+
+  /**
+   * 6. change
+   * input事件，当输入完毕后，blur的时候触发，如果输入的内容和上次一样为改变，则不会触发
+   */
+  {
+    const inputChange = document.getElementById('change')
+    inputChange.addEventListener('change', (e) => {
+      console.log(e.target.value)
+    })
+    inputChange.focus()
+  }
+
+  /**
+   * 7. input
+   * 输入框输入内容时触发
+   */
+  {
+    const inputChange = document.getElementById('change')
+    inputChange.addEventListener('input', (e) => {
+      console.log(e.target.value)
+    })
+  }
+
+  /**
+   * 8. 事件委托
+   * 给后添加的元素绑定事件，可以将事件添加到已存在的父级身上
+   */
+  {
+    const button = document.querySelector('button')
+    const ul = document.querySelector('ul')
+    button.addEventListener('click', () => {
+      const li = document.createElement('li')
+      li.style.height = '32px'
+      li.style.border = '1px dashed pink'
+      const index = document.querySelectorAll('li').length
+      li.innerText = index
+      li.setAttribute('data-index', index)
+
+      ul.appendChild(li)
+    })
+    // 给ul绑定事件
+    ul.addEventListener('click', (e) => {
+      const index = e.target.getAttribute('data-index')
+      alert(`您点击了第${index}个`)
     })
   }
 </script>

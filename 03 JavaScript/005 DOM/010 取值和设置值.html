@@ -1,0 +1,61 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-10 23:01:29
+ * @Description  : 取值和设置值
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-10 23:15:06
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>取值和设置值</title>
+  </head>
+  <body>
+    <button>设置text文字</button>
+    <button>设置html文字</button>
+    <button>获取inputvalue</button>
+    <button>设置inputvalue</button>
+    <div class="parent">
+      我是parent;
+      <div class="son">我是son</div>
+    </div>
+
+    <input type="text" />
+  </body>
+</html>
+<script>
+  const parent = document.querySelector('.parent')
+  const son = document.querySelector('.son')
+  const input = document.querySelector('input')
+  const button = document.querySelectorAll('button')
+  /**
+   * 1. innerText
+   * 只会获取到该元素内部的所有文字，包含子元素文字
+   */
+  console.log(parent.innerText)
+  button[0].addEventListener('click', () => {
+    parent.innerText = '<h1>我是设置后的文字</h1>'
+  })
+
+  /**
+   * 2. innerHTML
+   */
+  console.log(parent.innerHTML)
+  button[1].addEventListener('click', () => {
+    parent.innerHTML = '<h1>我是设置后的文字</h1>'
+  })
+
+  /**
+   * 3. 获取和设置input的value
+   */
+  button[2].addEventListener('click', () => {
+    console.log(input.value)
+  })
+
+  button[3].addEventListener('click', () => {
+      input.value = '<h1>我是设置后的input值</h1>'
+  })
+</script>

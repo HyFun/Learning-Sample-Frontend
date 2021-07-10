@@ -1,0 +1,128 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-10 14:50:53
+ * @Description  : 属性方法获取节点
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-10 15:33:01
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>属性方法获取节点</title>
+  </head>
+  <body>
+    <h3>1. parentNode</h3>
+    <div class="father">
+      <div class="son"></div>
+    </div>
+    <h3>2. childrenNodes</h3>
+    <ul class="childrenNodes">
+      <li>1</li>
+    </ul>
+    <h3>3. chilren</h3>
+    <ul class="children">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+  </body>
+</html>
+<script>
+  /**
+   * 1. parentNode
+   * 获取父节点，父节点肯定是一个元素节点
+   */
+  {
+    const son = document.querySelector('.son')
+    const parent = son.parentNode
+    parent.style.width = '100px'
+    parent.style.height = '100px'
+    parent.style.border = '1px dashed red'
+  }
+
+  /**
+   * 2. childrenNodes
+   * 包含text节点
+   */
+  {
+    console.log(document.querySelector('.childrenNodes').childNodes)
+    // [text, li, text]
+  }
+
+  /**
+   * 3. children
+   * 只有元素节点
+   */
+  {
+    console.log(document.querySelector('.children').children)
+    // [li]
+  }
+
+  /**
+   * 4. firstChild
+   * 包含文本节点
+   */
+  {
+    console.log(document.querySelector('.children').firstChild)
+  }
+
+  /**
+   * 5. firstElementChild
+   */
+  {
+    console.log(document.querySelector('.children').firstElementChild)
+  }
+
+  /**
+   * 6. lastChild
+   */
+  {
+    console.log(document.querySelector('.children').lastChild)
+  }
+
+  /**
+   * 7. lastElementChild
+   */
+  {
+    console.log(document.querySelector('.children').lastElementChild)
+  }
+
+  /**
+   * 8. nextSibling
+   * 包含文本节点
+   */
+  {
+    console.log(document.querySelector('.children li').nextSibling)
+  }
+
+  /**
+   * 9. nextElementSibling
+   *
+   */
+  {
+    console.log(document.querySelector('.children li').nextElementSibling)
+  }
+
+  /**
+   * 10. previousSibling
+   *
+   */
+  {
+    console.log(document.querySelector('.children li').previousSibling)
+  }
+
+  /**
+   * 11. previousElementSibling
+   *
+   */
+  {
+    console.log(
+      document.querySelector('.children li:nth-child(4)').previousElementSibling
+    )
+  }
+</script>

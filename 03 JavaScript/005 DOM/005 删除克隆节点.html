@@ -1,0 +1,88 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-10 15:33:30
+ * @Description  : 删除克隆节点
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-10 15:51:32
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>删除克隆节点</title>
+  </head>
+  <body>
+    <p>
+      <button>新增</button>
+      <button>新增指定位置</button>
+      <button>删除第二个li</button>
+      <button>克隆</button>
+    </p>
+    <ul></ul>
+  </body>
+</html>
+<script>
+  const ul = document.querySelector('ul')
+  const buttons = document.querySelectorAll('button')
+
+  /**
+   * 1. appendChild()
+   * 创建一条li元素插入在ul最后
+   */
+  {
+    buttons[0].addEventListener('click', () => {
+      const li = document.createElement('li')
+      li.innerHTML = document.querySelectorAll('ul li').length
+      ul.appendChild(li)
+    })
+  }
+  /**
+   * 2. insertBefore()
+   * 插入指定元素到某个元素前面
+   */
+  {
+    // 比如要插入到第一个li的前面
+    buttons[1].addEventListener('click', () => {
+      const li = document.querySelector('li')
+      const linew = document.createElement('li')
+      linew.innerHTML = document.querySelectorAll('ul li').length
+      ul.insertBefore(linew, li)
+    })
+  }
+
+  /**
+   * 3. 使用innerHTML方式插入元素
+   */
+
+  /**
+   * 4. 删除元素
+   * removeChild(element)  移除子元素
+   * remove() // 删除自己
+   */
+  {
+    buttons[2].addEventListener('click', () => {
+      // 获取第二个li
+      document.querySelector('ul li:nth-child(2)')?.remove()
+    })
+  }
+
+  /**
+   * 5. 删除元素
+   * html('') 一次性删除所有子元素
+   */
+
+  /**
+   * 6. clone
+   */
+  {
+    // 克隆一份ul到 body
+    buttons[3].addEventListener('click', () => {
+      const ul1 = ul.cloneNode() // 此方法只会复制一层
+      const ul2 = ul.cloneNode(true) // 此方法才是深度克隆
+      document.body.appendChild(ul1)
+      document.body.appendChild(ul2)
+    })
+  }
+</script>

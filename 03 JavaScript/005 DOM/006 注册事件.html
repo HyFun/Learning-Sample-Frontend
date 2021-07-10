@@ -1,0 +1,83 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-10 15:53:40
+ * @Description  : 注册事件
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-10 16:16:04
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>注册事件</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        border: 1px dashed pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="method1">
+      <button>注册事件</button>
+      <button>注销事件</button>
+      <div class="box">点我</div>
+    </div>
+
+    <div class="method2">
+      <button>注册事件</button>
+      <button>注销事件</button>
+      <div class="box">点我</div>
+    </div>
+  </body>
+</html>
+<script>
+  function clickListener() {
+    alert('您点击了我')
+  }
+
+  /**
+   * 1. onclick
+   * 缺点：只能绑定一个方法，第二次绑定时，上一次的事件被覆盖
+   */
+  {
+    const buttons = document.querySelectorAll('.method1 button')
+    // 注册
+    buttons[0].addEventListener('click', () => {
+      document.querySelector('.method1 .box').onclick = clickListener
+    })
+    // 注销
+    buttons[1].addEventListener('click', () => {
+      document.querySelector('.method1 .box').onclick = null
+    })
+  }
+
+  /**
+   * 2. addEventListener
+   * 解决了事件被覆盖问题，可以重复绑定不同的回调
+   */
+  {
+    const buttons = document.querySelectorAll('.method2 button')
+    // 注册
+    buttons[0].addEventListener('click', () => {
+      document
+        .querySelector('.method2 .box')
+        .addEventListener('click', clickListener)
+    })
+    // 注销
+    buttons[1].addEventListener('click', () => {
+      document
+        .querySelector('.method2 .box')
+        .removeEventListener('click', clickListener)
+    })
+  }
+
+  /**
+   * 3. IE9之前
+   * attachEvent(event, method)
+   * detachEvent(event, method)
+   */
+</script>

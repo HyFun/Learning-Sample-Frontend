@@ -1,0 +1,132 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-10 13:38:18
+ * @Description  : 获取节点
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-10 14:24:43
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>获取节点</title>
+  </head>
+  <body>
+    <div id="box">我是id为box的盒子</div>
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <br />
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+
+    <hr />
+    <h3>1. html节点</h3>
+    <p></p>
+
+    <h3>2. body节点</h3>
+    <p></p>
+
+    <h3>3. getElementById</h3>
+    <p></p>
+
+    <h3>4. getElementsByClassName</h3>
+    <p></p>
+
+    <h3>5. getElementsByTagName</h3>
+    <p></p>
+
+    <h3>6. querySelector</h3>
+    <p></p>
+    <h3>7. querySelector</h3>
+    <p></p>
+
+    <h3>8. 小案例：获取当前页面所有dom节点并排序</h3>
+    <p style="white-space: pre"></p>
+  </body>
+</html>
+<script>
+  const ps = document.querySelectorAll('p')
+  /**
+   * 1. html节点
+   */
+  {
+    ps[0].innerText = document.documentElement.tagName
+    console.dir(document.documentElement)
+  }
+
+  /**
+   * 2. body 节点
+   */
+  {
+    ps[1].innerText = document.body.tagName
+  }
+
+  /**
+   * 3. getElementById
+   */
+  {
+    ps[2].innerText = document.getElementById('box').innerText
+  }
+
+  /**
+   * 4. getElementsByClassName
+   */
+  {
+    const boxs = document.getElementsByClassName('box')
+    ps[3].innerText = `获取box的长度${boxs.length}`
+  }
+
+  /**
+   * 5. getElementsByTagName
+   */
+  {
+    const spans = document.getElementsByTagName('span')
+    ps[4].innerText = `获取span的个数${spans.length}`
+  }
+
+  /**
+   * 6. querySelector
+   * 根据css选择器查询对应的dom节点，如果有多个，只取第一个dom对象
+   */
+  {
+    const box = document.querySelector('.box')
+    ps[5].innerHTML = box.innerText
+  }
+
+  /**
+   * 7.querySelectorAll
+   */
+  {
+    const boxs = document.querySelectorAll('span')
+    const strs = []
+    Array.from(boxs).forEach((v) => {
+      strs.push(v.innerText)
+    })
+    ps[6].innerText = strs.toString()
+  }
+
+  /**
+   * 8. 小案例：获取当前页面所有dom节点并排序
+   */
+  {
+    const htmls = Array.from(document.querySelectorAll('*'))
+    let list = htmls
+      .map((v) => v.tagName.toLowerCase())
+      .reduce((res, a) => {
+        res[a] = (res[a] || 0) + 1
+        return res
+      }, {})
+    list = Object.fromEntries(
+      Object.entries(list).sort((v1, v2) => {
+        return v2[1] - v1[1]
+      })
+    )
+
+    ps[7].innerText = JSON.stringify(list, null, 4)
+  }
+</script>

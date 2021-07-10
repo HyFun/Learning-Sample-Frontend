@@ -1,0 +1,84 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-10 16:11:19
+ * @Description  : 事件对象event
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-10 16:36:10
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件对象event</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        width: 80vw;
+        height: 200vh;
+        margin: 0 auto;
+        box-sizing: border-box;
+        border: 1px dashed pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <a href="https://www.baidu.com" target="_blank">跳转去百度</a>
+    </div>
+  </body>
+</html>
+<script>
+  const box = document.querySelector('.box')
+  /**
+   * 1. event
+   */
+  box.addEventListener('click', (e) => {
+    console.log(e)
+  })
+
+  /**
+   * 2. event.target
+   * 事件源 点击事件的元素
+   */
+  box.addEventListener('click', (e) => {
+    console.log(e.target)
+    // clientX 可视区域文档的坐标
+    console.log(`clientX，clientY`, e.clientX, e.clientY)
+    // screen 屏幕的坐标
+    console.log(`screenX，screenY`, e.screenX, e.screenY)
+    // page 整个文档的坐标（包含不可视区域）
+    console.log(`pageX，pageY`, e.pageX, e.pageY)
+  })
+
+  /**
+   * 3. 阻止默认行为
+   * event.preventDefault // w3c 标准
+   * event.returnValue // IE
+   */
+  {
+    // 阻止a链接跳转
+    const a = document.querySelector('a')
+    a.addEventListener('click', (e) => {
+      console.log('点击了a')
+      e.preventDefault()
+    })
+  }
+
+  /**
+   * 4. 阻止冒泡
+   * event.stopPropagation() // 标准
+   * event.cancelBubble = true // IE
+   */
+  {
+    // 可以看到，点击a的时候 也会触发box的点击事件，如何做到点击a的时候不触发父级box的点击事件呢
+    const a = document.querySelector('a')
+    a.addEventListener('click', (e) => {
+        e.stopPropagation()
+    })
+  }
+</script>

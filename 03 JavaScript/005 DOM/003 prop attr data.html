@@ -1,0 +1,82 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-10 14:29:02
+ * @Description  : 设置属性
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-10 14:38:58
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>设置属性</title>
+  </head>
+  <body>
+    <p>
+      <button>获取src</button>
+      <button>设置src</button>
+      <button>设置自定义属性</button>
+      <button>获取自定义属性</button>
+
+      <button>设置data-属性</button>
+      <button>获取data-属性</button>
+    </p>
+    <img src="" alt="周杰伦" />
+  </body>
+</html>
+<script>
+  const buttons = document.getElementsByTagName('button')
+  const img = document.querySelector('img')
+
+  /**
+   * 1. 获取/设置自身属性
+   */
+  buttons[0].addEventListener('click', () => {
+    alert(img.getAttribute('src'))
+  })
+
+  /**
+   * 2. 设置自身属性
+   */
+  buttons[1].addEventListener('click', () => {
+    img.setAttribute(
+      'src',
+      'https://img1.baidu.com/it/u=4242937846,1962669844&fm=26&fmt=auto&gp=0.jpg'
+    )
+  })
+
+  /**
+   * 3. 设置自定义属性
+   */
+  buttons[2].addEventListener('click', () => {
+    img.setAttribute(
+      'custom',
+      'https://img1.baidu.com/it/u=4242937846,1962669844&fm=26&fmt=auto&gp=0.jpg'
+    )
+  })
+
+  /**
+   * 4. 获取自定义属性
+   */
+
+  buttons[3].addEventListener('click', () => {
+    alert(img.getAttribute('custom'))
+  })
+
+  /**
+   * 5. 设置dta-属性
+   */
+
+  buttons[4].addEventListener('click', () => {
+    img.setAttribute('data-name', '我是一张周杰伦图片而已~')
+  })
+
+  /**
+   * 6. 获取data-属性
+   */
+  buttons[5].addEventListener('click',()=>{
+      alert(img.getAttribute('data-name'))
+  })
+</script>

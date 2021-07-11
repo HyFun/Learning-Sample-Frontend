@@ -3,7 +3,7 @@
  * @Date         : 2021-01-22 17:15:22
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-07 21:18:55
+ * @LastEditTime : 2021-07-11 14:07:24
 -->
 # HTML
 ## 简介
@@ -129,7 +129,7 @@ HTML称为超文本标记语言，是一种标记语言。它包括一系列标�
 
 cookie的过期时间通过expires来设置的，
 
-### 以`js-cookie`为例
+### 1. 以`js-cookie`为例
 ```js
 import Cookies from 'js-cookie'
 // 设置cookie
@@ -141,10 +141,19 @@ Cookies.set('name','孙悟空',{ expires: new Date(new Date().getTime() + 1000) 
 - Number: 表示设置存储时间时长为x天
 - Date: Date对象，一个过期的时间点
 
-## 以原生document.cookie为例
+### 2. 以原生document.cookie为例
 ```js
 // 设置一个2025年5月1日过期的cookie
 document.cookie = `name=孙悟空,expires=${new Date('2025/05/01').toGMTString()}`
 ```
 原生设置cookie过期时间
 - GMT: `new Date().toGMTString()`
+
+## 浏览器内核
+| 内核 | 浏览器 |
+| - | - |
+| Trident | IE浏览器 |
+| Webkit | 早期Chrome浏览器、Safari浏览器 |
+| Presto | 早期Opero浏览器 |
+| Gecko | Firefox浏览器 |
+| Blink | Chrome、Opero浏览器 |

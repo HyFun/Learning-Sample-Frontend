@@ -3,7 +3,7 @@
  * @Date         : 2021-07-09 15:24:27
  * @Description  : JQuery
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-12 18:57:31
+ * @LastEditTime : 2021-07-12 18:59:14
 -->
 
 # JQuery
@@ -240,7 +240,7 @@ click:function() {
   ```
 
 ## 滚动到顶部
-[示例代码](.%2F015%20jquery%E7%9A%84scrollTop%E3%80%81scrollerLeft.html")
+[示例代码](./015%20jquery的scrollTop、scrollerLeft.html)
 
 基于文档的滚动
 ```js

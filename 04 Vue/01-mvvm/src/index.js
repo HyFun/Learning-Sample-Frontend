@@ -3,11 +3,11 @@
  * @Date         : 2021-07-11 16:45:15
  * @Description  : 入口
  * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-07-11 18:17:11
+ * @LastEditTime : 2021-07-12 10:24:00
  */
 import Vue from './vue'
 
-var app = new Vue({
+window.vm = new Vue({
   el: '#app',
   data() {
     return {
@@ -21,4 +21,4 @@ var app = new Vue({
   }
 })
 
-console.log(app)
+console.log(window.vm)

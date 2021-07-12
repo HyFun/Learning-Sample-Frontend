@@ -3,7 +3,7 @@
  * @Date         : 2021-07-09 15:24:27
  * @Description  : JQuery
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-10 22:59:13
+ * @LastEditTime : 2021-07-12 18:54:26
 -->
 
 # JQuery
@@ -238,3 +238,16 @@ click:function() {
     console.log(person2) // 未改变
   }
   ```
+
+## 滚动到顶部
+[示例代码](./015 jquery的scrollTop、scrollerLeft.html)
+
+基于文档的滚动
+```js
+$('html,body').stop().animate(
+  {
+    scrollTop: '0px'
+  },
+  500
+)
+```

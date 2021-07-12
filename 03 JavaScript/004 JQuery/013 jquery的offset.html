@@ -1,0 +1,55 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 21:29:18
+ * @Description  : jquery 模板
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-12 18:22:58
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模板</title>
+    <script src="../../00_Resource/assets/js/jquery-3.6.0.js"></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        border-top: 20px solid black;
+      }
+      .parent {
+        position: relative;
+        left: 100px;
+        top: 100px;
+        width: 400px;
+        height: 400px;
+        padding: 20px;
+        border: 20px solid pink;
+      }
+
+      .son {
+        width: 200px;
+        height: 200px;
+        padding: 20px;
+        border: 20px solid purple;
+        white-space: pre;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>offset()距离document的距离</h3>
+    <div class="parent">
+      <div class="son"></div>
+    </div>
+    <p></p>
+  </body>
+</html>
+<script>
+  $(function () {
+    $('.son').text(JSON.stringify($('.son').offset()))
+  })
+</script>

@@ -1,0 +1,76 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 21:29:18
+ * @Description  : jquery 模板
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-12 18:48:29
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模板</title>
+    <script src="../../00_Resource/assets/js/jquery-3.6.0.js"></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .content {
+        height: 2500px;
+      }
+      p {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      button {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      我是内容哦哦哦哦~ 我是内容哦哦哦哦~ 我是内容哦哦哦哦~ 我是内容哦哦哦哦~
+      我是内容哦哦哦哦~ 我是内容哦哦哦哦~
+    </div>
+    <p></p>
+    <button>返回顶部</button>
+  </body>
+</html>
+<script>
+  $(function () {
+    // 给document添加滚动事件
+    $(window).on('scroll', function () {
+      const x = $(this).scrollLeft()
+      const y = $(this).scrollTop()
+      $('p').text(`x: ${x}; y: ${y}`)
+      if (y >= 400) {
+        $('button').stop().fadeIn(200)
+      } else {
+        $('button').stop().fadeOut(200)
+      }
+    })
+    // 初始化时手动触发一次
+    $(window).trigger('scroll')
+
+    $('button').on('click', () => {
+      $('html,body').stop().animate(
+        {
+          scrollTop: '0px'
+        },
+        500
+      )
+    })
+  })
+</script>

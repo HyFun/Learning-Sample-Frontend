@@ -3,7 +3,7 @@
  * @Date         : 2021-07-13 11:17:55
  * @Description  :
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-13 12:49:38
+ * @LastEditTime : 2021-07-13 21:47:02
  */
 const prettier = require('./.prettierrc.js')
 module.exports = {
@@ -22,6 +22,7 @@ module.exports = {
     ecmaVersion: 2020
   },
   rules: {
-    'prettier/prettier': ['error', prettier]
+    'prettier/prettier': ['error', prettier],
+    '@typescript-eslint/no-unused-vars': 'error'
   }
 }

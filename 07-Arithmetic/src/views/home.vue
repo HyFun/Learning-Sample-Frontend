@@ -3,7 +3,7 @@
  * @Date         : 2021-07-13 11:26:33
  * @Description  : 主页
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-13 13:27:17
+ * @LastEditTime : 2021-07-13 21:45:14
 -->
 <template>
   <div class="container">
@@ -38,7 +38,7 @@ import { routes } from '../router'
 export default defineComponent({
   setup() {
     const lessons = computed(() => {
-      return routes.filter(v => !v.meta || !v.meta.hidden)
+      return routes.filter((v) => !v.meta || !v.meta.hidden)
     })
     return {
       lessons

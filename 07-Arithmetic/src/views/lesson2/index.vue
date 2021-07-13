@@ -3,12 +3,12 @@
  * @Date         : 2021-07-13 13:11:35
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-13 16:07:50
+ * @LastEditTime : 2021-07-13 21:47:10
 -->
 <template>
   <div class="container">
     <el-card shadow="never">
-      <h3>lesson1</h3>
+      <h3>lesson2</h3>
       <h4>源数据</h4>
       <div class="code">
         {{ JSON.stringify(list, null, 4) }}
@@ -20,8 +20,7 @@
   </div>
 </template>
 <script lang="ts">
-import _TimelineItem from 'element-plus/lib/el-timeline-item'
-import { defineComponent, toRaw } from 'vue'
+import { defineComponent } from 'vue'
 import list from './data'
 
 export default defineComponent({

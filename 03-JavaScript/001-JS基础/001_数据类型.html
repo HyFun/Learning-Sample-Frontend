@@ -1,0 +1,105 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-04-16 16:28:10
+ * @Description  : js的数据类型
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-04-19 11:02:02
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型</title>
+</head>
+<body>
+    <h2>8种数据类型</h2>
+    <ul>
+        <h3>基本数据类型</h3>
+        <li>string</li>
+        <li>number</li>
+        <li>boolean</li>
+        <li>null</li>
+        <li>undefine</li>
+        <li>symbol</li>
+        <li>bigint</li>
+        <h3>引用类型</h3>
+        <li>object</li>
+    </ul>
+</body>
+</html>
+<script>
+    // 判断数据类型的几种方法
+    /**
+     * 1. typeof
+     * 可以用预判断简单的数据类型，
+     * 缺点：
+     *   1）判断null的类型会是object
+     *   2）object类型的判断不出具体的类型
+     */
+    console.log('------typeof------');
+    console.log(typeof '字符串');   // string
+    console.log(typeof 1); // number
+    console.log(typeof true); // boolean
+    console.log(typeof null); // object
+    console.log(typeof undefined); // undefined
+    console.log(typeof {}); // object
+    console.log(typeof (()=>{})); // function
+
+    /**
+     * 2. Object.prototype.toString.call()
+     * 为了弥补方法1的不足
+     */
+    console.log('------Object.prototype.toString.call()------');
+    console.log(Object.prototype.toString.call('字符串')); // [object String]
+    console.log(Object.prototype.toString.call(2)); // [object Number]
+    console.log(Object.prototype.toString.call(true)); // [object Boolean]
+    console.log(Object.prototype.toString.call(null)); // [object Null]
+    console.log(Object.prototype.toString.call(undefined)); // [object Undefined]
+    console.log(Object.prototype.toString.call({})); // [object Object]
+    console.log(Object.prototype.toString.call(new Date())); // [object Date]
+    console.log(Object.prototype.toString.call(console.log)); // [object Function]
+    console.log(Object.prototype.toString.call([])); // [object Array]
+
+
+    /**
+     * 3. 其他判断类型的一些方法
+     */
+    // 1）判断是否是一个数组
+    console.log('------Array.isArray------');
+    console.log(Array.isArray([])); // true
+
+
+    /**
+     * 4. instanceof
+     * A instanceof B 判断A是否为B的实例对象
+     * 注意：判断的是实例对象，基本类型除外
+     */
+     console.log('------instanceof------');
+     // 基本类型
+     console.log('' instanceof String); // false
+     console.log(123 instanceof Number); // false
+     console.log(false instanceof Boolean); // false
+     // null undefined 无法判断
+
+     // 引用类型
+     console.log({} instanceof Object); // true
+     console.log((()=>{}) instanceof Function); // true
+     console.log(/[0-9]/ instanceof RegExp); // true
+     console.log(new Date() instanceof Date); // true
+     // 自定义类
+     class Person {
+         constructor(name, age) {
+             this.name = name
+             this.age = age
+         }
+     }
+     const person = new Person(`孙悟空`,18)
+     console.log(person instanceof Object); // true
+     console.log(person instanceof Person); // true
+     console.log(Object.prototype.toString.call(person)); // [object Object]
+
+
+
+</script>

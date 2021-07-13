@@ -1,0 +1,62 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 21:29:18
+ * @Description  : jquery 模板
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-09 15:47:07
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css.php" />
+    <title>ready</title>
+    <script src="../../00-Resource/assets/js/jquery-3.6.0.js"></script>
+  </head>
+  <body>
+    <img
+      src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2180997660.webp"
+      alt=""
+    />
+  </body>
+</html>
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+  /**
+   * 页面加载完毕的几种方法
+   *
+   * ready方法会在文档DOM生成结束后就会执行
+   * onload方法，等到页面中的图片加载完毕后才会执行
+   *
+   */
+  $('img').on('load', () => {
+    console.log(`图片加载完毕`)
+  })
+
+  // 1
+  $(function () {
+    console.log(`init1`)
+  })
+
+  // 2
+  $(document).ready(function () {
+    console.log(`init2`)
+  })
+
+  // 3
+  $().ready(function () {
+    console.log(`init3`)
+  })
+
+  // 4. onload
+  window.addEventListener('load', () => {
+    console.log(`window is onload`)
+  })
+
+  // 5. DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOMContentLoaded')
+  })
+</script>

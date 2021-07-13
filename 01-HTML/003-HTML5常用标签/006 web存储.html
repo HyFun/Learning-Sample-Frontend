@@ -1,0 +1,142 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-01-22 15:41:18
+ * @Description  : html5 web存储
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-01-22 18:05:55
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>localStorage、sessionStorage</title>
+  </head>
+  <body>
+    <h1>Web Storage</h1>
+    <h2>是否支持Storage</h2>
+    <p>是否支持Storage：<span id="support"></span></p>
+    <hr />
+    <h2>sessionStorage</h2>
+    <div>
+      <input type="text" id="sessionStorageKey" />
+      <input type="text" id="sessionStorageValue" />
+      <button id="sessionButtonSave">保存</button>
+      <button id="sessionButtonClear">清空</button>
+    </div>
+    <ul id="sessionStorage"></ul>
+    <hr />
+    <h2>localStorage</h2>
+    <div>
+        <input type="text" id="localStorageKey" />
+        <input type="text" id="localStorageValue" />
+        <button id="localButtonSave">保存</button>
+        <button id="localButtonClear">清空</button>
+      </div>
+      <ul id="localStorage"></ul>
+  </body>
+</html>
+<script>
+  /**
+   *  1. 查看是否支持
+   */
+  const elSupport = document.querySelector("#support");
+  if (typeof Storage === undefined) {
+    elSupport.innerHTML = "不支持";
+  } else {
+    elSupport.innerHTML = "支持";
+  }
+
+  /**
+   * 2. sessionStorage
+   */
+  // 1. 初始化的时候渲染
+  renderSession();
+  // 2. 给保存按钮添加点击事件
+  document
+    .querySelector("#sessionButtonSave")
+    .addEventListener("click", function (e) {
+      // 获取input值
+      const elInputKey = document.querySelector("#sessionStorageKey");
+      const elInputValue = document.querySelector("#sessionStorageValue");
+      console.log("key>>>", elInputKey.value);
+      console.log("value>>>", elInputValue.value);
+      const key = elInputKey.value.trim();
+      const value = elInputValue.value.trim();
+      if (!key || !value) {
+        alert("请输入内容");
+        return;
+      }
+      sessionStorage.setItem(key, value);
+      renderSession();
+      // 清空
+      elInputKey.value = "";
+      elInputValue.value = "";
+    });
+  document
+    .querySelector("#sessionButtonClear")
+    .addEventListener("click", function (e) {
+      for (let key in sessionStorage) {
+        sessionStorage.removeItem(key);
+      }
+      renderSession();
+    });
+
+  function renderSession() {
+    // 显示数据
+    const elSessionStorage = document.querySelector("#sessionStorage");
+    const list = Object.keys(sessionStorage)
+      .map((key) => ({ key, value: sessionStorage[key] }))
+      .map((v) => {
+        return `<li>${v.key}----${v.value}</li>`;
+      });
+    elSessionStorage.innerHTML = list.join("");
+  }
+
+  /**
+   * 3. localStorage
+   */
+  // 1. 初始化的时候渲染
+  renderLocal();
+  // 2. 给保存按钮添加点击事件
+  document
+    .querySelector("#localButtonSave")
+    .addEventListener("click", function (e) {
+      // 获取input值
+      const elInputKey = document.querySelector("#localStorageKey");
+      const elInputValue = document.querySelector("#localStorageValue");
+      console.log("key>>>", elInputKey.value);
+      console.log("value>>>", elInputValue.value);
+      const key = elInputKey.value.trim();
+      const value = elInputValue.value.trim();
+      if (!key || !value) {
+        alert("请输入内容");
+        return;
+      }
+      localStorage.setItem(key, value);
+      renderLocal();
+      // 清空
+      elInputKey.value = "";
+      elInputValue.value = "";
+    });
+  document
+    .querySelector("#localButtonClear")
+    .addEventListener("click", function (e) {
+      for (let key in localStorage) {
+        localStorage.removeItem(key);
+      }
+      renderLocal();
+    });
+
+  function renderLocal() {
+    // 显示数据
+    const elLocalStorage = document.querySelector("#localStorage");
+    const list = Object.keys(localStorage)
+      .map((key) => ({ key, value: localStorage[key] }))
+      .map((v) => {
+        return `<li>${v.key}----${v.value}</li>`;
+      });
+      elLocalStorage.innerHTML = list.join("");
+  }
+
+</script>

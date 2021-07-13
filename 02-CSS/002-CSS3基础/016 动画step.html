@@ -1,0 +1,93 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 15:18:13
+ * @Description  : step+精灵图实现动画
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-08 15:49:36
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>step+精灵图实现动画</title>
+    <style>
+      .wrap {
+        position: relative;
+        margin: 100px auto;
+        width: 780px;
+        background-color: orange;
+      }
+
+      .west {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 200px;
+        height: 180px;
+        animation: walk 1.4s steps(8) infinite;
+      }
+      @keyframes walk {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: -1600px 0;
+        }
+      }
+      .west-1 {
+        margin-left: -390px;
+        background-image: url(../../00-Resource/assets/css/animate-step-1.png);
+      }
+
+      .west-2 {
+        margin-left: -190px;
+        background-image: url(../../00-Resource/assets/css/animate-step-2.png);
+      }
+
+      .west-3 {
+        margin-left: 10px;
+        margin-top: -30px;
+        width: 170px;
+        height: 240px;
+        background-image: url(../../00-Resource/assets/css/animate-step-3.png);
+        animation-name: walk-3;
+      }
+
+      @keyframes walk-3 {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: -1360px 0;
+        }
+      }
+
+      .west-4 {
+        margin-left: 180px;
+        width: 210px;
+        height: 200px;
+        background-image: url(../../00-Resource/assets/css/animate-step-4.png);
+        animation-name: walk-4;
+      }
+
+      @keyframes walk-4 {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: -1680px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="west-1 west"></div>
+      <div class="west-2 west"></div>
+      <div class="west-3 west"></div>
+      <div class="west-4 west"></div>
+    </div>
+  </body>
+</html>

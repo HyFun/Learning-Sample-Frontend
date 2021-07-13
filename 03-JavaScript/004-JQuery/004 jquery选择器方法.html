@@ -1,0 +1,152 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 21:29:18
+ * @Description  : jquery选择器方法
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-09 00:24:07
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jquery选择器方法</title>
+    <script src="../../00-Resource/assets/js/jquery-3.6.0.js"></script>
+  </head>
+  <body>
+    <h3>1. parent()</h3>
+    <p>返回父元素对象</p>
+    <div class="parent">
+      parent
+      <div class="son">
+        son
+      </div>
+    </div>
+
+    <h3>2. parents(selector?)</h3>
+    <p>返回所有父元素对象</p>
+    <div class="parent2">
+      <div class="son2"></div>
+    </div>
+
+
+    <h3>3. children(selector?)</h3>
+    <ul class="parent3">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+
+    <h3>4. find(selector)</h3>
+    <ul class="parent4">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+
+    <h3>4. next()</h3>
+    <ul class="parent5">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li class="nextUntil">4</li>
+      <li>5</li>
+    </ul>
+
+    <h3>5. siblings(selector?)</h3>
+    <ul class="parent6">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+
+    <h3>6. eq(number)、first()、last()、filter(selector?)</h3>
+    <ul class="parent7">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+
+  </body>
+</html>
+<script>
+  /**
+   * jquery 选择器方法
+   */
+  /**
+   * 1. parent()
+   */
+  $('.son').parent().css({'background': 'orange'})
+
+  /**
+   * 2. parents(selector?)
+   * 带参数：选择器
+   * 不带参数：所有的父元素
+   */
+  $('.son2').text([...$('.son2').parents()].map(v=>v.tagName))
+
+  /**
+   * 3. children(selector?)
+   * 带参数：子类中满足selector的元素数组
+   * 不带参数：所有子类
+   */
+  // 不带参数
+  $('.parent3').children().text(function() {
+    return '第'+$(this).text()+'个'
+  })
+
+  // 带参数
+  $('.parent3').children(':even').css('background-color', 'red')
+
+  /**
+   * 4. find(selector)
+   * 从子元素中寻找满足selector的对象
+   */
+  // 不带参数
+  console.log($('.parent4').find()); // 什么都没有找到
+  // 携带参数
+  $('.parent4').find(':odd').css('background','orange')
+
+  /**
+   * 5. next()、nextAll()、nextUtil(selector?)
+   *    prev()、prevAll()、prevUtil(selector?)
+   */
+  // 以next为例
+  // next()
+  $('.parent5 li').eq(0).next().css('background','orange')
+  // nextAll()
+  $('.parent5 li').eq(0).next().nextAll().css('background','skyblue')
+  // nextUntil() 只包含之间的元素，不包含起始元素
+  $('.parent5 li').eq(0).nextUntil('.nextUntil').text(function(){
+    return `第${$(this).text()}个`
+  })
+
+
+  /**
+   * 6. siblings(selector?)
+   * 带参数：除了自己以外所有满足 selector 的兄弟 元素
+   * 不带参数：除了自己以外的所有参数
+   */
+  // 带参数 偶数个
+  $('.parent6 li').eq(0).siblings(':even').css('background','pink')
+  // 不带参数 除了自己其他所有兄弟
+  $('.parent6 li').eq(0).siblings().css('color','red')
+
+
+  /**
+   * 7. eq(number)、first()、last()、filter(selector?)
+   */
+  // eq()
+  $('.parent7 li').eq(1).css('color','red')
+  // first()
+  $('.parent7 li').first().css('background','pink')
+  // last
+  $('.parent7 li').last().css('background','orange')
+</script>

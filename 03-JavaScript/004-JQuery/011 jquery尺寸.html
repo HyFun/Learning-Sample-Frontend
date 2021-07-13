@@ -1,0 +1,83 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-08 21:29:18
+ * @Description  : jquery 模板
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-12 18:15:36
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模板</title>
+    <script src="../../00-Resource/assets/js/jquery-3.6.0.js"></script>
+    <style>
+      .box {
+        width: 300px;
+        height: 300px;
+        padding: 20px;
+        border: 10px solid orange;
+        margin: 20px;
+        box-sizing: content-box;
+      }
+
+      .box2 {
+        width: 300px;
+        height: 300px;
+        padding: 20px;
+        border: 10px solid orange;
+        margin: 20px;
+        box-sizing: border-box;
+      }
+
+      .label {
+        display: inline-block;
+        width: 120px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">box-sizing: content-box</div>
+    <p></p>
+    <hr />
+    <div class="box2">box-sizing: border-box;</div>
+    <p></p>
+  </body>
+</html>
+<script>
+  $(function () {
+    const box = $('.box')
+    let str = `
+    <span class="label">width:</span> ${box.width()} (content) 
+    <br>
+    <span class="label">height:</span> ${box.height()} (content) 
+    <br>
+    <span class="label">innerWidth:</span> ${box.innerWidth()} (content + padding)
+    <br>
+    <span class="label">innerHeight:</span> ${box.innerHeight()} (content + padding)
+    <br>
+    <span class="label">outerWidth:</span> ${box.outerWidth()} (content + padding + border)
+    <br>
+    <span class="label">outerHeight:</span> ${box.outerHeight()} (content + padding + border)
+    `
+    $('p').eq(0).html(str)
+
+    const box2 = $('.box2')
+    let str2 = `
+    <span class="label">width:</span> ${box2.width()} (content) 
+    <br>
+    <span class="label">height:</span> ${box2.height()} (content) 
+    <br>
+    <span class="label">innerWidth:</span> ${box2.innerWidth()} (content + padding)
+    <br>
+    <span class="label">innerHeight:</span> ${box2.innerHeight()} (content + padding)
+    <br>
+    <span class="label">outerWidth:</span> ${box2.outerWidth()} (content + padding + border)
+    <br>
+    <span class="label">outerHeight:</span> ${box2.outerHeight()} (content + padding + border)
+    `
+    $('p').eq(1).html(str2)
+  })
+</script>

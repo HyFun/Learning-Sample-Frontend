@@ -1,0 +1,202 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-04-20 15:14:57
+ * @Description  : Number
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-04-20 16:36:05
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+  /**
+   *  打印分割线
+   */
+   function divider() {
+    console.log(`-------------------`);
+  }
+    /**
+     * 1. 属性 Number.MAX_SAFE_INTEGER
+     * 9007199254740991
+     * 在 JavaScript 中最大的安全整数
+     */
+    console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
+
+    /**
+     * 2. 属性 Number.MAX_VALUE
+     */
+    console.log(Number.MAX_VALUE); // 1.7976931348623157e+308
+
+    /**
+     * 3. 属性 Number.MIN_SAFE_INTEGER
+     * JavaScript中最小的安全的integer型数字
+     */
+    console.log(Number.MIN_SAFE_INTEGER); // -9007199254740991
+
+    /**
+     * 4. 属性 Number.MIN_VALUE
+     * JavaScript 中所能表示的最小的正值。
+     * 注意：是最小的正值，而不是负值
+     */
+    console.log(Number.MIN_VALUE); // 5e-324
+
+    /**
+     * 5. 属性 Number.NaN
+     * 注意：两个NaN不相等
+     */
+    console.log(Number.NaN); // NaN
+    console.log(Number.NaN == Number.NaN); // false
+    console.log(Number.NaN === Number.NaN); // false
+
+    /**
+     * 6. 属性 Number.NEGATIVE_INFINITY 负无穷 | Number.POSITIVE_INFINITY 正无穷
+     */
+    console.log(Number.NEGATIVE_INFINITY); // -Infinity
+    console.log(Number.POSITIVE_INFINITY); // Infinity
+    console.log(Infinity === Number.POSITIVE_INFINITY); // true
+    console.log(-Infinity === Number.NEGATIVE_INFINITY); // true
+    console.log(typeof Infinity); // number
+    console.log(Object.prototype.toString.call(Infinity) === '[object Number]'); // true
+
+    divider()
+    /**
+     * 7. 方法 isFinite(number)
+     * 是否是一个有穷数
+     * 返回：boolean
+     */
+    console.log(Number.isFinite(1/0)); // false
+    console.log(Number.isFinite(1/1)); // true
+    divider()
+    /**
+     * 8. 方法 isInteger(number)
+     * 判断是否是一个整数
+     * 返回：boolean
+     */
+    console.log(Number.isInteger(1)); // true
+    console.log(Number.isInteger(2.12)); // false
+    console.log(Number.isInteger(2.0)); // true
+    divider()
+
+    /**
+     * 9. 方法 isNaN
+     * 确定传递的值是否为 NaN，并且检查其类型是否为 Number。它是原来的全局 isNaN() 的更稳妥的版本。
+     * 判断是否是一个NaN
+     * 返回：返回一个boolean值
+     */
+    console.log(Number.isNaN(NaN)); // true
+    console.log(Number.isNaN(1)); // false
+    console.log(Number.isNaN('1')); // false
+    console.log(Number.isNaN('1a')); // false
+    console.log(Number.isNaN('12abc')); // false
+    console.log(Number.isNaN('abc')); // false
+    // Number.isNaN()和isNaN()区别
+    /**
+     * 全局isNaN() 方法判断是否能parseInt()
+     * 能的话就不是NaN，否则是一个NaN
+     */
+    {
+        const isNaN = (value) => {
+            const b = parseInt(value)
+            return b!==b
+        }
+        console.log(isNaN('ABC')); // true
+        console.log(isNaN('123ABC')); // false
+        console.log(isNaN(NaN)); // true
+    }
+    /**
+     * Number.isNaN()是isNaN()的增强版
+     * 只有判断对象是NaN时，才会返回true
+     */
+    {
+        const isNaN = (value) => {
+            const b = parseInt(value)
+            return b!==b
+        }
+        Number.isNaN = function(value) {
+            return isNaN(value) && typeof value === 'number'
+        }
+        console.log(Number.isNaN(NaN)); // true
+        console.log(Number.isNaN(123)); // false
+        console.log(Number.isNaN('123abc')); // false
+    }
+    divider()
+
+    /**
+     * 10. isSageInteger( value )
+     * 判断是否是一个安全的整数，即值是否在 [Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER]之间
+     */
+    console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER)); // true
+    console.log(Number.isSafeInteger(Number.MIN_SAFE_INTEGER)); // true
+    console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER+1)); // false
+    console.log(Number.isSafeInteger(Number.MIN_SAFE_INTEGER-1)); // false
+    divider()
+
+    
+    /**
+     * 11. parseFloat(value)
+     * 可以把一个字符串解析成浮点数。
+     * 该方法与全局的 parseFloat() 函数相同
+     */
+    console.log(Number.parseFloat(1)); // 1
+    console.log(Number.parseFloat(1.22)); // 1.22
+    console.log(Number.parseFloat('1.22')); // 1.22
+    console.log(Number.parseFloat('1.22abcdef')); // 1.22
+    console.log(Number.parseFloat('a1.22abcdef')); // NaN
+    console.log(Number.parseFloat('')); // NaN
+    console.log(Number.parseFloat(null)); // NaN
+    console.log(Number.parseFloat(undefined)); // NaN
+    divider()
+
+    /**
+     * 12. parseInt( value )
+     * 解析成整数
+     */
+    console.log(Number.parseInt(1)); // 1
+    console.log(Number.parseInt(1.2)); // 1
+    console.log(Number.parseInt(1.8)); // 1
+    console.log(Number.parseInt('1.8')); // 1
+    console.log(Number.parseInt('1.8aaa')); // 1
+    console.log(Number.parseInt('a1.8aaa')); // NaN
+    console.log(Number.parseInt('')); // NaN
+    console.log(Number.parseInt(true)); // NaN
+    console.log(Number.parseInt(null)); // NaN
+    console.log(Number.parseInt(undefined)); // NaN
+    divider()
+
+    /**
+     * 13 Number.prototype.toFixed()
+     * 保留 number位小数  会四舍五入
+     * 返回：数字字符串
+     */
+    console.log(Number(123).toFixed(2)); // 123
+    console.log(Number(123.1234).toFixed(2)); // 123.12
+    console.log(Number(123.1267).toFixed(2)); // 123.13
+    divider()
+
+    /**
+     * 14. Number.prototype.toString()
+     * 将number转换为string类型
+     */
+    console.log(Number(123).toString()); // '123'
+    console.log(Number(123.123).toString()); // '123.123'
+    divider()
+
+    /**
+     * 15. Number.prototype.valueOf()
+     * 拆箱
+     * 将Number类型的值转换为基本类型
+     */
+    console.log(typeof new Number(1)); // object
+    console.log(typeof new Number(1).valueOf()); // number
+
+
+</script>

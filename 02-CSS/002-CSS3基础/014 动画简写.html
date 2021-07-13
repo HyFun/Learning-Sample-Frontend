@@ -1,0 +1,34 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-03-31 23:05:22
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-03-31 23:11:45
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画简写</title>
+    <style>
+        @keyframes long {
+            to {
+                width: 100%
+            }
+        }
+
+        /* animate: name duration timing-function delay count direction fill-mode play-state */
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            animation: long 5s linear 2s infinite alternate forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

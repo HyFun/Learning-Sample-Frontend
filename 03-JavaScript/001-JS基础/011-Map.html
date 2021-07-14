@@ -1,0 +1,148 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-14 22:25:47
+ * @Description  : Map
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-14 22:49:43
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  function divider() {
+    console.log(`-----------------`)
+  }
+
+  /**
+   * 1. 构造函数
+   */
+  // 无参
+  const map = new Map()
+  // 有参
+  console.log(new Map(Object.entries({ name: '张三', age: 20 })))
+  console.log(
+    new Map([
+      ['name', '李四'],
+      ['age', 20]
+    ])
+  )
+  divider()
+  /**
+   * 2. Map.prototype.set(key, value)
+   * 添加元素
+   *
+   * 返回：该map对象
+   */
+  map.set('name', '王五')
+  map.set('age', 22)
+  console.log(map)
+  divider()
+
+  /**
+   * 3. Map.prototype.size
+   * map大小
+   *
+   * 返回：map的数量
+   */
+  console.log(map.size)
+  divider()
+
+  /**
+   * 4. Map.prototype.keys()
+   * iterator 所有的key
+   *
+   * 返回：iterator
+   */
+  {
+    const keys = map.keys()
+    for (const iterator of keys) {
+      console.log(iterator)
+    }
+  }
+  divider()
+
+  /**
+   * 5. Map.prototype.values()
+   * iterator 所有的value
+   *
+   * 返回：iterator
+   */
+  {
+    const keys = map.values()
+    for (const iterator of keys) {
+      console.log(iterator)
+    }
+  }
+  divider()
+
+  /**
+   * 6. Map.prototype.has(key)
+   * 是否拥有某个属性
+   *
+   * 返回：boolean
+   */
+  console.log(map.has('name')) // true
+  console.log(map.has('name2')) // false
+  divider()
+
+  /**
+   * 7. Map.prototype.get(key)
+   * 获取某个key的value
+   *
+   * 返回：该键所在的value | undefined
+   */
+  console.log(map.get('name'))
+  console.log(map.get('name222')) // 如果不存在，则返回undefined
+  divider()
+
+  /**
+   * 8. Map.prototype.entries()
+   * 将map转换为iterator对象
+   *
+   * 返回：MapIterator对象
+   * [[key, value],[key, value]]
+   */
+  {
+    const entries = map.entries()
+    console.log(entries)
+    for (const iterator of entries) {
+      console.log(iterator)
+    }
+  }
+  divider()
+
+  /**
+   * 9. Map.prototype.forEach(callbackFn[, thisArg])
+   * 遍历
+   */
+  {
+    map.forEach((v) => {
+      console.log(v)
+    })
+  }
+  divider()
+
+  /**
+   * 10. Map.prototype.delete(key)
+   * 删除某一条记录
+   *
+   * 返回：boolean  删除成功：true   删除失败：false
+   */
+  console.log(map.delete('age'), map)
+  divider()
+
+  /**
+   * 11. Map.prototype.clear()
+   * 清空map
+   *
+   * 返回：void 无返回
+   */
+  console.log(map.clear(), map)
+</script>

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "promises-aplus-tests dist/index",
+    "dev": "rollup -c --watch src/*",
     "build": "rollup -c"
   },
   "keywords": [],

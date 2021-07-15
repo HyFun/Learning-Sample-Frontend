@@ -1,14 +1,11 @@
 /*
  * @Author       : HyFun
  * @Date         : 2021-07-15 11:24:35
- * @Description  : 手写promise
- * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-07-15 15:34:08
+ * @Description  : 手写promise https://juejin.cn/post/6945319439772434469
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-15 18:51:27
  */
 
-/**
- * 手写promise 命名为Promise2
- */
 // 三种状态
 const PENDING = 'pending'
 const FULFILLED = 'fulfilled'
@@ -54,7 +51,10 @@ class Promise2 {
     }
   }
 
-  then(onResolve: Function, onReject: Function) {
+  /**
+   * then方法
+   */
+  then(onResolve?: any, onReject?: any) {
     // 如果不传，就使用默认函数
     onResolve =
       typeof onResolve === 'function' ? onResolve : (value: any) => value
@@ -110,7 +110,14 @@ class Promise2 {
     return promise2
   }
 
-  static resolve = function (value: any) {
+  /**
+   * catch方法
+   */
+  catch(onRejected: any) {
+    return this.then(undefined, onRejected)
+  }
+
+  static resolve = function (value?: any) {
     if (value instanceof Promise2) {
       return value
     }
@@ -119,7 +126,7 @@ class Promise2 {
     })
   }
 
-  static reject = function (reason: any) {
+  static reject = function (reason?: any) {
     return new Promise2((resolve: any, reject: any) => {
       reject(reason)
     })

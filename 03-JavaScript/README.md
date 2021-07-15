@@ -3,10 +3,12 @@
  * @Date         : 2021-07-13 22:29:13
  * @Description  : JavaScript
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-14 18:58:00
+ * @LastEditTime : 2021-07-15 11:18:24
 -->
 
 ## 事件循环
+
+![](https://mmbiz.qpic.cn/sz_mmbiz_png/H8M5QJDxMHrfCCOLsbRHeq3YC4diaTTjo7Lf3Ny0Bc1gxItrquwY39sUVYYII6sxNGibG2jyhxvHwbcxKjujZMsQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 
 - [面试题：说说事件循环机制(满分答案来了)](https://juejin.cn/post/6844904079353708557)
 - [这一次，彻底弄懂 JavaScript 执行机制](https://juejin.cn/post/6844903512845860872)

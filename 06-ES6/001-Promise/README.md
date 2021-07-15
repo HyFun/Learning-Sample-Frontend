@@ -3,7 +3,7 @@
  * @Date         : 2021-03-31 12:51:35
  * @Description  : promise学习
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-13 10:19:55
+ * @LastEditTime : 2021-07-15 11:23:55
 -->
 
 # Promise
@@ -29,3 +29,14 @@
 1. 无法取消 Promise，一旦新建它就会立即执行，无法中途取消。
 2. 如果不设置回调函数，Promise 内部抛出的错误，不会反应到外部。
 3. 当处于 pending 状态时，无法得知目前进展到哪一个阶段。
+
+
+## 手写Promise
+
+[手写一个promise](https://mp.weixin.qq.com/s/UJKLVrSQWCxn8t78CqYfug)
+
+很多手写版本都是使用 setTimeout 去做异步处理，但是 setTimeout 属于宏任务，这与 Promise 是个微任务相矛盾，所以我打算选择一种创建微任务的方式去实现我们的手写代码。
+
+- process.nextTick（node端）
+- MutationObserver（浏览器端）
+- queueMicrotask（兼容）

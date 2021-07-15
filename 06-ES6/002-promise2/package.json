@@ -1,0 +1,22 @@
+{
+  "name": "promise2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "promises-aplus-tests dist/index",
+    "build": "rollup -c"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "promises-aplus-tests": "^2.1.2",
+    "rollup": "^2.53.2",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.3.5"
+  }
+}

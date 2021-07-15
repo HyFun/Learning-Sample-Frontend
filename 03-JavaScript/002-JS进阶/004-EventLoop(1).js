@@ -1,92 +1,46 @@
 /*
  * @Author       : HyFun
  * @Date         : 2021-07-14 13:05:28
- * @Description  :
+ * @Description  : EventLoop之 async/await
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-14 18:35:08
+ * @LastEditTime : 2021-07-15 10:43:07
  */
 
-// -----------------------------------------------
-
-// console.log('script start')
-
-// async function async1() {
-//   await async2()
-//   console.log('async1 end')
-// }
-// async function async2() {
-//   console.log('async2 end')
-// }
-// async1()
-
-// setTimeout(function () {
-//   console.log('setTimeout')
-// }, 0)
-
-// new Promise((resolve) => {
-//   console.log('Promise')
-//   resolve()
-// })
-//   .then(function () {
-//     console.log('promise1')
-//   })
-//   .then(function () {
-//     console.log('promise2')
-//   })
-
-// console.log('script end')
-
-// script start
-// async2 end
-// Promise
-// script end
-// async1 end
-// promise1
-// promise2
-// setTimeout
-
-// -----------------------------------------------
-
-console.log('script start')
+console.log('1')
 
 async function async1() {
   await async2()
-  console.log('async1 end')
+  console.log('2')
 }
 async function async2() {
-  console.log('async2 end')
-  return Promise.resolve().then(() => {
-    console.log('async2 end1')
-  })
+  console.log('3')
 }
 async1()
 
 setTimeout(function () {
-  console.log('setTimeout')
+  console.log('4')
 }, 0)
 
 new Promise((resolve) => {
-  console.log('Promise')
+  console.log('5')
   resolve()
 })
   .then(function () {
-    console.log('promise1')
+    console.log('6')
   })
   .then(function () {
-    console.log('promise2')
+    console.log('7')
   })
 
-console.log('script end')
-
-// script start
-// async2 end
-// Promise
-// script end
-// async2 end1
-// promise1
-// promise2
-// async1 end
-// setTimeout
+console.log('8')
+// 1
+// 3
+// 5
+// 8
+// 2
+// 6
+// 7
+// 4
 
 // -----------------------------------------------
 // console.log('start')

@@ -3,14 +3,23 @@
  * @Date         : 2021-07-14 13:05:28
  * @Description  : EventLoop之 async/await
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-15 10:43:07
+ * @LastEditTime : 2021-07-15 22:53:41
  */
 
 console.log('1')
 
 async function async1() {
-  await async2()
-  console.log('2')
+  // await async2()
+  // console.log('2')
+
+  // 相当于
+  new Promise((resolve,reject)=>{
+    console.log('3')
+    resolve()
+  })
+  .then(()=>{
+    console.log('2')
+  })
 }
 async function async2() {
   console.log('3')

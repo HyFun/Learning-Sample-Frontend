@@ -3,15 +3,34 @@
  * @Date         : 2021-07-14 13:05:28
  * @Description  : EventLoop之 async/await
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-15 10:40:27
+ * @LastEditTime : 2021-07-15 23:16:13
  */
-
 
 console.log('1')
 
 async function async1() {
-  await async2()
-  console.log('2')
+  // await async2()
+  // console.log('2')
+
+  // 相当于
+  new Promise((resolve, reject) => {
+    console.log('3')
+    // resolve(
+    //   Promise.resolve().then(() => {
+    //     console.log('4')
+    //   })
+    // )
+    // 进一步转换
+    resolve(
+      new Promise((r) => {
+        r()
+      }).then(() => {
+        console.log('4')
+      })
+    )
+  }).then(() => {
+    console.log('2')
+  })
 }
 async function async2() {
   console.log('3')
@@ -34,6 +53,9 @@ new Promise((resolve) => {
   })
   .then(function () {
     console.log('8')
+  })
+  .then(function () {
+    console.log('10')
   })
 
 console.log('9')

@@ -3,7 +3,7 @@
  * @Date         : 2021-03-31 12:51:35
  * @Description  : promise学习
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-15 18:53:47
+ * @LastEditTime : 2021-07-15 22:46:28
 -->
 
 # Promise
@@ -32,10 +32,55 @@
 
 ## 手写 Promise
 
-[手写 Promise 并测试](https://juejin.cn/post/6945319439772434469)
+[从一道让我失眠的 Promise 面试题开始，深入分析 Promise 实现细节(手写 Promise)](https://juejin.cn/post/6945319439772434469)
+
+[【V8 源码补充篇】从一道让我失眠的 Promise 面试题开始，深入分析 Promise 实现细节](https://juejin.cn/post/6953452438300917790)
+
+[Promise.resolove()到底做了什么](https://juejin.cn/post/6844903987183894535#heading-6)
 
 很多手写版本都是使用 setTimeout 去做异步处理，但是 setTimeout 属于宏任务，这与 Promise 是个微任务相矛盾，所以我打算选择一种创建微任务的方式去实现我们的手写代码。
 
 - process.nextTick（node 端）
 - MutationObserver（浏览器端）
 - queueMicrotask（兼容）
+
+## 罪魁祸首
+
+```js
+Promise.resolve()
+  .then(() => {
+    console.log(0)
+    return Promise.resolve(4)
+  })
+  .then((res) => {
+    console.log(res)
+  })
+Promise.resolve()
+  .then(() => {
+    console.log(1)
+  })
+  .then(() => {
+    console.log(2)
+  })
+  .then(() => {
+    console.log(3)
+  })
+  .then(() => {
+    console.log(5)
+  })
+  .then(() => {
+    console.log(6)
+  })
+```
+
+执行结果：
+
+```js
+// 0
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+```

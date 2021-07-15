@@ -3,10 +3,10 @@
  * @Date         : 2021-07-15 10:29:58
  * @Description  : 事件循环
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-15 10:31:00
+ * @LastEditTime : 2021-07-15 21:41:00
  */
 
-// 案例解析地址：https://mp.weixin.qq.com/s/UJKLVrSQWCxn8t78CqYfug
+// 案例解析地址：https://juejin.cn/post/6945319439772434469
 
 Promise.resolve()
   .then(() => {
@@ -33,3 +33,11 @@ Promise.resolve()
   .then(() => {
     console.log(6)
   })
+
+// 0
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6

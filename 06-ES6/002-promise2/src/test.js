@@ -1,124 +1,124 @@
 /*
  * @Author       : HyFun
- * @Date         : 2021-07-16 19:16:51
- * @Description  : 手写promise测试
+ * @Date         : 2021-07-16 21:55:13
+ * @Description  : xxx
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-16 19:35:35
+ * @LastEditTime : 2021-07-16 23:20:42
  */
-var PENDING = 'PENDING'
-var RESOLVED = 'RESOLVED'
-var REJECTED = 'REJECTED'
+const PENDING = 'PENDING'
+const FULFILLED = 'FULFILLED'
+const REJECTED = 'REJECTED'
 
 function Promise(excutor) {
-  var that = this
+  const that = this
   that.status = PENDING
   that.value = undefined
   that.reason = undefined
-  that.onResolvedCallback = []
-  that.onRejectedCallback = []
+  that.fulfilledCallback = []
+  that.rejectCallback = []
 
-  var resolve = function (value) {
+  function resolve(value) {
     if (that.status === PENDING) {
-      that.status = RESOLVED
+      that.status = FULFILLED
       that.value = value
-      while (that.onResolvedCallback.length) {
-        that.onResolvedCallback.shift().call(that, value)
+      while (that.fulfilledCallback.length) {
+        that.fulfilledCallback.shift().call(that, value)
       }
     }
   }
-  var reject = function (reason) {
+  function reject(reason) {
     if (that.status === PENDING) {
       that.status = REJECTED
       that.reason = reason
-      while (that.onRejectedCallback.length) {
-        that.onRejectedCallback.shift().call(that, reason)
+      while (that.rejectCallback.length) {
+        that.rejectCallback.shift().call(that, reason)
       }
     }
   }
   try {
     excutor(resolve, reject)
-  } catch (error) {}
+  } catch (error) {
+    reject(error)
+  }
 }
 
-Promise.prototype.then = function (onResolved, onRejected) {
-  onResolved = typeof onResolved === 'function' ? onResolved : (value) => value
-  onRejected =
-    typeof onRejected === 'function'
-      ? onRejected
+Promise.prototype.then = function (onResolve, onReject) {
+  onResolve = typeof onResolve === 'function' ? onResolve : (value) => value
+  onReject =
+    typeof onReject === 'function'
+      ? onReject
       : (reason) => {
           throw reason
         }
-
   var that = this
-
-  let promise = new Promise(function (resolve, reject) {
-    if (that.status === RESOLVED) {
-      handler(resolve, reject, onResolved, that.value)
+  var promise = new Promise(function (resolve, reject) {
+    if (that.status === FULFILLED) {
+      handler(resolve, reject, onResolve, that.value)
     } else if (that.status === REJECTED) {
-      handler(resolve, reject, onRejected, that.reason)
-    } else {
-      that.onResolvedCallback.push(function (value) {
-        handler(resolve, reject, onResolved, value)
+      handler(resolve, reject, onReject, that.reason)
+    } else if (that.status === PENDING) {
+      that.fulfilledCallback.push((value) => {
+        handler(resolve, reject, onResolve, value)
       })
-      that.onRejectedCallback.push(function (reason) {
-        handler(resolve, reject, onRejected, reason)
+      that.rejectCallback.push((reason) => {
+        handler(resolve, reject, onReject, reason)
       })
     }
   })
 
   function handler(resolve, reject, callback, value) {
-    queueMicrotask(function () {
+    queueMicrotask(() => {
       try {
-        const x = callback(value)
+        var x = callback(value)
         resolvePromise(promise, x, resolve, reject)
-      } catch (err) {
-        reject(err)
+      } catch (error) {
+        reject(error)
       }
     })
   }
 
-  function resolvePromise(promise, v, resolve, reject) {
-    if (promise === v) {
+  function resolvePromise(p, x, resolve, reject) {
+    if (p === x) {
       return reject(new TypeError('Chaining cycle detected for promise #'))
     }
-    if (typeof v === 'object' || typeof v === 'function') {
-      if (!v) {
-        return resolve(v)
+    if (typeof x === 'object' || typeof x === 'function') {
+      if (!x) {
+        return resolve(x)
       }
-      let then
+      var then
       try {
-        then = v.then
-      } catch (err) {
-        return reject(err)
+        then = x.then
+      } catch (error) {
+        return reject(error)
       }
       if (typeof then === 'function') {
         let called = false
-        queueMicrotask(function () {
+        queueMicrotask(() => {
           try {
             then.call(
-              v,
-              (x) => {
-                if (called) return
-                called = true
-                resolvePromise(promise, x, resolve, reject)
-              },
+              x,
               (y) => {
                 if (called) return
                 called = true
-                reject(y)
+                resolvePromise(p, y, resolve, reject)
+              },
+              (z) => {
+                if (called) return
+                called = true
+                reject(z)
               }
             )
-          } catch (err) {
+          } catch (error) {
             if (called) return
             called = true
-            reject(err)
+            reject(error)
           }
         })
       } else {
-        resolve(v)
+        resolve(x)
       }
     } else {
-      resolve(v)
+      resolve(x)
     }
   }
 
@@ -126,12 +126,11 @@ Promise.prototype.then = function (onResolved, onRejected) {
 }
 
 Promise.deferred = function () {
-  var result = {}
-  result.promise = new Promise(function (resolve, reject) {
+  const result = {}
+  result.promise = new Promise((resolve, reject) => {
     result.resolve = resolve
     result.reject = reject
   })
-
   return result
 }
 

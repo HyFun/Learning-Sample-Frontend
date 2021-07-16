@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "promises-aplus-tests dist/index",
+    "test2": "promises-aplus-tests src/test",
     "dev": "rollup -c --watch src/*",
     "build": "rollup -c"
   },

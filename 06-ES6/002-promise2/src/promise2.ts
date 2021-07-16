@@ -3,7 +3,7 @@
  * @Date         : 2021-07-15 11:24:35
  * @Description  : 手写promise https://juejin.cn/post/6945319439772434469
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-15 18:51:27
+ * @LastEditTime : 2021-07-16 13:29:55
  */
 
 // 三种状态
@@ -160,7 +160,7 @@ function resolvePromise(
     if (!x) {
       return resolve(x)
     }
-    let then
+    let then: any
     try {
       then = x.then
     } catch (error) {
@@ -168,24 +168,26 @@ function resolvePromise(
     }
     if (typeof then === 'function') {
       let called = false
-      try {
-        then.call(
-          x,
-          (y: any) => {
-            if (called) return
-            called = true
-            resolvePromise(promise2, y, resolve, reject)
-          },
-          (r: any) => {
-            if (called) return
-            called = true
-            reject(r)
-          }
-        )
-      } catch (error) {
-        if (called) return
-        reject(error)
-      }
+      queueMicrotask(() => {
+        try {
+          then.call(
+            x,
+            (y: any) => {
+              if (called) return
+              called = true
+              resolvePromise(promise2, y, resolve, reject)
+            },
+            (r: any) => {
+              if (called) return
+              called = true
+              reject(r)
+            }
+          )
+        } catch (error) {
+          if (called) return
+          reject(error)
+        }
+      })
     } else {
       resolve(x)
     }

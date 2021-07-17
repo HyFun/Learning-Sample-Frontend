@@ -1,20 +1,17 @@
 {
-  "name": "promise2",
+  "name": "promise-write",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "promises-aplus-tests dist/index",
-    "test2": "promises-aplus-tests src/test",
-    "dev": "rollup -c --watch src/*",
-    "build": "rollup -c"
+    "test": "rollup -c && promises-aplus-tests dist/promise"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^19.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-commonjs": "^19.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.2",
     "promises-aplus-tests": "^2.1.2",
     "rollup": "^2.53.2",
     "rollup-plugin-clear": "^2.0.7",

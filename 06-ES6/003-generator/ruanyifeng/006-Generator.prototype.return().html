@@ -1,0 +1,52 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-20 12:42:46
+ * @Description  : Generator.prototype.return()
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-20 12:48:37
+-->
+<script>
+  /**
+   * 1. 还有一个return()方法，可以返回给定的值，并且终结遍历 Generator 函数。
+   * 如果return无参数，那么返回的结果就是 {value: undefined, done: true}
+   */
+  {
+    function* gen() {
+      yield 1
+      yield 2
+      yield 3
+    }
+
+    var g = gen()
+
+    console.log(g.next()) // { value: 1, done: false }
+    console.log(g.return('foo')) // { value: "foo", done: true }
+    console.log(g.next()) // { value: undefined, done: true }
+  }
+  console.log(`==============`)
+
+  /**
+   * 2. 如果 Generator 函数内部有try...finally代码块，
+   * 且正在执行try代码块，那么return()方法会导致立刻进入finally代码块，
+   * 执行完以后，整个函数才会结束。
+   */
+  {
+    function* numbers() {
+      yield 1
+      try {
+        yield 2
+        yield 3
+      } finally {
+        yield 4
+        yield 5
+      }
+      yield 6
+    }
+    var g = numbers()
+    console.log(g.next()) // { value: 1, done: false }
+    console.log(g.next()) // { value: 2, done: false }
+    console.log(g.return()) // { value: 4, done: false }
+    console.log(g.next()) // { value: 5, done: false }
+    console.log(g.next()) // { value: undefined, done: true }
+  }
+</script>

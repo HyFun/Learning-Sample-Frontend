@@ -1,0 +1,114 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-20 12:51:22
+ * @Description  : generator嵌套
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-20 18:33:05
+-->
+<script>
+  /**
+   * 1. yield*
+   */
+  {
+    function* fn1() {
+      yield 1
+      for (const iterator of fn2()) {
+        yield iterator
+      }
+      yield 2
+    }
+
+    function* fn2() {
+      yield `a`
+      yield `b`
+      yield `c`
+      yield `d`
+    }
+
+    for (const iterator of fn1()) {
+      console.log(iterator)
+    }
+
+    console.log(`================`)
+    // 可以将以上写成
+
+    function* fn3() {
+      yield 1
+      yield* fn2()
+      yield 2
+    }
+    for (const iterator of fn3()) {
+      console.log(iterator)
+    }
+  }
+
+  console.log(`================`)
+
+  /**
+   * 2. yield* 相当于是for...of的语法糖
+   * 如果generator有return时，不能用for...of接收到return的值
+   * 只能用yield接收值
+   */
+  {
+    function* fn() {
+      yield 1
+      yield 2
+      yield 3
+      return 4
+    }
+    function* fn1() {
+      for (const iterator of fn()) {
+        yield iterator
+      }
+    }
+
+    // 只会打印 1 2 3 得不到return的值
+    for (const iterator of fn1()) {
+      console.log(iterator)
+    }
+
+    // 使用yield*
+    function* fn2() {
+      yield yield* fn()
+    }
+    // 打印的是 1 2 3 4
+    for (const iterator of fn2()) {
+      console.log(iterator)
+    }
+  }
+  console.log(`================`)
+
+  /**
+   * 3. yield* 是for...of的语法糖，后边跟iterator的对象
+   */
+  {
+    function* fn() {
+      // 可以使用数字
+      //   yield* [1, 2, 3, 4, 5]
+      // 字符串
+      yield* 'hello world!'
+    }
+    for (const iterator of fn()) {
+      console.log(iterator)
+    }
+  }
+  console.log(`================`)
+
+  /**
+   * 4. 使用 yield* 操作符 扁平化数组
+   */
+  {
+    function* flat(list = []) {
+      if (Array.isArray(list)) {
+        for (let i = 0; i < list.length; i++) {
+          yield* flat(list[i])
+        }
+      } else {
+        yield list
+      }
+    }
+
+    const list = [[1, 2, 3, [4]], 5, 6, [7, 8]]
+    console.log(Array.from(flat(list)))
+  }
+</script>

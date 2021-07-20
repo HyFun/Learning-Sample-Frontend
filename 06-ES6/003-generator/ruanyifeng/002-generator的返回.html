@@ -1,0 +1,47 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-20 10:20:25
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-20 10:34:18
+-->
+<script>
+  /**
+   * 1. 如果该函数有返回值，那么最后一个next的返回值的 value就是返回值，done: true
+   */
+  {
+    function* helloWorldGenerator() {
+      yield 'hello'
+      yield 'world'
+      return 'ending'
+    }
+
+    var hw = helloWorldGenerator()
+    // 将指针向下
+    const r1 = hw.next() // 返回 {value,done}
+    console.log(r1) // {value: "hello", done: false}
+    const r2 = hw.next()
+    console.log(r2) // {value: "world", done: false}
+    const r3 = hw.next()
+    console.log(r3) // {value: "ending", done: true}
+  }
+  console.log(`--------------`);
+  /**
+   * 2. 如果该函数没有返回值，那么最后一个next()执行后返回的 {value: undefined, done: true}
+   */
+  {
+    function* helloWorldGenerator() {
+      yield 'hello'
+      yield 'world'
+    }
+
+    var hw = helloWorldGenerator()
+    // 将指针向下
+    const r1 = hw.next() // 返回 {value,done}
+    console.log(r1) // {value: "hello", done: false}
+    const r2 = hw.next()
+    console.log(r2) // {value: "world", done: false}
+    const r3 = hw.next()
+    console.log(r3) // {value: "ending", done: true}
+  }
+</script>

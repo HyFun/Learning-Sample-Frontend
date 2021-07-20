@@ -1,0 +1,59 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-20 18:43:19
+ * @Description  : generator异步操作
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-20 19:02:41
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动态加载图片</title>
+  </head>
+  <body></body>
+</html>
+<script src="../../../00-Resource/assets/js/jquery-3.6.0.js"></script>
+<script>
+  /**
+   * 1. 封装一个异步请求
+   */
+  {
+    function request(url, generator) {
+      $.ajax({
+        url,
+        method: 'get',
+        success(response) {
+          generator.next(response)
+        },
+        error(err) {
+          generator.throw(err)
+        }
+      })
+    }
+
+    const get = (function* () {
+      const res = yield request('https://gank.io/api/v2/banners', get)
+      console.log(res)
+      // 拿到上一个数据
+      setImage(res.data)
+    })()
+
+    // 设置图片
+    function setImage(list) {
+      list.forEach((v) => {
+        const img = document.createElement('img')
+        img.style.width = '300px'
+        img.style.height = '200px'
+        img.src = v.image
+
+        document.body.appendChild(img)
+      })
+    }
+
+    // 触发执行
+    get.next()
+  }
+</script>

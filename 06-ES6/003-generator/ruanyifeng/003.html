@@ -1,0 +1,41 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-20 10:36:02
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-20 10:45:59
+-->
+<script>
+  /**
+   * 1. Generator 函数可以不用yield表达式，这时就变成了一个单纯的暂缓执行函数。
+   */
+  {
+    function* f() {
+      console.log(`hello world`)
+    }
+    const re = f() // 此时函数体并不执行
+
+    re.next() // 此时才会执行
+  }
+  /**
+   * 2. yield表达式只能用在 Generator 函数里面，用在其他地方都会报错。
+   */
+  {
+    function fn() {
+      // yield 1;
+    }
+    fn() // Uncaught SyntaxError: Unexpected number
+  }
+
+  /**
+   * 3. yield表达式如果用在另一个表达式之中，必须放在圆括号里面。
+   */
+  {
+    function* fn() {
+      console.log('aaa' + (yield 123))
+    }
+    const it = fn()
+    console.log(it.next());
+    it.next() // 此时才会执行fn里边的log内容
+  }
+</script>

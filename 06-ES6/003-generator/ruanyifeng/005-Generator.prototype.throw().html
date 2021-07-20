@@ -1,0 +1,86 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-20 11:36:54
+ * @Description  : Generator.prototype.throw()
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-20 12:39:24
+-->
+<script>
+  /**
+   * Generator 函数返回的遍历器对象，
+   * 都有一个throw方法，可以在函数体外抛出错误，
+   * 然后在 Generator 函数体内捕获。
+   */
+  {
+    var g = function* () {
+      try {
+        yield
+      } catch (e) {
+        console.log('内部捕获', e)
+      }
+    }
+
+    var i = g()
+    i.next()
+
+    try {
+      i.throw('a')
+      i.throw('b')
+    } catch (e) {
+      console.log('外部捕获', e)
+    }
+  }
+
+  /**
+   * 2. 如果 Generator 函数内部没有部署try...catch代码块，那么throw方法抛出的错误，将被外部try...catch代码块捕获。
+   */
+  {
+    function* fn() {
+      try {
+        yield
+      } catch (error) {
+        console.log(`内部捕获到了错误`, error)
+      }
+    }
+    const it = fn()
+    it.next()
+    it.throw(new Error('出错啦~'))
+    console.log(`bbbb`)
+  }
+
+  /**
+   * 3. 如果 Generator 函数内部和外部，都没有部署try...catch代码块，那么程序将报错，直接中断执行。
+   */
+  //   {
+  //     function* fn() {
+  //       yield
+  //     }
+  //     const it = fn()
+  //     it.next()
+  //     it.throw(`出错啦出错啦~`)
+  //     // 由于没有程序捕获，所以被终止了
+  //     console.log(`ccc`)
+  //   }
+
+  /**
+   * 4. throw方法被捕获以后，会附带执行下一条yield表达式
+   */
+  {
+    function* fn() {
+      var a = 0
+      try {
+        yield ++a
+      } catch (error) {
+        //
+      }
+      yield ++a
+      yield ++a
+    }
+
+    const it = fn()
+    console.log(it.next()) // 此时 a=1
+    console.log(it.throw()) // 此时已经执行了第二个 yield a = 2
+    console.log(it.next()) // {value: 3, done: false}
+    console.log(it.next()) // {value: undefined, done: true}
+  }
+</script>

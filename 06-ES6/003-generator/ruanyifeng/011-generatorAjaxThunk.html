@@ -1,0 +1,85 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-21 15:58:14
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-21 16:34:07
+-->
+<script src="../../../00-Resource/assets/js/jquery-3.6.0.js"></script>
+<script>
+  function Thunk(fn) {
+    return function () {
+      const args = Array.from(arguments)
+      return function (done) {
+        var called = false
+        args.push(function () {
+          if (called) return
+          called = true
+          done.apply(this, arguments)
+        })
+        try {
+          fn.apply(this, args)
+        } catch (error) {
+          done(error)
+        }
+      }
+    }
+  }
+
+  /**
+   * 创建通用get请求的方法
+   */
+  function createRequest() {
+    return function (url, callback) {
+      $.ajax({
+        url,
+        method: 'get',
+        success(res) {
+          callback(undefined, res)
+        },
+        error(err) {
+          callback(err)
+        }
+      })
+    }
+  }
+  var request = createRequest()
+  var thunkRequest = Thunk(request)
+
+  const req1 = thunkRequest(
+    'https://gank.io/api/v2/data/category/Girl/bbbb/type/Girl/page/1/count/10'
+  )
+  const req2 = thunkRequest(
+    'https://gank.io/api/v2/data/category/Girl/type/Girl/page/2/count/10'
+  )
+
+  // 自执行函数
+  function run(fn) {
+    var gen = fn()
+    // 相当于callback
+    function next(err, data) {
+      if (err) {
+        return gen.throw(err)
+      }
+      var result = gen.next(data)
+      if (result.done) return
+      result.value(next)
+    }
+
+    next()
+  }
+
+  function* gen() {
+    try {
+      const res1 = yield req1
+      console.log('res1', res1)
+      const res2 = yield req2
+      console.log('res2', res2)
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+
+  // 开始执行
+  run(gen)
+</script>

@@ -1,0 +1,51 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-21 10:55:55
+ * @Description  : generator异步操作
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-21 15:19:13
+-->
+<script src="../../../00-Resource/assets/js/jquery-3.6.0.js"></script>
+<script>
+  /**
+   * 1. 使用Promise处理异步操作
+   */
+  new Promise((resolve, reject) => {
+    $.ajax({
+      url: 'https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/10',
+      method: 'get',
+      success(response) {
+        resolve(response)
+      },
+      error(err) {
+        reject(err)
+      }
+    })
+  })
+    .then((res) => {
+      console.log('获取数据成功', res)
+    })
+    .catch((err) => {
+      console.log('获取数据失败', err)
+    })
+
+  /**
+   * 2. 异步任务封装
+   */
+  {
+    function* get() {
+      var result = yield fetch(
+        'https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/10'
+      )
+    }
+
+    var g = get()
+    g.next()
+      .value.then((res) => {
+        return res.json()
+      })
+      .then((res) => {
+        console.log('获取数据成功', res)
+      })
+  }
+</script>

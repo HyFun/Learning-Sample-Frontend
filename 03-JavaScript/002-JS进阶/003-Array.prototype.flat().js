@@ -3,7 +3,7 @@
  * @Date         : 2021-07-13 22:30:17
  * @Description  : 数组扁平化
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-13 22:54:45
+ * @LastEditTime : 2021-07-21 16:43:23
  */
 const list = [[1, 2, [3], [4, 5]], [6], [7, 8], [9]]
 
@@ -80,3 +80,18 @@ console.log(flat4(list))
  * 不考虑元素类型
  */
 console.log(list.toString().split(','))
+
+/**
+ * 方法七：generator + yield*
+ */
+function* flat5(list) {
+  if (Array.isArray(list)) {
+    for (let i = 0; i < list.length; i++) {
+      yield* flat5(list[i])
+    }
+  } else {
+    yield list
+  }
+}
+
+console.log(Array.from(flat5(list)))

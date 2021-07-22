@@ -3,7 +3,7 @@
  * @Date         : 2021-07-13 22:29:13
  * @Description  : JavaScript
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-15 11:18:24
+ * @LastEditTime : 2021-07-22 19:10:12
 -->
 
 ## 事件循环
@@ -37,3 +37,8 @@ async/await 注意事项
 1. 如果 await 后面直接跟的为一个变量，比如：`await 1;`或者`await undefined;`这种情况的话相当于直接把 await 后面的代码注册为一个微任务，可以简单理解为 promise.then(await 下面的代码)。
 
 2. 如果 await 后面跟的是一个异步函数的调用，此时执行完 awit 并不先把 await 后面的代码注册到微任务队列中去，而是执行完 await 之后，直接跳出 async1 函数，执行其他代码。
+
+## 跨域解决方案
+
+- [九种跨域方式实现原理（完整版）](https://juejin.cn/post/6844903767226351623)
+- [前端常见跨域解决方案（全） - 个人文章 - SegmentFault 思否](https://segmentfault.com/a/1190000011145364?utm_medium=referral&utm_source=tuicool)

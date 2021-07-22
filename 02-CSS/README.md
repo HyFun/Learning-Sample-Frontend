@@ -3,7 +3,7 @@
  * @Date         : 2021-07-07 17:26:19
  * @Description  : css 笔记
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-08 18:07:12
+ * @LastEditTime : 2021-07-22 13:24:57
 -->
 
 # CSS
@@ -428,7 +428,7 @@ flex-shrink 属性定义了项目的缩小比例，默认为 1，即如果空间
    </div>
    ```
 
-   解题思路：当总宽度大于父级宽度时，则按照缩小比例`flex-shrink`进行计算，和`flex-grow`完全没关系!
+   **解题思路：当总宽度大于父级宽度时，则按照缩小比例`flex-shrink`进行计算，和`flex-grow`完全没关系!**
 
    ```js
    left = 500 + ( 600 - ( 500 + 400 ) * ( 2 * 500 / ( 500 * 2 + 400 * 1))) = 285.72
@@ -460,7 +460,7 @@ flex-shrink 属性定义了项目的缩小比例，默认为 1，即如果空间
    </div>
    ```
 
-   解题思路：当总宽度小于父元素宽度时，剩余宽度则按照`flex-grow`来进行伸缩
+   **解题思路：当总宽度小于父元素宽度时，剩余宽度则按照`flex-grow`来进行伸缩**
 
    ```js
    left = 300 + (600 - ( 300 + 200 ) ) * (1 / 3) = 333.33
@@ -478,4 +478,38 @@ flex-shrink 属性定义了项目的缩小比例，默认为 1，即如果空间
 - flex 布局 + margin: auto
 - table + table-ceil + vertical-align: middle
 
+## 18. BFC
 
+[介绍下 BFC 布局规则，除此之外，你还知道哪些 CSS 格式化上下文?](https://github.com/sisterAn/blog/issues/118)
+
+### 创建 BFC
+
+- float 不为 none
+- 非块级元素的块级元素，display 为 inline-block、table-cell 等
+- position 为 absolute、fixed
+- overflow 为非 visible 的
+
+### BFC 规则
+
+- 内部盒子的方向垂直排列
+- 两个相邻的盒子上下 margin 会重叠
+- 子元素的 margin 也导致父元素 margin
+- BFC 元素不会和 float 重叠
+- 计算 BFC 高度时，浮动的子元素也会参与计算
+
+## IFC: 行内格式上下文
+
+行内格式化上下文（Inline Formatting Context），简称 IFC 。主要用来规则行内级盒子的格式化规则。
+
+IFC 的行盒的高度是根据包含行内元素中最高的实际高度计算而来。主要会涉及到 CSS 中的 font-size 、 line-height 、 vertical-align 和 text-align 等属性。
+
+那么 IFC 一般有什么用呢？
+
+- 垂直方向上，当行内元素的高度比行盒要低，那么 vertical-align 属性决定垂直方向上的对齐方式。
+- 水平方向上，当行内元素的总宽度比行盒要小，那么行内元素在水平方向上的分部由 text-align 决定。
+- 水平方向上，当行内元素的总宽度超过了行盒，那么行内元素会被分配到多个行盒中去，如果设置了不可折行等属性，那么行内元素会溢出行盒。
+- 行盒的左右两边都会触碰到包含块，而 ef="https://github.com/sisterAn/blog">float 元素则会被放置在行盒和包含快边缘的中间位置。
+
+## GFC: 网格布局格式化上下文
+
+Flex 格式化上下文（Flexbox Formatting Context）俗称 FFC 。当 display 取值为 flex 或 inline-flex ，将会创建一个 Flexbox 容器。该容器为其内容创建一个新的格式化上下文，即 Flex 格式化上下文。

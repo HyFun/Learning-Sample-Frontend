@@ -1,0 +1,66 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-22 13:02:04
+ * @Description  : IFC：行内格式上下文
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-22 13:21:05
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IFC：行内格式上下文</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>
+      1. IFC 的line
+      box（线框）高度由其包含行内元素中最高的实际高度计算而来（不受到竖直方向的padding/margin影响)
+    </h3>
+    <div class="box" style="vertical-align: middle">
+      <span style="padding: 10px">我是一个行内元素1</span>
+      <span style="padding: 10px">我是一个行内元素2</span>
+      <span style="padding: 10px">我是一个行内元素3</span>
+      <span style="padding: 10px">我是一个行内元素4</span>
+    </div>
+    <h3>
+      2. IFC
+      的行盒的高度是根据包含行内元素中最高的实际高度计算而来。主要会涉及到CSS中的
+      font-size 、 line-height 、 vertical-align 和 text-align 等属性。
+    </h3>
+    <span style="line-height: 24px">我是一个line框</span>
+    <span style="font-size: 24px">我是一个line框</span>
+
+    <h3>
+      3. 垂直方向上，当行内元素的高度比行盒要低，那么 vertical-align
+      属性决定垂直方向上的对齐方式。
+    </h3>
+    <span style="display: inline-block; height: 40px; background-color: pink">
+      <span style="vertical-align: middle">我是一个line框</span>
+    </span>
+    <h3>
+      4.
+      水平方向上，当行内元素的总宽度超过了行盒，那么行内元素会被分配到多个行盒中去，如果设置了不可折行等属性，那么行内元素会溢出行盒。
+    </h3>
+    <h4>折行</h4>
+    <div class="box">
+      <span>
+        水平方向上，当行内元素的总宽度超过了行盒，那么行内元素会被分配到多个行盒中去，如果设置了不可折行等属性，那么行内元素会溢出行盒。
+      </span>
+    </div>
+    <h4>不折行</h4>
+    <div class="box" style="white-space: nowrap;">
+      <span>
+        水平方向上，当行内元素的总宽度超过了行盒，那么行内元素会被分配到多个行盒中去，如果设置了不可折行等属性，那么行内元素会溢出行盒。
+      </span>
+    </div>
+  </body>
+</html>

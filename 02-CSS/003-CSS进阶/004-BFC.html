@@ -1,0 +1,80 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-22 10:28:46
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-22 11:29:50
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BFC</title>
+    <style>
+      .bfc {
+        overflow: hidden;
+      }
+
+      .box {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        background-color: pink;
+      }
+
+      .box1 {
+        width: 100px;
+        height: 100px;
+        float: left;
+        background-color: pink;
+      }
+      .box2 {
+        height: 200px;
+        background-color: seagreen;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>1. 自适应两栏布局</h3>
+    <div class="box1"></div>
+    <div class="box2"></div>
+
+    <h3>2. 清除浮动，解决浮动元素不占高度</h3>
+    <div class="parent" style="border: 1px solid black; overflow: hidden">
+      <div
+        style="
+          float: left;
+          width: 100px;
+          height: 100px;
+          border: 1px solid red;
+          background-color: pink;
+        "
+      ></div>
+      <div
+        style="
+          float: left;
+          width: 100px;
+          height: 100px;
+          border: 1px solid red;
+          background-color: pink;
+        "
+      ></div>
+    </div>
+
+    <h3>3. 解决margin重叠</h3>
+    <div class="bfc">
+      <div class="box" style="margin-bottom: 50px"></div>
+    </div>
+    <div class="bfc">
+      <div class="box" style="margin-top: 100px"></div>
+    </div>
+
+    <h3>4. 子元素margin影响父元素</h3>
+    <div class="bfc">
+      <div class="box" style="margin-top: 30px"></div>
+    </div>
+  </body>
+</html>

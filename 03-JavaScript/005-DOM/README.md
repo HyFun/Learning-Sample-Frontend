@@ -3,10 +3,26 @@
  * @Date         : 2021-07-10 21:15:29
  * @Description  : readme
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-11 00:01:38
+ * @LastEditTime : 2021-07-23 18:44:16
 -->
 
 # DOM
+
+## 页面生命周期
+
+### document 的 readyState
+
+- `loading`: 文档处于加载中
+- `interactive`: 文档已经结束了“正在加载”状态，DOM 元素可以被访问。但是像图像，样式表和框架等资源依然还在加载。
+- `complete`: 文档和所有子资源已完成加载。表示 load 状态的事件即将被触发。
+
+### DOMContentLoaded
+
+document 的`interactive`方法触发后触发，浏览器已完全加载 HTML，并构建了 DOM 树，但像 `<img>` 和样式表之类的外部资源可能尚未加载完成。
+
+### load
+
+document 的`complete`方法触发后触发。外部资源已加载完成，样式已被应用，图片大小也已知了。
 
 ## 节点类型
 
@@ -130,19 +146,22 @@ style
 - `mouseleave`: 鼠标离开时事件。**_不会冒泡_**
 - `keydowm`: 按下键盘时
 - `keyup`: 抬起键盘时
-- `keypress`: 只有按下字符键时才会触发，对大小写敏感，能通过keyCode区分大小写
+- `keypress`: 只有按下字符键时才会触发，对大小写敏感，能通过 keyCode 区分大小写
 - `contextmenu`: 单击右键
 - `selectstart`: 开始拖动选择文字
 
 事件委托
-- 如果需要给后添加的元素添加事件，此时元素没有在dom上，可以给父元素添加事件，父元素可以通过 `e.target` 来找到点击的真正的元素
 
-## 事件对象event
+- 如果需要给后添加的元素添加事件，此时元素没有在 dom 上，可以给父元素添加事件，父元素可以通过 `e.target` 来找到点击的真正的元素
+
+## 事件对象 event
 
 阻止默认行为
+
 - `e.preventDefault()`: 标准
 - `e.returnValue = false`: IE
 
 阻止冒泡
+
 - `e.stopPropagation()`: 标准
 - `e.cancelBubble = true`: IE

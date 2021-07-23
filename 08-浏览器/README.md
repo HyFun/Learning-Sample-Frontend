@@ -3,7 +3,7 @@
  * @Date         : 2021-07-22 22:26:31
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-23 16:43:16
+ * @LastEditTime : 2021-07-23 18:13:08
 -->
 # 浏览器相关
 
@@ -14,3 +14,4 @@
 ## 浏览器渲染流程
 
 - [浏览器渲染流程 - 掘金](https://juejin.im/post/5dcbbbbd6fb9a0606a206c14)
+- [浏览器线程阻塞和无阻塞加载脚本的理解](https://segmentfault.com/a/1190000006143086)

@@ -1,0 +1,86 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-07-25 15:28:44
+ * @Description  : 懒加载图片
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-07-25 15:57:14
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>懒加载图片</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+      ul {
+        width: 80vw;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      ul li {
+        width: 50%;
+      }
+      img {
+        width: 100%;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul></ul>
+  </body>
+</html>
+<script>
+  fetch('https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/100')
+    .then((res) => {
+      return res.json()
+    })
+    .then((res) => {
+      const list = res.data
+      let html = ``
+      list.forEach((v) => {
+        html += `<li><img data-src="${v.url}"/></li>`
+      })
+      const ul = document.querySelector('ul')
+      ul.innerHTML = html
+    })
+
+  /**
+   * 防抖函数
+   */
+  function fangdou(fn) {
+    let time = null
+    return function () {
+      if (time) {
+        clearTimeout(time)
+      }
+      time = setTimeout(() => {
+        fn.apply(null, arguments)
+      }, 200)
+    }
+  }
+
+  const viewHeight = window.innerHeight
+  const fn = fangdou(() => {
+    // 获取所有的图片
+    const imgList = document.querySelectorAll('img')
+    imgList.forEach((item) => {
+      let rect = item.getBoundingClientRect()
+      if (rect.bottom >= 0 && rect.top < viewHeight && item.dataset.src) {
+        item.src = item.dataset.src
+        item.removeAttribute('data-src')
+      }
+    })
+  })
+  fn()
+  window.addEventListener('scroll', () => {
+    fn()
+  })
+</script>

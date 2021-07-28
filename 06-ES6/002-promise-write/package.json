@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "rollup -c && promises-aplus-tests dist/promise"
+    "test": "rollup -c && promises-aplus-tests dist/promise",
+    "test2": "promises-aplus-tests src/promise.js"
   },
   "keywords": [],
   "author": "",

@@ -3,7 +3,7 @@
  * @Date         : 2021-08-18 16:20:26
  * @Description  : 继承
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-18 22:22:37
+ * @LastEditTime : 2021-08-18 23:00:08
 -->
 
 <script>
@@ -30,10 +30,11 @@
     console.log(son)
   }
 
-  // 缺点：多个子类会共享同一个父类实例属性
+  // 缺点：多个子类会共享同一个父类实例属性，对于基本类型没有影响，引用类型的数据会造成影响
   {
     const son1 = new Child()
     const son2 = new Child()
+    son1.name = 'son1'
     son1.child.push(1)
     console.log(son1)
     console.log(son2)

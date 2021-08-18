@@ -1,0 +1,44 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-18 16:20:26
+ * @Description  : 继承
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-18 22:03:46
+-->
+
+<script>
+  /**
+   * 寄生组合式继承
+   */
+  function Parent() {
+    this.name = 'parent'
+    this.children = []
+  }
+  Parent.prototype.say = function () {
+    console.log(`我是${this.name}`)
+  }
+
+  function Child(){
+    Parent.call(this)
+  }
+
+  // 继承设置
+  // 1. 子类原型指向父类原型的新对象
+  // 使用Object.create() 避免多个子类实例原型对象，共用的是同一个父类原型
+  Child.prototype = Object.create(Parent.prototype)
+  // 2. 子类原型构造函数指向子类
+  Child.prototype.construtor = Child
+  // 3. 构造子类时，父类的属性和方法设置到子类中: Parent.call(this)
+
+
+  // 实例
+  {
+    const son1 = new Child()
+    const son2 = new Child()
+    son1.say()
+    son1.children.push(1)
+    console.log(son1);
+    console.log(son2);
+  }
+
+</script>

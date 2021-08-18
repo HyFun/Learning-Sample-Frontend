@@ -1,0 +1,42 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-18 16:20:26
+ * @Description  : 继承
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-18 21:54:23
+-->
+
+<script>
+  /**
+   * 寄生式继承
+   */
+  function object(proto) {
+    function Proxy() {}
+    Proxy.prototype = proto
+    return new Proxy()
+  }
+
+  function createExtend(proto) {
+    var parent = object(proto)
+    /**
+     * 扩展新对象的方法
+     */
+    parent.hello = function() {
+      console.log('hello world!',this,name);
+    }
+    return parent
+  }
+
+  const parent = {
+    name: 'parent',
+    children: []
+  }
+
+  const child1 = createExtend(parent)
+  const child2 = createExtend(parent)
+  child1.hello()
+  child1.children.push(1)
+  console.log(child1);
+  console.log(child2);
+  // 缺点：父类中的引用类型指向同一地址
+</script>

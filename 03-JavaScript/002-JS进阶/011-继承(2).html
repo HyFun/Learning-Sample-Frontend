@@ -3,7 +3,7 @@
  * @Date         : 2021-08-18 16:20:26
  * @Description  : 继承
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-18 16:34:34
+ * @LastEditTime : 2021-08-18 22:45:01
 -->
 
 <script>
@@ -13,7 +13,7 @@
    */
   function Parent() {
     this.name = '我是父类'
-    this.child = []
+    this.children = []
   }
 
   Parent.prototype.say = function () {
@@ -26,12 +26,11 @@
 
   // 测试
   {
-    const child = new Child()
-    console.log(child)
+    const son1 = new Child()
+    const son2 = new Child()
+    son1.children.push(1)
+    console.log(son1)
+    console.log(son2)
   }
   // 缺点：无法将父类的原型方法、属性继承过来
-  {
-    const child = new Child()
-    // child.say() // child.say is not a function
-  }
 </script>

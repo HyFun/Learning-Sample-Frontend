@@ -3,34 +3,30 @@
  * @Date         : 2021-08-18 16:20:26
  * @Description  : 继承
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-18 19:24:56
+ * @LastEditTime : 2021-08-18 21:45:55
 -->
 
 <script>
   /**
    * 原型式继承
-   * Object.create
+   * Object.create()
    */
-  function Parent() {
+  function object(proto) {
+    function Proxy() {}
+    Proxy.prototype = proto
+    return new Proxy()
   }
-  Parent.prototype = Object.create({
-
-  })
-  Parent.prototype.say = function () {
-    console.log(this.name)
+  const parent = {
+    name: '我是parent',
+    child: []
   }
 
-  function Child() {}
+  // 示例
+  const son1 = object(parent)
+  const son2 = object(parent)
+  son1.child.push(1)
+  console.log(son1);
+  console.log(son2);
 
-
-  // 测试
-  {
-    const child = new Child()
-    console.log(child)
-  }
-  // 缺点：子类实例和子类实例的原型对象上的属性和方法重复
-  {
-    const child = new Child()
-    child.say()
-  }
+  // 缺点：多个子类持有父类对象中为引用类型的属性，会共享。存在的问题和原型链继承一样
 </script>

@@ -1,0 +1,68 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-18 14:54:39
+ * @Description  : 参考资料：https://segmentfault.com/a/1190000022831974
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-18 15:30:52
+-->
+
+<script>
+  /**
+   * 1. 全局变量实现
+   * 缺点：不够透明、耦合性高
+   */
+  class Single1 {
+    static getInstance() {
+      if (!this.instance) {
+        this.instance = new Single1()
+      }
+      return this.instance
+    }
+  }
+  // 验证
+  {
+    const a = Single1.getInstance()
+    const b = Single1.getInstance()
+    console.log(a === b) // true
+  }
+
+  /**
+   * 2. 构造函数实现
+   * 缺点：耦合度高
+   */
+  class Single2 {
+    constructor() {
+      if (!Single2.instance) {
+        Single2.instance = this
+      }
+      return Single2.instance
+    }
+  }
+  // 验证
+  {
+    const a = new Single2()
+    const b = new Single2()
+    console.log(a === b) // true
+  }
+
+  /**
+   * 3. 闭包 代理
+   */
+  class Single3 {}
+
+  const Proxy = (function () {
+    var instance
+    return function () {
+      if (!instance) {
+        instance = new Single3()
+      }
+      return instance
+    }
+  })()
+  // 验证
+  {
+    const a = new Proxy()
+    const b = new Proxy()
+    console.log(a === b) // true
+  }
+</script>

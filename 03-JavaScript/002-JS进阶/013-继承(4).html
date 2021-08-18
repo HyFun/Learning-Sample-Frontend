@@ -1,0 +1,36 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-18 16:20:26
+ * @Description  : 继承
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-18 19:24:56
+-->
+
+<script>
+  /**
+   * 原型式继承
+   * Object.create
+   */
+  function Parent() {
+  }
+  Parent.prototype = Object.create({
+
+  })
+  Parent.prototype.say = function () {
+    console.log(this.name)
+  }
+
+  function Child() {}
+
+
+  // 测试
+  {
+    const child = new Child()
+    console.log(child)
+  }
+  // 缺点：子类实例和子类实例的原型对象上的属性和方法重复
+  {
+    const child = new Child()
+    child.say()
+  }
+</script>

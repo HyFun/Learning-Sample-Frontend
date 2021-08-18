@@ -1,0 +1,35 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-18 16:20:26
+ * @Description  : 继承
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-18 16:27:11
+-->
+
+<script>
+  /**
+   * 原型链继承
+   * 子类原型对象 设置为 父类实例
+   */
+  function Parent() {
+    this.name = `我是parent`
+    this.child = []
+  }
+  function Child() {}
+  Child.prototype = new Parent()
+
+  // 测试
+  {
+    const son = new Child()
+    console.log(son)
+  }
+
+  // 缺点：多个子类会共享同一个父类实例属性
+  {
+    const son1 = new Child()
+    const son2 = new Child()
+    son1.child.push(1)
+    console.log(son1)
+    console.log(son2)
+  }
+</script>

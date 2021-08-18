@@ -1,0 +1,37 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-18 16:20:26
+ * @Description  : 继承
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-18 16:34:34
+-->
+
+<script>
+  /**
+   * 构造函数继承
+   * 每个子类都拥有父类实例的属性和方法
+   */
+  function Parent() {
+    this.name = '我是父类'
+    this.child = []
+  }
+
+  Parent.prototype.say = function () {
+    console.log(this.name)
+  }
+
+  function Child() {
+    Parent.call(this)
+  }
+
+  // 测试
+  {
+    const child = new Child()
+    console.log(child)
+  }
+  // 缺点：无法将父类的原型方法、属性继承过来
+  {
+    const child = new Child()
+    // child.say() // child.say is not a function
+  }
+</script>

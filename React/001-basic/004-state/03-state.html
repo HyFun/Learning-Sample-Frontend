@@ -3,7 +3,7 @@
  * @Date         : 2021-08-15 17:36:21
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-19 13:00:50
+ * @LastEditTime : 2021-08-19 14:53:09
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -29,15 +29,13 @@
         this.state = {name: '张三'}
       }
       render() {
-        return <h3 onClick={this.click}>我的名字叫{this.state.name}</h3>
+        return <h3 onClick={this.click.bind(this)}>我的名字叫{this.state.name}</h3>
       }
       /**
-       * 类中方法使用this问题
-       * 类中的方法作用域中，默认开启了严格模式，所以在全局作用域下直接调用，里边的this为undefined
-       * 如果不是使用严格模式，而直接调用的话，this则指向的是window
+       * 在使用的地方，调用bind改变函数内部的this指向
        */
       click(){
-        console.log(this);
+        console.log(this); // 此时的this就是当前实例了
       }
     }
 

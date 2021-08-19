@@ -3,7 +3,7 @@
  * @Date         : 2021-08-18 16:20:26
  * @Description  : 继承
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-18 18:27:39
+ * @LastEditTime : 2021-08-19 15:09:40
 -->
 
 <script>
@@ -25,6 +25,8 @@
   }
 
   Child.prototype = new Parent()
+  Child.prototype.constructor = Child
+  // 定义子类原型方法
 
   // 测试
   {

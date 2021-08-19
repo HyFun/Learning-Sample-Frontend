@@ -1,0 +1,54 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-15 17:36:21
+ * @Description  : 使用setState响应式改变state数据
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-20 00:03:56
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>state</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    /**
+     * 类式组件需要继承自 React.Component 类，该类才能成为一个组件
+     */
+    class Hello extends React.Component {
+      state = {
+        name: '张三'
+      }
+      render() {
+        const { name } = this.state
+        return (
+          <div>
+            <h3>我的名字叫{name}</h3>
+            <button onClick={this.onClick}>toggle</button>
+          </div>
+        )
+      }
+      onClick = () =>{
+        if(this.state.name==='李四') {
+          this.setState({
+            name: '张三'
+          })
+        }else {
+          this.setState({
+            name: '李四'
+          })
+        }
+      }
+    }
+
+    ReactDOM.render(<Hello />, document.getElementById('app'))
+  </script>
+</html>

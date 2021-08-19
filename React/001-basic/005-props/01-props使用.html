@@ -1,0 +1,72 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-15 17:36:21
+ * @Description  : 使用setState响应式改变state数据
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-20 00:21:03
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>state</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    /**
+     * 类式组件需要继承自 React.Component 类，该类才能成为一个组件
+     */
+    class App extends React.Component {
+      state = {
+        list: [
+          {
+            name: '张三',
+            sex: '男',
+            age: 18
+          },
+          {
+            name: '李四',
+            sex: '女',
+            age: 19
+          },
+          {
+            name: '王五',
+            sex: '男',
+            age: 16
+          }
+        ]
+      }
+      render() {
+        return (
+          <div>
+            {this.state.list.map((v) => (
+              <Person name={v.name} sex={v.sex} age={v.age} />
+            ))}
+          </div>
+        )
+      }
+    }
+
+    class Person extends React.Component {
+      render() {
+        const { name, sex, age } = this.props
+        return (
+          <ul>
+            <li>姓名：{name}</li>
+            <li>性别：{sex}</li>
+            <li>年龄：{age}</li>
+          </ul>
+        )
+      }
+    }
+
+    ReactDOM.render(<App />, document.getElementById('app'))
+  </script>
+</html>

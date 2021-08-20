@@ -1,0 +1,64 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-15 17:36:21
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-21 01:15:28
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05-refs的createRef使用</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    class Input extends React.Component {
+      state = {
+        isHot: true
+      }
+
+      input1 = React.createRef()
+
+      render() {
+        const { isHot } = this.state
+        return (
+          <div>
+            <h3>今天天气很{isHot ? '炎热' : '凉爽'}!</h3>
+            <button
+              onClick={() => {
+                this.setState({ isHot: !isHot })
+              }}
+            >
+              change
+            </button>
+            <input
+              ref={this.input1}
+              type="text"
+              placeholder="点击按钮提示数据"
+            />
+            <button
+              onClick={() => {
+                this.showMessage('input1')
+              }}
+            >
+              点我显示数据
+            </button>
+          </div>
+        )
+      }
+
+      showMessage = (ref) => {
+        alert(this[ref].current.value)
+      }
+    }
+    ReactDOM.render(<Input />, document.querySelector('#app'))
+  </script>
+</html>

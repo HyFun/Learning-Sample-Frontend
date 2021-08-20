@@ -1,0 +1,50 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-15 17:36:21
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-21 00:10:04
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HelloReact</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      const users = [
+        { name: 'zhangsan', sex: '男', age: 18 },
+        { name: 'lisi', sex: '女', age: 16 },
+        { name: 'wangwu', sex: '男', age: 20 }
+      ]
+      return (
+        <div>
+          {users.map((v, index) => (
+            <Person {...v} key={index} />
+          ))}
+        </div>
+      )
+    }
+
+    function Person(props) {
+      const { name, sex, age } = props
+      return (
+        <ul>
+          <li>姓名：{name}</li>
+          <li>性别：{sex}</li>
+          <li>年龄：{age}</li>
+        </ul>
+      )
+    }
+    ReactDOM.render(<App />, document.querySelector('#app'))
+  </script>
+</html>

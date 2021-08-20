@@ -1,0 +1,112 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-15 17:36:21
+ * @Description  : 使用setState响应式改变state数据
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-20 13:04:58
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>state</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script type="text/babel">
+    /**
+     * 类式组件需要继承自 React.Component 类，该类才能成为一个组件
+     */
+    class App extends React.Component {
+      state = {
+        list: [
+          {
+            name: '张三',
+            sex: '男',
+            age: 18,
+            speak: this.speak
+          },
+          {
+            name: '李四',
+            sex: '女',
+            age: 19,
+            speak: this.speak
+          },
+          {
+            sex: '男',
+            age: 16,
+            speak: this.speak
+          }
+        ]
+      }
+
+      speak(name) {
+        alert(`我的名字叫${name}`)
+      }
+
+      render() {
+        return (
+          <div>
+            {this.state.list.map((v, key) => (
+              // 可以使用展开运算符进行展开属性
+              // 前提: 组件属性和数据中的属性对应
+              <Person {...v} key={key} />
+            ))}
+          </div>
+        )
+      }
+    }
+
+    class Person extends React.Component {
+      /**
+       * PropTypes
+       *    类型限制：[string, number, boolean, func, ...]
+       *    必须：isRequired
+       *    读写：由于prop的设计是单向数据流的方式，prop属性不能进行修改
+       */
+      static propTypes = {
+        name: PropTypes.string.isRequired,
+        age: PropTypes.number.isRequired,
+        sex: PropTypes.string.isRequired,
+        speak: PropTypes.func // 对方法的限制，不能使用function，而是使用func
+      }
+
+      /**
+       * 默认的props
+       * 如果没有传入prop，就会使用默认的props中的属性
+       */
+      static defaultProps = {
+        name: '【默认名字】'
+      }
+
+      render() {
+        const { name, sex, age, speak } = this.props
+        return (
+          <ul>
+            <li>姓名：{name}</li>
+            <li>性别：{sex}</li>
+            <li>年龄：{age}</li>
+            <li>
+              <button
+                onClick={() => {
+                  speak(name)
+                }}
+              >
+                speak
+              </button>
+            </li>
+          </ul>
+        )
+      }
+    }
+
+    ReactDOM.render(<App />, document.getElementById('app'))
+  </script>
+</html>

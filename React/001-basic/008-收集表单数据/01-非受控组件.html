@@ -1,0 +1,51 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-15 17:36:21
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-21 11:42:50
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05-refs的createRef使用</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    class Form extends React.Component {
+      onSubmit = (e) => {
+        e.preventDefault()
+        const { username, password } = this
+        alert(`您输入的用户名：${username.value}，密码：${password.value}`)
+      }
+
+      render() {
+        return (
+          <form action="#" onSubmit={this.onSubmit}>
+            用户名：
+            <input ref={(c) => (this.username = c)} type="text" name="name" />
+            <br />
+            密码：
+            <input
+              ref={(c) => (this.password = c)}
+              type="password"
+              name="pass"
+            />
+            <br />
+            <button>登录</button>
+          </form>
+        )
+      }
+    }
+
+    ReactDOM.render(<Form />, document.querySelector('#app'))
+  </script>
+</html>

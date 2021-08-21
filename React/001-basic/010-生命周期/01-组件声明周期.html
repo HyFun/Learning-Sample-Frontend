@@ -1,0 +1,66 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-15 17:36:21
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-21 16:34:45
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01-组件声明周期</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    class Life extends React.Component {
+      state = {
+        isHot: true,
+        opacity: 1
+      }
+      render() {
+        const { isHot } = this.state
+        return (
+          <div style={{ opacity: this.state.opacity }}>
+            <h3>今天天气很{isHot ? '炎热' : '凉爽'}</h3>
+            <button
+              onClick={() => {
+                this.setState({ isHot: !isHot })
+              }}
+            >
+              toggle
+            </button>
+            <button onClick={this.uninstall}>卸载</button>
+          </div>
+        )
+      }
+
+      uninstall = () => {
+        ReactDOM.unmountComponentAtNode(document.querySelector('#app'))
+      }
+
+      componentDidMount() {
+        this.timer = setInterval(() => {
+          let op = this.state.opacity - 0.1
+          if (op <= 0) op = 1
+          this.setState({
+            opacity: op
+          })
+        }, 200)
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.timer)
+      }
+    }
+
+    ReactDOM.render(<Life />, document.querySelector('#app'))
+  </script>
+</html>

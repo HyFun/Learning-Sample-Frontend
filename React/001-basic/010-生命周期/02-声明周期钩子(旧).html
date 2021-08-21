@@ -1,0 +1,133 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-15 17:36:21
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-21 17:43:28
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01-组件声明周期</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    class App extends React.Component {
+      state = {
+        show: true,
+        car: '奔驰'
+      }
+
+      toggle = () => {
+        this.setState({
+          show: !this.state.show
+        })
+      }
+
+      changeCar = () => {
+        this.setState({
+          car: '保时捷'
+        })
+      }
+
+      render() {
+        const { show, car } = this.state
+        return (
+          <div>
+            <h3>我是父组件</h3>
+            <p>我拥有的车：{car}</p>
+            <button onClick={this.changeCar}>换车</button>
+            {show ? (
+              <button onClick={this.toggle}>卸载</button>
+            ) : (
+              <button onClick={this.toggle}>加载</button>
+            )}
+            <hr />
+            {show ? <Count car={this.state.car} /> : <p>组件已被卸载</p>}
+          </div>
+        )
+      }
+    }
+
+    class Count extends React.Component {
+      state = {
+        count: 0
+      }
+
+      constructor() {
+        super()
+        console.log('constructor')
+      }
+
+      add = () => {
+        const result = ++this.state.count
+        this.setState({
+          count: result
+        })
+      }
+
+      force = () => {
+        this.forceUpdate()
+      }
+
+      render() {
+        console.log(`render`)
+        return (
+          <div>
+            <h3>我是子组件</h3>
+            <p>父亲拥有的车：{this.props.car}</p>
+            <p>当前求和为：{this.state.count}</p>
+            <button onClick={this.add}>+</button>
+            <button onClick={this.force}>forceUpdate</button>
+          </div>
+        )
+      }
+
+      // ------------声明周期钩子------------
+      // 组件即将挂载
+      componentWillMount() {
+        console.log(`componetWillMount`)
+      }
+      // 组件已挂载
+      componentDidMount() {
+        console.log(`componentDidMount`)
+      }
+
+      // 组件将要接收新的props
+      componentWillReceiveProps(props) {
+        console.log(`componentWillReceiveProps`, props)
+      }
+
+      // 组件是否需要更新
+      shouldComponentUpdate(config) {
+        console.log(`shouldComponentUpdate`, config)
+        return true
+      }
+
+      // 组件即将更新
+      componentWillUpdate() {
+        console.log(`componentWillUpdate`)
+      }
+
+      // 组件更新完成
+      componentDidUpdate() {
+        console.log(`componentDidUpdate`)
+      }
+
+      // 组件即将卸载
+      componentWillUnmount() {
+        console.log(`componentWillUnmount`)
+      }
+    }
+
+    ReactDOM.render(<App />, document.querySelector('#app'))
+  </script>
+</html>

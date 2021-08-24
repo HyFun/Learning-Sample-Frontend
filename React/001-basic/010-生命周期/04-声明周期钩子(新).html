@@ -3,7 +3,7 @@
  * @Date         : 2021-08-15 17:36:21
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-23 22:26:26
+ * @LastEditTime : 2021-08-23 22:58:44
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -95,25 +95,31 @@
       /**
        * React 17+ 提示声明周期 componentWillMount、componentWillReceiveProps和componentWillUpdate
        * 这三个生命周期钩子即将其废弃、并会有提示，如果不想要出现警告⚠️，可以在这三个钩子前加上【UNSAFE_】前缀
-       * 
+       *
        * 新增了2个钩子：getDerivedStateFromProps、getSnapshotBeforeUpdate
        */
 
       // 组件即将挂载
-      // 即将废弃
-      componentWillMount() {
-        console.log(`componetWillMount`)
+      // componentWillMount() {
+      //   console.log(`componetWillMount`)
+      // }
+      // 从props中得到一个派生的state
+      // 必须有返回值，返回值为一个对象或null
+      // 作用：如果state的值都取决于props，那么可以使用这个
+      static getDerivedStateFromProps(props, state) {
+        console.log(`getDerivedStateFromProps`, props, state)
+        return null
       }
+
       // 组件已挂载
       componentDidMount() {
         console.log(`componentDidMount`)
       }
 
       // 组件将要接收新的props
-      // 即将废弃
-      componentWillReceiveProps(props) {
-        console.log(`componentWillReceiveProps`, props)
-      }
+      // componentWillReceiveProps(props) {
+      //   console.log(`componentWillReceiveProps`, props)
+      // }
 
       // 组件是否需要更新
       shouldComponentUpdate(config) {
@@ -122,14 +128,19 @@
       }
 
       // 组件即将更新
-      // 即将废弃
-      componentWillUpdate() {
-        console.log(`componentWillUpdate`)
+      // componentWillUpdate() {
+      //   console.log(`componentWillUpdate`)
+      // }
+      // 组件数据将要更新之前调用，返回值将会传到下一个钩子函数 componentDidUpdate
+      // 作为钩子函数的第三个参数
+      getSnapshotBeforeUpdate() {
+        console.log(`getSnapshotBeforeUpdate`)
+        return 'hello react'
       }
 
       // 组件更新完成
-      componentDidUpdate() {
-        console.log(`componentDidUpdate`)
+      componentDidUpdate(prevProps, prevState, snap) {
+        console.log(`componentDidUpdate`, prevProps, prevState, snap)
       }
 
       // 组件即将卸载

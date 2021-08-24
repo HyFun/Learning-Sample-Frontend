@@ -1,0 +1,41 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-08-24 17:09:01
+ * @Description  : 
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-24 17:16:58
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <tem />
+    </div>
+  </body>
+  <script>
+    const tem = {
+      template:
+        '<div><h3>我是子组件</h3><button @click="show">点我</button></div>',
+      methods: {
+        show() {
+          alert('hello vue!')
+          console.log(this)
+        }
+      }
+    }
+
+    window.vm = new Vue({
+      el: '#app',
+      components: {
+        tem
+      }
+    })
+  </script>
+</html>

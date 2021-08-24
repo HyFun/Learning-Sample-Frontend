@@ -3,7 +3,7 @@
  * @Date         : 2021-07-22 22:26:31
  * @Description  :
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-11 15:26:04
+ * @LastEditTime : 2021-08-24 15:14:05
 -->
 
 # 浏览器相关
@@ -80,3 +80,11 @@
 ## HTTP有哪些方法？
 - HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法
 - HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT
+
+## http强缓存和协商缓存
+
+https://segmentfault.com/a/1190000021661656
+
+## XSS和CSRF攻击和防范
+
+https://github.com/dwqs/blog/issues/68

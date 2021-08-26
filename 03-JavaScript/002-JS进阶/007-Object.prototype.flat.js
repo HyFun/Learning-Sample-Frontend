@@ -3,7 +3,7 @@
  * @Date         : 2021-07-21 16:44:02
  * @Description  : 对象扁平化和还原
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-21 17:34:07
+ * @LastEditTime : 2021-08-25 16:37:30
  */
 var entry = {
   a: {
@@ -22,7 +22,7 @@ var entry = {
 /**
  * 1. 对象扁平化
  */
-function flat(obj, pre = '', result = {}) {
+function flat(obj, preKey = '', result = {}) {
   Object.keys(obj).forEach((v) => {
     const key = `${preKey}${v}`
     if (typeof obj[v] === 'object') {

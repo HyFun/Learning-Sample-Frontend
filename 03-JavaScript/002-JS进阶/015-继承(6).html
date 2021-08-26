@@ -3,7 +3,7 @@
  * @Date         : 2021-08-18 16:20:26
  * @Description  : 继承
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-18 22:03:46
+ * @LastEditTime : 2021-08-25 17:58:27
 -->
 
 <script>
@@ -27,7 +27,7 @@
   // 使用Object.create() 避免多个子类实例原型对象，共用的是同一个父类原型
   Child.prototype = Object.create(Parent.prototype)
   // 2. 子类原型构造函数指向子类
-  Child.prototype.construtor = Child
+  Child.prototype.constructor = Child
   // 3. 构造子类时，父类的属性和方法设置到子类中: Parent.call(this)
 
 

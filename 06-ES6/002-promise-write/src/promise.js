@@ -1,139 +1,137 @@
 /*
- * @Author       : heyongfeng
+ * @Author       : HyFun
  * @Date         : 2021-07-28 14:34:47
- * @Description  : 手写promise测试
- * @LastEditors  : heyongfeng
- * @LastEditTime : 2021-07-28 15:15:34
+ * @Description  :
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-08-25 13:39:53
  */
-var FULFILLED = 'FULFILLED'
-var PENDING = 'PENDING'
-var REJECTED = 'REJECTED'
+const PENDING = 'PENDING'
+const FULFILLED = 'FULFILLED'
+const REJECTED = 'REJECTED'
 
-function Promise(excutor) {
-  var self = this
+class Promise {
+  constructor(excutor) {
+    this.status = PENDING
+    this.value = null
+    this.reason = null
+    this.onFulfilledCallback = []
+    this.onRejectedCallback = []
 
-  self.status = PENDING
-  self.value = null
-  self.reason = null
-  self.onFulfilledCallback = []
-  self.onRejectedCallback = []
-
-  function resolve(value) {
-    if (self.status === PENDING) {
-      self.status = FULFILLED
-      self.value = value
-      while (self.onFulfilledCallback.length) {
-        self.onFulfilledCallback.shift()(value)
-      }
-    }
-  }
-  function reject(reason) {
-    if (self.status === PENDING) {
-      self.status = REJECTED
-      self.reason = reason
-      while (self.onRejectedCallback.length) {
-        self.onRejectedCallback.shift()(reason)
-      }
-    }
-  }
-  try {
-    excutor(resolve, reject)
-  } catch (error) {
-    reject(error)
-  }
-}
-
-Promise.prototype.then = function (onResolve, onReject) {
-  onResolve = typeof onResolve === 'function' ? onResolve : (value) => value
-  onReject =
-    typeof onReject === 'function'
-      ? onReject
-      : (reason) => {
-          throw reason
+    const resolve = (value) => {
+      if (this.status === PENDING) {
+        this.status = FULFILLED
+        this.value = value
+        while (this.onFulfilledCallback.length) {
+          this.onFulfilledCallback.shift()(value)
         }
-
-  var self = this
-  var promise = new Promise(function (resolve, reject) {
-    if (self.status === FULFILLED) {
-      handler(resolve, reject, onResolve, self.value)
-    } else if (self.status === REJECTED) {
-      handler(resolve, reject, onReject, self.reason)
-    } else {
-      self.onFulfilledCallback.push(function (value) {
-        handler(resolve, reject, onResolve, value)
-      })
-
-      self.onRejectedCallback.push(function (reason) {
-        handler(resolve, reject, onReject, reason)
-      })
+      }
     }
-  })
 
-  function handler(resolve, reject, callback, value) {
-    queueMicrotask(() => {
-      try {
-        var x = callback(value)
-        resolvePromise(promise, x, resolve, reject)
-      } catch (error) {
-        reject(error)
+    const reject = (reason) => {
+      if (this.status === PENDING) {
+        this.status = REJECTED
+        this.reason = reason
+        while (this.onRejectedCallback.length) {
+          this.onRejectedCallback.shift()(reason)
+        }
+      }
+    }
+
+    try {
+      excutor(resolve, reject)
+    } catch (error) {
+      reject(error)
+    }
+  }
+
+  then(onResolve, onReject) {
+    onResolve = typeof onResolve === 'function' ? onResolve : (value) => value
+    onReject =
+      typeof onReject === 'function'
+        ? onReject
+        : (reason) => {
+            throw reason
+          }
+    let promise = new Promise((resolve, reject) => {
+      if (this.status === FULFILLED) {
+        handler(resolve, reject, onResolve, this.value)
+      } else if (this.status === REJECTED) {
+        handler(resolve, reject, onReject, this.reason)
+      } else {
+        this.onFulfilledCallback.push((value) => {
+          handler(resolve, reject, onResolve, value)
+        })
+        this.onRejectedCallback.push((reason) => {
+          handler(resolve, reject, onReject, reason)
+        })
       }
     })
-  }
 
-  function resolvePromise(promise, x, resolve, reject) {
-    if (promise === x) {
-      return reject(new TypeError('xxxxx'))
+    function handler(resolve, reject, callback, value) {
+      queueMicrotask(() => {
+        try {
+          const x = callback(value)
+          resolvePromise(promise, x, resolve, reject)
+        } catch (error) {
+          reject(error)
+        }
+      })
     }
-    if (typeof x === 'function' || typeof x === 'object') {
-      if (!x) {
-        return resolve(x)
+
+    function resolvePromise(promise, x, resolve, reject) {
+      if (promise === x) {
+        return reject(new TypeError('xxxxx'))
       }
-      let then
-      try {
-        then = x.then
-      } catch (error) {
-        return reject(error)
-      }
-      if (typeof then === 'function') {
-        let called = false
-        queueMicrotask(() => {
-          try {
-            then.call(
-              x,
-              (y) => {
-                if (called) return
-                called = true
-                resolvePromise(promise, y, resolve, reject)
-              },
-              (z) => {
-                if (called) return
-                called = true
-                reject(z)
-              }
-            )
-          } catch (error) {
-            if (called) return
-            reject(error)
-          }
-        })
+      if (typeof x === 'function' || typeof x === 'object') {
+        if (!x) {
+          return resolve(x)
+        }
+        let then
+        try {
+          then = x.then
+        } catch (error) {
+          return reject(error)
+        }
+        if (typeof then === 'function') {
+          let called = false
+          queueMicrotask(() => {
+            try {
+              then.call(
+                x,
+                (y) => {
+                  if (called) return
+                  called = true
+                  resolvePromise(promise, y, resolve, reject)
+                },
+                (z) => {
+                  if (called) return
+                  called = true
+                  reject(z)
+                }
+              )
+            } catch (error) {
+              if (called) return
+              reject(error)
+            }
+          })
+        } else {
+          resolve(x)
+        }
       } else {
         resolve(x)
       }
-    } else {
-      resolve(x)
     }
+    return promise
   }
 
-  return promise
-}
-
-Promise.deferred = function () {
-  var result = {}
-  result.promise = new Promise((resolve, reject) => {
-    result.resolve = resolve
-    result.reject = reject
-  })
-  return result
+  static deferred() {
+    const result = {}
+    result.promise = new Promise((resolve, reject) => {
+      result.resolve = resolve
+      result.reject = reject
+    })
+    return result
+  }
 }
 
 module.exports = Promise

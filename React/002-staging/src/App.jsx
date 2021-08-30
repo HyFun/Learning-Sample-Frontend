@@ -39,6 +39,17 @@ export default class App extends Component {
     })
   }
 
+  all = () => {
+    const list = this.state.list
+    list.forEach((v) => {
+      v.done = true
+    })
+    console.log(list);
+    this.setState({
+      list
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -48,7 +59,7 @@ export default class App extends Component {
           check={this.check}
           delete={this.delete}
         ></List>
-        <Footer list={this.state.list}></Footer>
+        <Footer list={this.state.list} all={this.all}></Footer>
       </div>
     )
   }

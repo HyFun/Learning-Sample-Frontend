@@ -1,0 +1,11 @@
+.list_item {
+    padding: 10px;
+    display: flex;
+}
+
+.list_item span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

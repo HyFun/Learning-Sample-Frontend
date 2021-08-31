@@ -3,7 +3,7 @@
  * @Date         : 2021-07-13 22:29:13
  * @Description  : JavaScript
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-22 19:10:12
+ * @LastEditTime : 2021-08-31 16:27:31
 -->
 
 ## 事件循环
@@ -42,3 +42,12 @@ async/await 注意事项
 
 - [九种跨域方式实现原理（完整版）](https://juejin.cn/post/6844903767226351623)
 - [前端常见跨域解决方案（全） - 个人文章 - SegmentFault 思否](https://segmentfault.com/a/1190000011145364?utm_medium=referral&utm_source=tuicool)
+
+
+## script: async/defer
+
+https://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
+
+## new 操作符
+
+https://juejin.cn/post/6844903789070123021

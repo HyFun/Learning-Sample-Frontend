@@ -3,7 +3,7 @@
  * @Date         : 2021-03-31 12:51:35
  * @Description  : promise学习
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-07-15 22:46:28
+ * @LastEditTime : 2021-08-31 16:08:04
 -->
 
 # Promise
@@ -84,3 +84,7 @@ Promise.resolve()
 // 5
 // 6
 ```
+
+## Promise.all并发限制
+
+https://segmentfault.com/a/1190000016389127

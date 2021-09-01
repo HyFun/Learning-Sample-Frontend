@@ -1,0 +1,60 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-09-01 10:23:34
+ * @Description  : 面试官问：能否模拟实现JS的new操作符 https://juejin.cn/post/6844903704663949325
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-09-01 13:20:33
+-->
+<script>
+  /**
+   * 1. 在堆内存中创建一个空对象
+   * 2. 该对象__proto__指向构造函数的prototype
+   * 3. this绑定到新生成的这个对象上
+   * 4. 如果返回值是基本数据类型，那么会返回创建的新对象；如果返回的是引用类型（Date、Function、Array、RegExp、Error）
+   *    则会直接返回return返回的结果
+   */
+
+  function Person() {}
+
+  console.log(new Person())
+  console.log(new Person().constructor === Person) // 该处的constructor使用原型上取的构造函数
+  console.log(new Person().__proto__.constructor === Person)
+
+  console.log(`===============`)
+
+  function createClass(ctor) {
+    if (typeof ctor !== 'function') {
+      throw 'newOperator function the first param must be a function'
+    }
+    // 创建一个新对象，并将该对象的__proto__设置为构造函数的原型对象
+    const instance = Object.create(ctor.prototype)
+    // 取出构造函数参数
+    const params = Array.from(arguments).slice(1)
+    // 执行构造函数  绑定this
+    const returnValue = ctor.apply(instance, params)
+    if (
+      [
+        '[object Object]',
+        '[object Array]',
+        '[object RegExp]',
+        '[object Date]',
+        '[object Function]',
+        '[object Error]'
+      ].includes(Object.prototype.toString.call(returnValue))
+    ) {
+      return returnValue
+    }
+    return instance
+  }
+
+  console.log(createClass(function Person2() {
+        this.name = 'name'
+        Person2.prototype.say = function() {
+            console.log('hello');
+        }
+  }));
+
+  console.log(createClass(function Person3() {
+      return new Array()
+  }));
+</script>

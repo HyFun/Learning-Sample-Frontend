@@ -1,0 +1,58 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-09-01 15:20:00
+ * @Description  : 能否模拟实现JS的call和apply方法
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-09-01 18:48:07
+-->
+<script>
+  function getGlobalObject() {
+    return this
+  }
+  /**
+   * 1. 声明一个对象，将this（当前方法）挂载到这个对象上，使用该对象调用方法，然后删除
+   */
+  Function.prototype.apply = function (thisArg, argsArray) {
+    // 判断是否是一个function
+    if (typeof this !== 'function') {
+      throw new TypeError(this + ' is not a function')
+    }
+
+    // 判断 argsArray是否是数组
+    if (!Array.isArray(argsArray)) {
+      argsArray = []
+    }
+
+    // 判断thisArg是否为undefined 或者 null
+    if (thisArg === undefined || thisArg === null) {
+      thisArg = getGlobalObject()
+    }
+
+    //
+    thisArg = new Object(thisArg)
+    var __fn = '__fn'
+    thisArg[__fn] = this
+    // 调用
+    const result = thisArg[__fn](...argsArray)
+    delete thisArg[__fn]
+    return result
+  }
+
+  {
+    const obj1 = {
+      name: '我是obj1'
+    }
+    function print() {
+      console.log(this)
+    }
+    print.apply(obj1)
+    // 如果被绑定的对象和该方法同名
+    const obj2 = {
+      name: '我是obj2',
+      print() {
+        console.log(`我是obj2的print方法`)
+      }
+    }
+    print.apply(obj2)
+  }
+</script>

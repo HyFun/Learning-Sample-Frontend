@@ -1,0 +1,62 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-09-01 13:56:35
+ * @Description  : 能否模拟实现JS的bind方法
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-09-01 15:14:47
+-->
+<script>
+  /**
+   * 1. bind第一个参数改变函数的this指向
+   *    bind中的多余参数会和bind生成的bound函数参数进行合并
+   */
+  function sum(a, b, c) {
+    return a + b + c
+  }
+
+  console.log(sum.bind(this, 1, 2)(4))
+
+  /**
+   * 2. 实现bind函数
+   * 缺点  new bound()时会失去this指向
+   */
+  Function.prototype.bind = function (thisArg) {
+    if (typeof this !== 'function') {
+      throw new TypeError(this + 'must be a function')
+    }
+    // 存储函数自身
+    var self = this
+    // 获取arguments 用于在bound函数中合并参数
+    const args = [...arguments].splice(1)
+    return function bound() {
+      // 获取bound的参数
+      const newArgs = [...arguments]
+      return self.apply(thisArg, args.concat(newArgs))
+    }
+  }
+
+  /**
+   * 3.
+   */
+  Function.prototype.bind = function (thisArg) {
+    if (typeof this !== 'function') {
+      throw new TypeError(this + 'must be a function')
+    }
+    // 存储函数自身
+    var self = this
+    // 获取arguments 用于在bound函数中合并参数
+    const args = [...arguments].splice(1)
+    const finalArgs = args.concat(newArgs)
+    return function bound() {
+      // 获取bound的参数
+      const newArgs = [...arguments]
+      if (this instanceof bound) {
+        bound.prototype = Object.create(self.prototype)
+        self.apply(this, finalArgs)
+        return this
+      } else {
+        return self.apply(thisArg, finalArgs)
+      }
+    }
+  }
+</script>

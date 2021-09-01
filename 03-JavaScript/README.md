@@ -3,7 +3,7 @@
  * @Date         : 2021-07-13 22:29:13
  * @Description  : JavaScript
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-31 16:27:31
+ * @LastEditTime : 2021-09-01 13:21:19
 -->
 
 ## 事件循环
@@ -43,11 +43,45 @@ async/await 注意事项
 - [九种跨域方式实现原理（完整版）](https://juejin.cn/post/6844903767226351623)
 - [前端常见跨域解决方案（全） - 个人文章 - SegmentFault 思否](https://segmentfault.com/a/1190000011145364?utm_medium=referral&utm_source=tuicool)
 
-
 ## script: async/defer
 
 https://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
 
-## new 操作符
+## new 操作符做了什么操作
 
 https://juejin.cn/post/6844903789070123021
+
+1. 在堆内存中创建一个空对象
+2. 该对象`__proto__`指向构造函数的 prototype
+3. this 绑定到新生成的这个对象上
+4. 如果返回值是基本数据类型，那么会返回创建的新对象；如果返回的是引用类型（Date、Function、Array、RegExp、Error）
+   则会直接返回 return 返回的结果
+
+代码实现 new
+
+```js
+function createClass(ctor) {
+  if (typeof ctor !== 'function') {
+    throw 'newOperator function the first param must be a function'
+  }
+  // 创建一个新对象，并将该对象的__proto__设置为构造函数的原型对象
+  const instance = Object.create(ctor.prototype)
+  // 取出构造函数参数
+  const params = Array.from(arguments).slice(1)
+  // 执行构造函数  绑定this
+  const returnValue = ctor.apply(instance, params)
+  if (
+    [
+      '[object Object]',
+      '[object Array]',
+      '[object RegExp]',
+      '[object Date]',
+      '[object Function]',
+      '[object Error]'
+    ].includes(Object.prototype.toString.call(returnValue))
+  ) {
+    return returnValue
+  }
+  return instance
+}
+```

@@ -39,12 +39,19 @@ export default class App extends Component {
     })
   }
 
+  // 清除已完成
   all = () => {
     const list = this.state.list
-    list.forEach((v) => {
-      v.done = true
+    this.setState({
+      list: list.filter(v=>!v.done)
     })
-    console.log(list);
+  }
+
+  checkAll = (check) => {
+    const list = this.state.list
+    list.forEach(v=>{
+      v.done = check
+    })
     this.setState({
       list
     })
@@ -59,7 +66,7 @@ export default class App extends Component {
           check={this.check}
           delete={this.delete}
         ></List>
-        <Footer list={this.state.list} all={this.all}></Footer>
+        <Footer list={this.state.list} all={this.all} checkAll={this.checkAll}></Footer>
       </div>
     )
   }

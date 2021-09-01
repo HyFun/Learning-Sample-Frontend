@@ -19,7 +19,7 @@ export default class Item extends Component {
       <li className="list_item">
         <input
           type="checkbox"
-          defaultChecked={done}
+          checked={done}
           onChange={this.onChangeCheck(id)}
         />
         <span>{value}</span>

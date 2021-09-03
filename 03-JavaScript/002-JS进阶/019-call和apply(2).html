@@ -1,0 +1,57 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-09-01 15:20:00
+ * @Description  : 能否模拟实现JS的call和apply方法
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-09-02 11:03:22
+-->
+<script>
+  function getGlobalObject() {
+    return this
+  }
+  /**
+   * 2. 在1中，会有属性同名的问题，为了解决这个问题，可以使用Symbol作为参数
+   */
+  Function.prototype.apply = function (thisArg, argArray) {
+    if (typeof this !== 'function') {
+      throw new TypeError()
+    }
+
+    if (!Array.isArray(argArray)) {
+      argArray = []
+    }
+
+    if (typeof thisArg === 'undefined' || thisArg === null) {
+      thisArg = getGlobalObject()
+    }
+
+    thisArg = new Object(thisArg)
+    // 使用唯一标识
+    var __fn = '__' + Date.now()
+    // var __fn = Symbol() // 也可以使用Symbol作为唯一标识
+
+    // 判断原来的对象是否有
+    var hasProp = thisArg.hasOwnProperty(__fn)
+    var origin = thisArg.__fn
+    thisArg[__fn] = this
+    var result = thisArg[__fn](...argArray)
+    // 还原原来的方法
+    hasProp && (thisArg[__fn] = origin)
+    return result
+  }
+
+  const obj1 = {
+    name: '我是obj1',
+    __fn: 1111
+  }
+  function print() {
+    console.log(this)
+  }
+  print.apply(obj1)
+  // 如果被绑定的对象和该方法同名
+  const obj2 = {
+    name: '我是obj2',
+    __fn: 2222
+  }
+  print.apply(obj2)
+</script>

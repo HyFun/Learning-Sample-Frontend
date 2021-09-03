@@ -1,0 +1,40 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-09-02 17:00:09
+ * @Description  : js防抖
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-09-02 17:10:32
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js防抖</title>
+  </head>
+  <body>
+    <h3>0</h3>
+    <button>点我+1</button>
+  </body>
+  <script>
+    function createFD(fn, time = 200) {
+      var timmer
+      return function () {
+        clearTimeout(timmer)
+        timmer = setTimeout(() => {
+          fn(...arguments)
+        }, time)
+      }
+    }
+
+    var button = document.querySelector('button')
+
+    const handler = createFD(function (e) {
+      console.log(e)
+      var h3 = document.querySelector('h3')
+      h3.innerText = Number(h3.innerText) + 1
+    })
+    button.addEventListener('click', handler)
+  </script>
+</html>

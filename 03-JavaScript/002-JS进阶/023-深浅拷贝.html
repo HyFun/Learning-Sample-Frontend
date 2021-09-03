@@ -1,0 +1,21 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-09-03 11:34:50
+ * @Description  : 深浅拷贝
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-09-03 13:18:38
+-->
+
+<script>
+  function deepCopy(obj) {
+    if (!obj || typeof obj !== 'object') return obj
+    let newObj = Array.isArray(obj) ? [] : {}
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        newObj[key] =
+          typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key]
+      }
+    }
+    return newObj
+  }
+</script>

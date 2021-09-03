@@ -1,0 +1,257 @@
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.staticfile.org/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      /*  公共      */
+      * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+      .calendar_wrap {
+        display: flex;
+      }
+      .calendar_item {
+        flex: 1;
+        box-sizing: border-box;
+      }
+
+      .card {
+        background-color: #fff;
+        box-shadow: 0 0 5px #ccc;
+        padding: 10px;
+        color: #333;
+        border-radius: 5px;
+      }
+
+      .header {
+        display: flex;
+        height: 30px;
+        line-height: 30px;
+      }
+      .header h3 {
+        flex: 1;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+      }
+
+      .calendar {
+        margin-top: 10px;
+      }
+
+      .calendar_week {
+        text-align: center;
+      }
+      .calendar_week_item {
+        padding: 10px;
+        border-bottom: 2px solid #f0f0f0;
+      }
+      .calendar_week_item.current {
+        border: 1px solid blue;
+        background-color: rgba(0, 0, 255, 0.05);
+      }
+
+      /*    任务    */
+      .task_wrap {
+        padding: 0 5px;
+      }
+      .task_wrap.current {
+        border: 1px solid blue;
+        border-top: none;
+        background-color: rgba(0, 0, 255, 0.05);
+      }
+      .task_item {
+        border-left: 2px solid #ccc;
+        padding: 5px;
+        margin: 5px 0;
+        color: #999;
+        text-decoration: line-through;
+      }
+
+      .task_item.done {
+        color: #333;
+        text-decoration: none;
+        border-left-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      要求：
+        1. 动态布局，一周七天，根据浏览器宽度自适应每一列的宽度，表头为星期 + 日期（格式：月份（两位）/日期（两位）），每周从周一开始；
+        2. 任务列表按完成状态分组，未完成在上，已完成在下并加 30% 透明度；按时间正序排列；
+        3. 高亮今天所在的列，文字和边框使用 `rgb(66, 143, 239)`；
+        4. 支持切换上一周、下一周，并在日历头部显示当前周开始的日期（本周则显示“本周”），Mock 接口地址：https://yapi.kbjcloud.net/mock/34/api/task/list
+        5. 必须使用接口数据，手工填写数据的视为无效答卷；
+        6. 不限制使用的框架，但使用 Vue/React 作答的，禁止使用 AntD/ElementUI 等类似的前端组件库，否则视为无效答卷；
+
+      说明：
+        1. 可以使用任何答题时使用的浏览器支持的 JS、CSS 语法特性；
+        2. 需要引入第三方依赖的，请参考上方「环境说明」；
+        3. API 响应数据结构：
+
+        ```ts
+	    type Response = Array<{
+	    	date: string;
+	    	tasks: Array<{
+            	datetime: string;
+	    		title: string;
+	    		done: boolean;
+	    	}>
+	    }>
+	    ```
+    -->
+    <div id="app">
+      <!-- 日历 -->
+      <div class="card">
+        <div class="header">
+          <button @click="onClickPre" :disabled="loading">上一周</button>
+          <h3>{{title}}</h3>
+          <button @click="onClickNext" :disabled="loading">下一周</button>
+          <button
+            @click="onClickBacktocur"
+            :disabled="loading"
+            style="margin-left: 10px"
+          >
+            本周
+          </button>
+        </div>
+        <div class="calendar">
+          <!-- 日历日期头部 -->
+          <ul class="calendar_wrap calendar_week">
+            <li
+              class="calendar_item calendar_week_item"
+              :class="{current: formatDate(new Date())===datas[index].date}"
+              v-for="(item, index) in weeks"
+              :key="index"
+            >
+              <p>{{datas[index].date}}</p>
+              <p>{{item}}</p>
+            </li>
+          </ul>
+          <!-- 日历内容 -->
+          <ul class="calendar_wrap">
+            <li
+              class="calendar_item task_wrap"
+              :class="{current: formatDate(new Date())===item.date}"
+              v-for="(item,index) in datas"
+              :key="index"
+            >
+              <div
+                class="task_item"
+                :class="{done: subItem.done}"
+                v-for="(subItem, subIndex) in item.tasks"
+              >
+                <label>
+                  <input
+                    type="checkbox"
+                    :checked="subItem.done===true"
+                    @change="()=>onTaskChange(subItem)"
+                  />
+                  <span>{{subItem.title}}</span>
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const WEEK_DAY_TIME = 7 * 24 * 60 * 60 * 1000
+      var api_url = 'https://yapi.kbjcloud.net/mock/34/api/task/list'
+      new Vue({
+        el: '#app',
+        data() {
+          return {
+            loading: false,
+            cur: new Date(), // 当前日期
+            weeks: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            datas: []
+          }
+        },
+        computed: {
+          // 当前周一
+          curMonday() {
+            const date = this.getMondayByDate(this.cur)
+            return date
+          },
+          // 当前周日
+          curSunday() {
+            return new Date(this.curMonday.getTime() + 6 * 24 * 60 * 60 * 1000)
+          },
+          // title
+          title() {
+            return `${this.formatDate(this.curMonday)} 至 ${this.formatDate(
+              this.curSunday
+            )}`
+          }
+        },
+        created() {
+          // 获取初始化数据
+          this.getData()
+        },
+        methods: {
+          // 点击上周
+          onClickPre() {
+            this.cur = new Date(this.cur.getTime() - WEEK_DAY_TIME)
+            this.getData()
+          },
+          // 点击下周
+          onClickNext() {
+            this.cur = new Date(this.cur.getTime() + WEEK_DAY_TIME)
+            this.getData()
+          },
+          // 回到本周
+          onClickBacktocur() {
+            // 如果已经是本周了
+            if (this.formatDate(new Date()) === this.formatDate(this.cur))
+              return
+            this.cur = new Date()
+            this.getData()
+          },
+          // 切换任务 已完成/未完成 状态
+          onTaskChange(task) {
+            task.done = !task.done
+          },
+          // 给定一个日期，获取该日期的周一
+          getMondayByDate(date) {
+            const day = date.getDay()
+            let distance = day === 0 ? 6 : day - 1
+            date = new Date(date.getTime() - distance * 24 * 60 * 60 * 1000)
+            return date
+          },
+          // 格式化日期  date -> xxxx-xx-xx
+          formatDate(date) {
+            const year = date.getFullYear()
+            let month = date.getMonth() + 1
+            month = month >= 10 ? month : `0${month}`
+            let day = date.getDate()
+            day = day >= 10 ? day : `0${day}`
+            return `${year}-${month}-${day}`
+          },
+          // ----------------------------------
+          // 获取数据
+          getData() {
+            this.loading = true
+            const date = this.formatDate(this.getMondayByDate(this.cur))
+            axios
+              .get(api_url + '?startDate=' + date)
+              .then((res) => {
+                const datas = res.data || []
+                this.datas = datas
+              })
+              .finally(() => {
+                this.loading = false
+              })
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

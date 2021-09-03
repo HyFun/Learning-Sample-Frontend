@@ -3,7 +3,7 @@
  * @Date         : 2021-08-31 16:37:41
  * @Description  : promise.all并发限制
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-31 17:32:28
+ * @LastEditTime : 2021-09-03 17:15:54
  */
 
 function asyncPool(
@@ -12,27 +12,27 @@ function asyncPool(
   createPromiseFn = () => Promise.resolve()
 ) {
   let index = 0
-  let ret = []
-  let runningArray = []
-  function run() {
-    // 递归出口
+  let tem = []
+  let all = []
+
+  function create() {
     if (index >= list.length) {
       return Promise.resolve()
     }
     const item = list[index]
-    const p = Promise.resolve().then(() => createPromiseFn(item, index++, list))
-    // 将p存放到ret中
-    ret.push(p)
-    //
-    const e = p.then(() => runningArray.splice(runningArray.indexOf(e), 1))
-    runningArray.push(e)
-    let r = Promise.resolve()
-    if (runningArray.length >= limit) {
-      r = Promise.race(runningArray)
+    let p = Promise.resolve().then(() => createPromiseFn(item, index++, list))
+    all.push(p)
+    let e = p.then(() => tem.splice(tem.indexOf(e), 1))
+    tem.push(e)
+
+    let t = Promise.resolve()
+    if (tem.length >= limit) {
+      t = Promise.race(tem)
     }
-    return r.then(() => run())
+    return t.then(() => create())
   }
-  return run().then(() => Promise.all(ret))
+
+  return create().then(() => Promise.all(all))
 }
 
 // 使用Promise.all

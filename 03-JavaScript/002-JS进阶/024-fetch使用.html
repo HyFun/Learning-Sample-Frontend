@@ -1,0 +1,105 @@
+<!--
+ * @Author       : HyFun
+ * @Date         : 2021-09-04 21:01:38
+ * @Description  : fetch使用
+ * @LastEditors  : HyFun
+ * @LastEditTime : 2021-09-04 21:24:47
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fetch使用</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="getXHRData">xhr获取妹子</button>
+      <ul style="display: flex; flex-wrap: wrap">
+        <li
+          v-for="item in xhrData"
+          :key="item._id"
+          style="width: 20%; font-size: 0; box-sizing: border-box; padding: 5px"
+        >
+          <img :src="item.url" style="width: 100%" />
+        </li>
+      </ul>
+
+      <button @click="getFetchData">fetch获取妹子</button>
+      <ul style="display: flex; flex-wrap: wrap">
+        <li
+          v-for="item in fetchData"
+          :key="item._id"
+          style="width: 20%; font-size: 0; box-sizing: border-box; padding: 5px"
+        >
+          <img :src="item.url" style="width: 100%" />
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          xhrData: [],
+          fetchData: []
+        }
+      },
+      methods: {
+        /**
+         * 使用xhr获取数据
+         */
+        getXHRData() {
+          var self = this
+          var xhr = new XMLHttpRequest()
+          xhr.responseType = 'application/json'
+          xhr.open(
+            'GET',
+            'https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/10'
+          )
+          xhr.onload = function (e) {
+            if (this.status == 200 || this.status == 304) {
+              self.xhrData = JSON.parse(this.responseText).data
+            }
+          }
+          xhr.onerror = (e) => {
+            console.log('加载出错', e)
+          }
+          xhr.send()
+        },
+        /**
+         * 使用fetch获取数据
+         */
+        getFetchData() {
+          fetch(
+            'https://gank.io/api/v2/data/category/Girl/type/Girl/page/2/count/10',
+            {
+              method: 'GET'
+            }
+          )
+            .then((res) => {
+              const p = res.json()
+              console.log(p) // 可以看到，p是一个promise对象
+              return p
+            })
+            .then((res) => {
+              this.fetchData = res.data || []
+            })
+            .catch((err) => {
+              console.log('fetch获取失败', err)
+            })
+        }
+      }
+    })
+  </script>
+</html>

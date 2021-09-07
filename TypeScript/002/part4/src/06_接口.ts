@@ -3,7 +3,7 @@
  * @Date         : 2021-05-19 23:21:32
  * @Description  : 接口
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-09-06 18:30:01
+ * @LastEditTime : 2021-09-07 14:40:12
  */
 ;(() => {
   interface Person {
@@ -52,5 +52,23 @@
 
   fn('小明', 12)
 
+  /**
+   * 3. 接口继承
+   */
 
+  interface Animal {
+    name: string
+  }
+
+  interface Dog extends Animal {
+    say(): void
+  }
+
+  const 旺财: Dog = {
+    name: '旺财',
+    say() {
+      console.log('汪汪汪')
+      return '111'
+    }
+  }
 })()

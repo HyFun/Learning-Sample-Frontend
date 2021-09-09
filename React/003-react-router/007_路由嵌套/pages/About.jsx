@@ -9,6 +9,7 @@ import AboutMe from './AboutMe'
 import AboutOther from './AboutOther'
 export default class About extends Component {
   render() {
+    console.log('Home-render:::', this.props)
     return (
       <div>
         <MyNavLink to="/about/me">我</MyNavLink>

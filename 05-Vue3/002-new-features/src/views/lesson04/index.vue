@@ -3,13 +3,13 @@
  * @Date         : 2021-09-08 18:13:03
  * @Description  : 
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-09-08 18:51:12
+ * @LastEditTime : 2021-09-09 11:30:31
 -->
 <template>
   <div>
     <h4>课时四：自定义指令 钩子函数</h4>
     <input type="text" v-permission v-if="show" />
-    <br>
+    <br />
     <button @click="show = !show">
       {{ show ? '隐藏' : '显示' }}
     </button>

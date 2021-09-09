@@ -4,6 +4,7 @@ import './App.css'
 
 import Home from './pages/Home'
 import About from './pages/About'
+import Test from './pages/Test'
 
 import MyNavLink from './components/MyNavLink'
 
@@ -16,8 +17,9 @@ export default class App extends Component {
           <MyNavLink to="/about">关于</MyNavLink>
 
           <Switch>
-            <Route exact path="/home" component={Home}></Route>
-            <Route exact path="/about" component={About}></Route>
+            <Route path="/home" component={Home}></Route>
+            <Route path="/about" component={About}></Route>
+            <Route path="/about" component={Test}></Route>
           </Switch>
         </div>
       </div>

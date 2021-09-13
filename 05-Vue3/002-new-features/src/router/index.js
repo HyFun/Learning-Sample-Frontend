@@ -3,7 +3,7 @@
  * @Date         : 2021-09-08 17:04:59
  * @Description  :
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-09-09 18:34:00
+ * @LastEditTime : 2021-09-13 17:55:55
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -66,6 +66,55 @@ export const routes = [
     component: () => import('../views/lesson08/index.vue'),
     meta: {
       title: '课时八：支持多个根节点'
+    }
+  },
+  {
+    path: '/lesson09',
+    component: () => import('../views/lesson09/index.vue'),
+    meta: {
+      title: '课时九：函数式组件'
+    }
+  },
+  {
+    path: '/lesson10',
+    component: () => import('../views/lesson10/index.vue'),
+    meta: {
+      title: '课时十：全局API'
+    }
+  },
+  {
+    path: '/lesson11',
+    component: () => import('../views/lesson11/index.vue'),
+    meta: {
+      title: '课时十一：nextTick'
+    }
+  },
+  {
+    path: '/lesson12',
+    component: () => import('../views/lesson12/index.vue'),
+    meta: {
+      title: '课时十二：propsData'
+    }
+  },
+  {
+    path: '/lesson13',
+    component: () => import('../views/lesson13/index.vue'),
+    meta: {
+      title: '课时十三：渲染函数'
+    }
+  },
+  {
+    path: '/lesson14',
+    component: () => import('../views/lesson14/index.vue'),
+    meta: {
+      title: '课时十四：Suspense组件'
+    }
+  },
+  {
+    path: '/lesson15',
+    component: () => import('../views/lesson15/index.vue'),
+    meta: {
+      title: '课时十五：v-model改变'
     }
   }
 ]

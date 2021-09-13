@@ -146,6 +146,7 @@
                 class="task_item"
                 :class="{done: subItem.done}"
                 v-for="(subItem, subIndex) in item.tasks"
+                :key="index+'-'+subIndex"
               >
                 <label>
                   <input

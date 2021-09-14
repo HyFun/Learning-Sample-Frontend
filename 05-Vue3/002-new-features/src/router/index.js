@@ -3,7 +3,7 @@
  * @Date         : 2021-09-08 17:04:59
  * @Description  :
  * @LastEditors  : HyFun
- * @LastEditTime : 2021-09-13 17:55:55
+ * @LastEditTime : 2021-09-14 14:26:19
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -115,6 +115,34 @@ export const routes = [
     component: () => import('../views/lesson15/index.vue'),
     meta: {
       title: '课时十五：v-model改变'
+    }
+  },
+  {
+    path: '/lesson16',
+    component: () => import('../views/lesson16/index.vue'),
+    meta: {
+      title: '课时十六：v-if 与 v-for 的优先级对比'
+    }
+  },
+  {
+    path: '/lesson17',
+    component: () => import('../views/lesson17/index.vue'),
+    meta: {
+      title: '课时十七：v-bind 合并行为'
+    }
+  },
+  {
+    path: '/lesson18',
+    component: () => import('../views/lesson18/index.vue'),
+    meta: {
+      title: '课时十八：组件生命周期回调'
+    }
+  },
+  {
+    path: '/lesson19',
+    component: () => import('../views/lesson19/index.vue'),
+    meta: {
+      title: '课时十九：监听数组'
     }
   }
 ]

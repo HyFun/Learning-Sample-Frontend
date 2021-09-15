@@ -19,22 +19,17 @@ export default class AboutMe extends Component {
         <ul>
           {list.map((v) => (
             <li key={v.id}>
-              <Link
-                to={{
-                  pathname: `${this.props.match.path}/detail`,
-                  state: {
-                    id: v.id,
-                    title: v.title
-                  }
-                }}
-              >
+              <Link to={`${this.props.match.path}/detail/${v.id}`}>
                 {v.title}
               </Link>
             </li>
           ))}
         </ul>
         <hr />
-        <Route path={`${this.props.match.path}/detail`} component={Detail} />
+        <Route
+          path={`${this.props.match.path}/detail/:id`}
+          component={Detail}
+        />
       </>
     )
   }

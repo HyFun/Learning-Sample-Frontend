@@ -3,8 +3,8 @@ import qs from 'querystring'
 
 export default class Detail extends Component {
   render() {
-    console.log(this.props)
-    const { id, title } = this.props.location.state
+    const {search} = this.props.location
+    const {id,title} = qs.parse(search.slice(1))
     return (
       <div>
         <h3>{id}</h3>

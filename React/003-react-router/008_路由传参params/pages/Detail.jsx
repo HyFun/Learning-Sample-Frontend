@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import qs from 'querystring'
 
 export default class Detail extends Component {
   render() {
-    console.log(this.props)
-    const { id, title } = this.props.location.state
+    const { id } = this.props.match.params
     return (
       <div>
         <h3>{id}</h3>
-        <p>{title}</p>
+        <p>我是detail页面哦~</p>
       </div>
     )
   }

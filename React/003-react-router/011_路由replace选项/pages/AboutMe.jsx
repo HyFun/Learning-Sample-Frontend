@@ -12,20 +12,6 @@ export default class AboutMe extends Component {
     ]
   }
 
-  onClickItem = (id, mode) => {
-    const item = this.state.list.find((v) => v.id === id)
-    const p = {
-      pathname: `${this.props.match.path}/detail`,
-      state: item
-    }
-    if (mode === 0) {
-      // push查看
-      this.props.history.push(p)
-    } else {
-      this.props.history.replace(p)
-    }
-  }
-
   render() {
     const { list } = this.state
     return (
@@ -33,7 +19,8 @@ export default class AboutMe extends Component {
         <ul>
           {list.map((v) => (
             <li key={v.id}>
-              {/* <Link
+              <Link
+                replace={true} //开启replace模式
                 to={{
                   pathname: `${this.props.match.path}/detail`,
                   state: {
@@ -43,10 +30,7 @@ export default class AboutMe extends Component {
                 }}
               >
                 {v.title}
-              </Link> */}
-              {v.title}
-              <button onClick={() => this.onClickItem(v.id, 0)}>push</button>
-              <button onClick={() => this.onClickItem(v.id, 1)}>replace</button>
+              </Link>
             </li>
           ))}
         </ul>

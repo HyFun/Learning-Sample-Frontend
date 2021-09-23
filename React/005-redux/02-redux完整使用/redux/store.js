@@ -5,10 +5,9 @@
  * @LastEditors  : heyongfeng
  * @LastEditTime : 2021-09-23 12:03:09
  */
-import { createStore,applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import { createStore } from 'redux'
 import reducerCount from './reducerCount'
 
-const store = createStore(reducerCount, applyMiddleware(thunk))
+const store = createStore(reducerCount)
 
 export default store

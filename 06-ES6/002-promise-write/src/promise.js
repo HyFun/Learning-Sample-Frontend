@@ -1,38 +1,30 @@
-/*
- * @Author       : HyFun
- * @Date         : 2021-07-28 14:34:47
- * @Description  :
- * @LastEditors  : HyFun
- * @LastEditTime : 2021-08-25 13:39:53
- */
-const PENDING = 'PENDING'
+const PEDNING = 'PEDNING'
 const FULFILLED = 'FULFILLED'
 const REJECTED = 'REJECTED'
 
 class Promise {
-  constructor(excutor) {
-    this.status = PENDING
-    this.value = null
-    this.reason = null
-    this.onFulfilledCallback = []
-    this.onRejectedCallback = []
+  status = PEDNING
+  value = null
+  reason = null
+  fulfilledCallback = []
+  rejectedCallback = []
 
+  constructor(excutor) {
     const resolve = (value) => {
-      if (this.status === PENDING) {
+      if (this.status === PEDNING) {
         this.status = FULFILLED
         this.value = value
-        while (this.onFulfilledCallback.length) {
-          this.onFulfilledCallback.shift()(value)
+        while (this.fulfilledCallback.length) {
+          this.fulfilledCallback.shift()(value)
         }
       }
     }
-
     const reject = (reason) => {
-      if (this.status === PENDING) {
+      if (this.status === PEDNING) {
         this.status = REJECTED
         this.reason = reason
-        while (this.onRejectedCallback.length) {
-          this.onRejectedCallback.shift()(reason)
+        while (this.rejectedCallback.length) {
+          this.rejectedCallback.shift()(reason)
         }
       }
     }
@@ -52,16 +44,18 @@ class Promise {
         : (reason) => {
             throw reason
           }
+
     let promise = new Promise((resolve, reject) => {
       if (this.status === FULFILLED) {
         handler(resolve, reject, onResolve, this.value)
       } else if (this.status === REJECTED) {
         handler(resolve, reject, onReject, this.reason)
       } else {
-        this.onFulfilledCallback.push((value) => {
+        this.fulfilledCallback.push((value) => {
           handler(resolve, reject, onResolve, value)
         })
-        this.onRejectedCallback.push((reason) => {
+
+        this.rejectedCallback.push((reason) => {
           handler(resolve, reject, onReject, reason)
         })
       }
@@ -80,8 +74,9 @@ class Promise {
 
     function resolvePromise(promise, x, resolve, reject) {
       if (promise === x) {
-        return reject(new TypeError('xxxxx'))
+        return reject(new TypeError('error'))
       }
+
       if (typeof x === 'function' || typeof x === 'object') {
         if (!x) {
           return resolve(x)
@@ -121,6 +116,7 @@ class Promise {
         resolve(x)
       }
     }
+
     return promise
   }
 

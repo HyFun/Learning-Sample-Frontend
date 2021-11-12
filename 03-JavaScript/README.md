@@ -47,9 +47,11 @@ async/await 注意事项
 
 https://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
 
+https://juejin.cn/post/6844904017907154951
+
 ## new 操作符做了什么操作
 
-https://juejin.cn/post/6844903789070123021
+https://juejin.cn/post/6844903704663949325
 
 1. 在堆内存中创建一个空对象
 2. 该对象`__proto__`指向构造函数的 prototype

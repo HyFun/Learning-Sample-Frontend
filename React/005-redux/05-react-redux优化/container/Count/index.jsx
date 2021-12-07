@@ -1,8 +1,18 @@
+import { connect } from 'react-redux'
+import {
+  increment,
+  decrement,
+  ride,
+  divide,
+  incrementAsync
+} from '../../redux/actionCount'
+
+
 import React, { Component } from 'react'
 
 import styles from './index.module.css'
 
-export default class index extends Component {
+class Count extends Component {
   get count() {
     return this.props.count
   }
@@ -51,3 +61,12 @@ export default class index extends Component {
     )
   }
 }
+
+
+export default connect(state => state, {
+  jia: increment,
+  jian: decrement,
+  chen: ride,
+  chu: divide,
+  jiaAsync: incrementAsync
+})(Count)

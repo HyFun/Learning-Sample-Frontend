@@ -5,7 +5,7 @@
  * @LastEditors  : heyongfeng
  * @LastEditTime : 2021-09-23 12:59:17
  */
-import action from './actions'
+import action from '../constant'
 export function increment(data) {
   return { type: action.ACTION_INCREMENT, data }
 }

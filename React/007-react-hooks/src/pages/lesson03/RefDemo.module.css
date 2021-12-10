@@ -1,0 +1,12 @@
+.container {
+  height: 300px;
+  background-color: pink;
+  overflow: hidden;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin-top: 100px;
+}

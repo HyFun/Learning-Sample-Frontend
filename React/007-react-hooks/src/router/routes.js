@@ -31,6 +31,11 @@ const routes = [
     component: lazy(() => import("../pages/lesson05")),
     title: "课时5：useContext使用",
   },
+  {
+    path: "/lesson6",
+    component: lazy(() => import("../pages/lesson06")),
+    title: "课时6: todo-list案例",
+  },
 ];
 
 export default routes;

@@ -9,6 +9,7 @@
   <div>
     setup 参数
     <h3>我是父组件</h3>
+    <input v-model="subValue" type="text">
     <hr>
     <component01
       :name="subValue"

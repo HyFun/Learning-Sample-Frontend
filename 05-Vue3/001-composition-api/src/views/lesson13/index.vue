@@ -12,12 +12,16 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent, onBeforeMount, onMounted, ref } from 'vue'
 
 export default defineComponent({
   setup() {
     const inputRef = ref<HTMLInputElement|null>(null)
+    onBeforeMount(() => {
+      console.log(inputRef)
+    })
     onMounted(() => {
+      console.log(inputRef)
       inputRef.value && inputRef.value.focus()
     })
     return {

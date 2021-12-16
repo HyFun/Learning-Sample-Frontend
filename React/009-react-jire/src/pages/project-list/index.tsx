@@ -7,6 +7,19 @@ import { clearPlainObject, useDebounce } from "./util";
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 
+
+export interface User{
+  name: string
+  personId: string
+}
+
+export interface Project {
+  id: number
+  name: string
+  projectName: string
+  personId: string
+}
+
 const ProjectList = () => {
   const [param, setParam] = useState({
     projectName: "",

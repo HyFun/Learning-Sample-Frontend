@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-function isNumzero(value) {
+function isNumzero(value: any) {
   return value === 0 ? true : !!value;
 }
 
-export function clearPlainObject(obj) {
-  const result = {};
+export function clearPlainObject(obj: any) {
+  const result: any = {};
   Object.keys(obj).forEach((key) => {
     if (isNumzero(obj[key])) {
       result[key] = obj[key];
@@ -14,7 +14,7 @@ export function clearPlainObject(obj) {
   return result;
 }
 
-export function useDebounce(value, delay) {
+export function useDebounce(value: any, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     const timmer = setTimeout(() => {

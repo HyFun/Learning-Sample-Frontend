@@ -1,6 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { User } from "./index";
+ 
+interface SearchPannelProps {
+  users: User[];
+  param: {
+    projectName: string;
+    personId: string;
+  };
+  setParam: (param: SearchPannelProps["param"]) => void;
+}
 
-const SearchPannel = ({ param, setParam, users }) => {
+const SearchPannel = ({ param, setParam, users }: SearchPannelProps) => {
   return (
     <form action="">
       <div>
@@ -23,7 +33,9 @@ const SearchPannel = ({ param, setParam, users }) => {
             });
           }}
         >
-          <option value="" key={0}>负责人</option>
+          <option value="" key={0}>
+            负责人
+          </option>
           {users.map((v) => (
             <option value={v.personId} key={v.personId}>
               {v.name}

@@ -10,6 +10,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
+    "qs": "^6.10.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
@@ -21,7 +22,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "prettier -w ./src"
+    "lint": "prettier -w ./src",
+    "serve": "json-server -w ./__json_server_mock__/db.json -p 8088"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +46,7 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.3.0",
+    "json-server": "^0.17.0",
     "prettier": "2.5.1"
   }
 }

@@ -25,6 +25,21 @@ export const routes = [
     title: "课时3：useRef使用",
     component: lazy(() => import("../pages/lesson03/index")),
   },
+  {
+    path: "/lesson04",
+    title: "课时4：useCallback使用",
+    component: lazy(() => import("../pages/lesson04/index")),
+  },
+  {
+    path: "/lesson05",
+    title: "课时5：useReducer使用",
+    component: lazy(() => import("../pages/lesson05/index")),
+  },
+  {
+    path: "/lesson06",
+    title: "课时6：useContext使用",
+    component: lazy(() => import("../pages/lesson06/index")),
+  },
 ];
 
 export const Routes = () => {

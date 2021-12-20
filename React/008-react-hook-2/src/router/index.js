@@ -40,6 +40,11 @@ export const routes = [
     title: "课时6：useContext使用",
     component: lazy(() => import("../pages/lesson06/index")),
   },
+  {
+    path: "/lesson07",
+    title: "课时7：useSelector和useDispatch使用",
+    component: lazy(() => import("../pages/lesson07/index")),
+  },
 ];
 
 export const Routes = () => {

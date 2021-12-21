@@ -1,11 +1,10 @@
 import React from 'react'
 
-import Todos from './components/todo'
-
+import TodoOld from './components/todo-old'
 export default function App() {
     return (
         <div>
-            <Todos />
+            <TodoOld />
         </div>
     )
 }

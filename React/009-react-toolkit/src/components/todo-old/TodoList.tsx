@@ -1,6 +1,5 @@
 import React, {
   Dispatch,
-  MouseEventHandler,
   useCallback,
   useEffect,
   useMemo,
@@ -27,22 +26,19 @@ export default function TodoList() {
   const [showInput, setShowInput] = useState(false);
   const [value, setValue] = useState("");
 
-  const generateStyle = useCallback(
-    (v: Todo) => {
-      if (v.completed) {
-        return {
-          color: "#999",
-          textDecoration: "line-through",
-        };
-      } else {
-        return {
-          color: "green",
-          textDecoration: "none",
-        };
-      }
-    },
-    [list]
-  );
+  const generateStyle = useCallback((v: Todo) => {
+    if (v.completed) {
+      return {
+        color: "#999",
+        textDecoration: "line-through",
+      };
+    } else {
+      return {
+        color: "green",
+        textDecoration: "none",
+      };
+    }
+  }, []);
 
   const selectTodo = useMemo(() => {
     return list.find((v) => v.id === selectId);
@@ -79,9 +75,9 @@ export default function TodoList() {
     if (!selectTodo) return;
     dispatchTodo(deleteTodoCreator({ id: selectTodo?.id }));
     // 重置
-    setShowInput(false)
-    dispatch(selectTodoActionCreator({id: null}))
-  }, [selectTodo, dispatchTodo]);
+    setShowInput(false);
+    dispatch(selectTodoActionCreator({ id: null }));
+  }, [selectTodo, dispatchTodo, dispatch]);
   return (
     <div>
       <h4>todo列表</h4>
@@ -121,7 +117,9 @@ export default function TodoList() {
       <button disabled={!selectTodo} onClick={() => setShowInput(true)}>
         edit
       </button>
-      <button disabled={!selectTodo} onClick={remove}>delete</button>
+      <button disabled={!selectTodo} onClick={remove}>
+        delete
+      </button>
       <button disabled={!selectTodo} onClick={toggle}>
         toggle
       </button>

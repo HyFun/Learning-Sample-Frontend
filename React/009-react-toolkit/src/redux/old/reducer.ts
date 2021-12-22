@@ -34,9 +34,12 @@ export const todoReducer = (
     }
     case TODO_TOGGLE_ACTION: {
       const { id } = action.payload;
-      const todo = state.find((v) => v.id === id);
-      todo!.completed = !todo!.completed;
-      return [...state];
+      return state.map(v=>{
+        if(v.id===id) {
+          v.completed=!v.completed
+        }
+        return v
+      });
     }
     default:
       return state;
@@ -50,7 +53,7 @@ export const selectReducer = (
   if (action.type === TODO_SELECT_ACTION) {
     return action.payload.id;
   } else {
-    return null;
+    return state;
   }
 };
 

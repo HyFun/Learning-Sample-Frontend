@@ -84,17 +84,17 @@ export const deleteTodoCreator = ({
   };
 };
 
-export  interface SelectTodoActionType {
+export interface SelectTodoActionType {
   type: typeof TODO_SELECT_ACTION;
   payload: {
-    id: string;
+    id: string | null;
   };
 }
 
 export const selectTodoActionCreator = ({
   id,
 }: {
-  id: string;
+  id: string | null;
 }): SelectTodoActionType => {
   return {
     type: TODO_SELECT_ACTION,

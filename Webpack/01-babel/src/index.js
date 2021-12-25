@@ -1,32 +1,28 @@
-/*
- * @Author       : HyFun
- * @Date         : 2021-09-02 20:51:38
- * @Description  :
- * @LastEditors  : HyFun
- * @LastEditTime : 2021-09-02 23:38:06
- */
+const common = new Person("zhangsan", 20);
 
-let a = 123
-
-const b = () => {
-  return a
-}
+const person = {
+  ...common,
+  name: "张三",
+  age: 30,
+};
 
 class Person {
-  constructor(name) {
-    this.name = name
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
   }
+
   say() {
-    console.log(`hello world!`)
+    console.log(this.name);
   }
 }
 
-Promise.resolve(1)
-  .then((res) => {
-    console.log(res)
-  })
-  .finally(() => {
-    console.log(`promise执行完成`)
-  })
+new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("success");
+  }, 2000);
+}).then((res) => {
+  console.log(res);
+});
 
-export default Person
+const list = [1, 2, 3, 4, 5, 6].map((v) => v * 2);

@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "preset": "babel src -o dist/01_preset.js --config-file ./babel/preset.config.json",
-    "polyfill": "babel src -o dist/02_polyfill.js --config-file ./babel/polyfill.config.json"
+    "preset": "babel src -o dist/01_preset.js --config-file ./babel/preset.config.js",
+    "polyfill": "babel src -o dist/02_polyfill.js --config-file ./babel/polyfill.config.js",
+    "runtime": "babel src -o dist/03_runtime.js --config-file ./babel/runtime.config.js"
   },
   "browserslist": [
     "> 1%",
@@ -13,10 +14,12 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "@babel/core": "^7.16.5"
+    "@babel/core": "^7.16.5",
+    "@babel/runtime-corejs2": "^7.16.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.5",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.16.5"
   }

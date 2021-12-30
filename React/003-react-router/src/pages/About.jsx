@@ -12,11 +12,11 @@ export default class About extends Component {
     return (
       <div>
         <MyNavLink to="/about/me">我</MyNavLink>
-        <MyNavLink to="/about/other">其他</MyNavLink>
+        <MyNavLink to={`/about/other/hello`}>其他</MyNavLink>
 
         <Switch>
           <Route path="/about/me" component={AboutMe} />
-          <Route path="/about/other" component={AboutOther} />
+          <Route path="/about/other/:message" component={AboutOther} />
           <Redirect to="/about/me" />
         </Switch>
       </div>

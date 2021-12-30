@@ -1,5 +1,3 @@
-import '@babel/polyfill'
-
 import add from "./calculate";
 
 class Person {

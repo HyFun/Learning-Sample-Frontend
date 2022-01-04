@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
-  entry: ["./src/index.js"],
+  entry: ["./src/main.js"],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.[hash:8].js",
@@ -31,10 +31,11 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /.(scss|sass)$/,
+        test: /.(sc|sa)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
+          "postcss-loader",
           "sass-loader"
         ],
         exclude: /node_modules/,

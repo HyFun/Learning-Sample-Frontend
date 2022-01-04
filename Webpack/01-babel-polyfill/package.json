@@ -1,0 +1,22 @@
+{
+  "name": "01-babel-polyfill",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src -o dist/bundle.js"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 3 versions",
+    "not ie <= 8"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.16.7",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
+  }
+}

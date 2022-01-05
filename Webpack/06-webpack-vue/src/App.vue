@@ -1,9 +1,18 @@
 <template>
-  <div class="app">{{ message }}</div>
+  <div class="app">
+    {{ message }}
+    <InputComponent />
+    </div>
 </template>
 <script>
+import InputComponent from '@/components/Input/index.vue'
+
+
 export default {
   name: "App",
+  components: {
+    InputComponent
+  },
   data() {
     return {
       message: "Hello Vue!",

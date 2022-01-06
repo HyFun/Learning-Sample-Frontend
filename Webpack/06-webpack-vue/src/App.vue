@@ -2,16 +2,20 @@
   <div class="app">
     {{ message }}
     <InputComponent />
+    <hr>
+    <Counter />
+    <router-view></router-view>
     </div>
 </template>
 <script>
 import InputComponent from '@/components/Input/index.vue'
-
+import Counter from '@/components/Counter/index.vue'
 
 export default {
   name: "App",
   components: {
-    InputComponent
+    InputComponent,
+    Counter
   },
   data() {
     return {

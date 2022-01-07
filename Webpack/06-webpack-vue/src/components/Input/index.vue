@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>v-model</h3>
     <input type="text" v-model="message" />
     <p>message: {{ message }}</p>
   </div>
@@ -9,7 +10,7 @@ export default {
   name: 'InputComponent',
   data() {
     return {
-      message: ''
+      message: 'Hello World!'
     }
   }
 }

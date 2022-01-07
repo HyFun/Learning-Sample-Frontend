@@ -6,16 +6,16 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/login",
+    redirect: "/dashboard",
   },
   {
-    path: "/login",
+    path: "/dashboard",
     component: () => import("@/pages/login/index.vue"),
   },
 ];
 
 const router = new VueRouter({
-    mode: 'hash',
-    routes
-})
+  mode: "hash",
+  routes,
+});
 export default router;

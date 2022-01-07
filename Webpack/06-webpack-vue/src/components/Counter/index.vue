@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>Counter</h3>
     <p>count: {{ count }}</p>
     <button @click="count--">-</button>
     <button @click="count++">+</button>
@@ -15,9 +16,8 @@ export default {
   },
 };
 </script>
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 button {
-    min-width: 100px;
-    padding: 5px;
+  min-width: 25px;
 }
 </style>

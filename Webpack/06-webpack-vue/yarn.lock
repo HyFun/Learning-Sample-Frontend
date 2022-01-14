@@ -5209,6 +5209,15 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+url-loader@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.npmmirror.com/url-loader/download/url-loader-4.1.1.tgz#28505e905cae158cf07c92ca622d7f237e70a4e2"
+  integrity sha1-KFBekFyuFYzwfJLKYi1/I35wpOI=
+  dependencies:
+    loader-utils "^2.0.0"
+    mime-types "^2.1.27"
+    schema-utils "^3.0.0"
+
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/util-deprecate/download/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"

@@ -1,19 +1,19 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
-const WebpackBar = require('webpackbar')
+const WebpackBar = require("webpackbar");
 
 module.exports = {
   entry: ["/src/main.js"],
   output: {
     path: path.join(__dirname, "../dist"),
-    filename: "bundle.js",
+    filename: "js/bundle.js",
     environment: {
       arrowFunction: false,
     },
+    assetModuleFilename: 'fonts/[hash].[ext]'
   },
   resolve: {
     alias: {
@@ -48,6 +48,11 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+        exclude: /node_modules/,
+      },
+      {
         test: /\.(sc|sa)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -61,22 +66,29 @@ module.exports = {
         test: /\.(gif|png|jpg|jpeg)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "url-loader",
             options: {
-              esModule: false
-            }
-          }
-        ]
-      }
+              limit: 8 * 1024,
+              esModule: false,
+              name: `images/[hash:8].[ext]`,
+            },
+          },
+        ],
+      },
+      {
+        test: /.ttf$/,
+        type: "asset/resource",
+      },
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin(),
-    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: `css/index.css`,
+    }),
     new HtmlWebpackPlugin({
       template: "/index.html",
     }),
     new VueLoaderPlugin(),
-    new WebpackBar()
+    new WebpackBar(),
   ],
 };

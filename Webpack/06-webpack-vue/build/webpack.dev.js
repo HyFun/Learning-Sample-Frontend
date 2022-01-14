@@ -6,6 +6,6 @@ module.exports = merge(base, {
   mode: "development",
   devServer: {
     port: 8090,
-    open: true,
+    // open: true,
   },
 });

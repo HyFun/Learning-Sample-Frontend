@@ -1,0 +1,24 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+.title {
+  font-size: 28px;
+  font-weight: bold;
+}
+#box {
+  width: 200px;
+  height: 200px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 5px solid orange;
+  -webkit-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+.parent:hover #box {
+  width: 100%;
+}
+

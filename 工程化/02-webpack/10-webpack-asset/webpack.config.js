@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const WebpackBar = require("webpackbar");
 
 module.exports = {
   mode: 'development',
@@ -11,6 +12,9 @@ module.exports = {
   output: {
     filename: 'js/bundle.js',
     path: resolve(__dirname, 'dist')
+  },
+  devServer: {
+    port: 8090
   },
   resolve: {
     extensions: ['.ts', '.js']
@@ -49,10 +53,18 @@ module.exports = {
             name: 'images/[hash:8].[ext]'
           }
         }]
+      },
+      {
+        test: /\.ttf$/,
+        type: `asset/resource`,
+        generator: {
+          filename: `fonts/[hash:8].[ext]`
+        }
       }
     ]
   },
   plugins: [
+    new WebpackBar(),
     new CleanWebpackPlugin(),
     new OptimizeCssAssetsWebpackPlugin(),
     new MiniCssExtractPlugin({

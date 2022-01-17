@@ -1,1 +1,0 @@
-!function(){"use strict";document.addEventListener("DOMContentLoaded",(function(){document.body.innerHTML="<h1>".concat("Hello World!","</h1>")}))}();

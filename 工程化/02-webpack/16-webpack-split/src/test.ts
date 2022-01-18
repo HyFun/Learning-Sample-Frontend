@@ -8,17 +8,9 @@ new Vue({
   }
 })
 
-type IC = 123344
-
 enum CType {
   RED = 'red',
   BLUE = 'blue'
 }
 
-const name:IC = 123344
-console.log(name);
-
-
-
-
-console.log(CType.RED === 'red');
+console.log('enum>>>', CType.RED === 'red')

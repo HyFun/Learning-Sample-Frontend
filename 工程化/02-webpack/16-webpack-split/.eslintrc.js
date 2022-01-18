@@ -1,18 +1,18 @@
 module.exports = {
-  // parser: '@typescript-eslint/parser',
+  root: true,
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    parser: '@typescript-eslint/parser',
-    ecmaVersion: 2020,
+    ecmaVersion: 2021,
     sourceType: 'module'
   },
-  plugins: ['@typescript-eslint', 'eslint-plugin-prettier'],
+  plugins: ['@typescript-eslint'],
   extends: [
     'eslint:recommended',
+    'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended'
-    // 'plugin:prettier/recommended'
   ],
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': ['error', { parser: 'typescript' }],
     'spaced-comment': ['error', 'always'],
     '@typescript-eslint/no-unused-vars': 'error',
     // to enforce using type for object type definitions, can be type or interface

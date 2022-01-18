@@ -1,0 +1,35 @@
+{
+	"include": [
+	  "src/**/*"
+	],
+	"exclude": [
+	  "node_modules",
+	  "**/*.spec.ts"
+	],
+	"compilerOptions": {
+	  "target": "esNext",
+	  "moduleResolution": "node",
+	  "strict": true,
+	  "jsx": "preserve",
+	  "module": "esNext",   // 这里声明ts导出模块风格是esNext风格
+	  "resolveJsonModule": false,
+	  "allowJs": false,
+	  "allowSyntheticDefaultImports": true,
+	  "esModuleInterop": true,
+	  "isolatedModules": true,
+	  "forceConsistentCasingInFileNames": true,
+	  "skipLibCheck": true,
+	  "removeComments": true,
+	  "sourceMap": false,
+	  "noEmit": false,
+	  "outDir": "./dist/types/",
+	  "declaration": true,
+	  "typeRoots": [
+		"node_modules/@types"
+	  ],
+	  "baseUrl": ".",
+	  "paths": {
+		"@/*": ["./src/*"]
+	  }
+	}
+  }

@@ -3,7 +3,8 @@ import '@/styles/index.less'
 
 // import add from '@/utils/calculate'
 // console.log(add(1, 2))
-import('./utils/calculate').then((add: any) => {
+import('./utils/calculate').then((res) => {
+  const add = res.default
   console.log(add(1, 2))
 })
 

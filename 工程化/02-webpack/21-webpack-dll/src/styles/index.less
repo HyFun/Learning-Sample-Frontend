@@ -1,0 +1,30 @@
+@import './iconfont.css';
+
+html,
+body{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+.title {
+    font-size: 28px;
+    font-weight: bold;
+}
+#box {
+    width: 200px;
+    height: 200px;
+    box-sizing: border-box;
+    border: 5px solid orange;
+    transition: all 1s;
+}
+
+.parent{
+    &:hover #box{
+        width: 60%;
+    }
+}
+
+.iconfont {
+    color: orange;
+    font-size: 50px;
+}

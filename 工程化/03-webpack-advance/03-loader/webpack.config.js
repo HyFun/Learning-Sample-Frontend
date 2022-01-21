@@ -5,7 +5,11 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'loader-01',
+        use: [
+          'loader-01',
+          'loader-02',
+          'loader-03',
+        ]
       },
     ],
   },

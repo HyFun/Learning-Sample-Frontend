@@ -46,7 +46,6 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "@babel/polyfill": "^7.12.1",
-    "vue": "2"
+    "@babel/polyfill": "^7.12.1"
   }
 }

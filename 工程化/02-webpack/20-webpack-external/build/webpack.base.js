@@ -131,9 +131,8 @@ module.exports = {
       chunks: 'all'
     }
   },
-  // externalsType: 'script',
+  externalsType: 'script',
   externals: {
-    // vue: ['https://cdn.jsdelivr.net/npm/vue@2', 'Vue']
-    vue: 'Vue'
+    vue: ['https://cdn.jsdelivr.net/npm/vue@2', 'Vue']
   }
 }

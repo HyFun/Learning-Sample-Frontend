@@ -1,17 +1,19 @@
 import { observer } from "mobx-react";
-import store from "../store";
+import { useStore } from "../store";
 import { ProductModel } from "../store/product";
 
 const Product = () => {
+  const { product, card } = useStore();
+
   const handleAdd = (pro: ProductModel) => {
-    store.card.add(pro);
+    card.add(pro);
   };
 
   return (
     <>
       <h3>商品列表</h3>
       <ul style={{ width: 600 }}>
-        {store.product.products.map((v) => (
+        {product.products.map((v) => (
           <li key={v.id} style={{ display: "flex", alignItems: "center" }}>
             <p>{v.name}</p>
             <p style={{ flex: "1", textAlign: "right", marginRight: 10 }}>

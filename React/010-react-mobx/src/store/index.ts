@@ -1,9 +1,10 @@
 import { action, observable } from "mobx";
+import { useLocalStore } from "mobx-react";
 
 import { CardStore } from "./card";
 import { ProductStore } from "./product";
 
-export class Store {
+class Store {
   @observable card: CardStore;
   @observable product: ProductStore;
 
@@ -18,4 +19,10 @@ export class Store {
   }
 }
 
-export default new Store();
+const store = new Store();
+
+export function useStore() {
+  return useLocalStore(() => store);
+}
+
+export default store;

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "IPhone 13 pro",
+    "count": 10,
+    "price": 8900
+  },
+  {
+    "id": 2,
+    "name": "小米蓝牙音响",
+    "count": 5,
+    "price": 299
+  },
+  {
+    "id": 3,
+    "name": "华为蓝牙耳机",
+    "count": 8,
+    "price": 599
+  }
+]

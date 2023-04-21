@@ -1,0 +1,35 @@
+{
+  "cookies": [
+    {
+      "name": "X-Platform-Tid",
+      "value": "0992a843-cfcf-4d1a-9964-acdf9ec7183a",
+      "domain": "qa-yeva.talkdeskqaid.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SESSION",
+      "value": "NjAxZDQ3ZTMtOGNkMS00ZjYyLThhOWEtZWYzNjMyODM5ODI2",
+      "domain": "qa-yeva.talkdeskqaid.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "764c879e0ba0178",
+      "domain": ".nr-data.net",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": []
+}

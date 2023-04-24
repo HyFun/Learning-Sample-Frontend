@@ -1,3 +1,6 @@
+const fs = require("fs");
+const { resolve } = require("path");
+
 const { renderJson } = require("../render");
 const { URL } = require("url");
 
@@ -15,6 +18,10 @@ const api = {
     } else {
       renderJson(res, 200, failed(-1, "用户名/密码错误"));
     }
+  },
+  "/api/files": (req, res) => {
+    const files = fs.readdirSync(resolve(__dirname, "../public/static"));
+    renderJson(res, 200, success(files));
   },
 };
 

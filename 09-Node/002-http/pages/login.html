@@ -35,6 +35,11 @@
     const account = document.querySelector('input[type="text"]');
     const password = document.querySelector('input[type="password"]');
 
+    const accountLocal = localStorage.getItem("user");
+    const passwordLocal = localStorage.getItem("password");
+    account.value = accountLocal;
+    password.value = passwordLocal;
+
     const button = document.querySelector("button");
     button.onclick = (e) => {
       e.preventDefault();
@@ -47,10 +52,13 @@
       fetch(`/api/login?user=${accountValue}&password=${passwordValue}`)
         .then((res) => res.json())
         .then((res) => {
-          if (res.code !== 200) {
-            throw new Error(res.message);
+          if (res?.code === 200) {
+            localStorage.setItem("user", accountValue);
+            localStorage.setItem("password", passwordValue);
+            location.href = "/home.html";
+          } else {
+            throw new Error(res?.message);
           }
-          location.href = "/home.html";
         })
         .catch((error) => {
           alert(error.message);

@@ -9,6 +9,25 @@
   <body>
     <div style="margin: auto">
       <h3>Welcome</h3>
+      <ul></ul>
     </div>
   </body>
+  <script>
+    fetch("/api/files")
+      .then((res) => res.json())
+      .then((res) => {
+        const ul = document.querySelector("ul");
+        const files = res?.data || [];
+        const htmlValue = files
+          .map(
+            (v) =>
+              `<li><a href='https://www.baidu.com' target="_blank">${v}</a></li>`
+          )
+          .join();
+        ul.innerHTML = htmlValue;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  </script>
 </html>

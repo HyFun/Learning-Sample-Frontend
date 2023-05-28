@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList</title>
+    <style>
+      .empty {
+        height: 200px;
+        text-align: center;
+        color: #999;
+      }
+
+      table,
+      tbody {
+        display: block;
+      }
+
+      table tr {
+        display: flex;
+        border-bottom: 1px solid #eee;
+      }
+
+      table td {
+        padding: 8px;
+        flex-basis: 0;
+        flex-grow: 1;
+        word-break: break-all;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ title }}</h1>
+      <hr />
+      <div>
+        <h3>新增</h3>
+        <p>
+          <input
+            :disabled="loading"
+            type="text"
+            placeholder="请输入标题"
+            v-model="form.title"
+          />
+          <button :disabled="loading" @click="add">提交</button>
+        </p>
+      </div>
+      <hr />
+      <div>
+        <h3>列表</h3>
+        <p class="empty" v-if="list<=0">数据为空</p>
+        <table v-else>
+          <tr>
+            <td>ID</td>
+            <td>标题</td>
+            <td>创建时间</td>
+            <td>done</td>
+            <td>完成时间</td>
+          </tr>
+          <tr v-for="(data, index) in list" :key="data._id">
+            <td>{{ data._id }}</td>
+            <td>{{ data.title }}</td>
+            <td>{{ data.create_date }}</td>
+            <td>{{ data.done ? "✅" : "❌" }}</td>
+            <td>{{ data.finish_date }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        title: "Todo列表",
+        loading: false,
+        form: { title: "" },
+        list: [],
+      },
+      created() {
+        this.refresh();
+      },
+      methods: {
+        refresh: function () {
+          this.loading = true;
+          fetch("/api/todo/list")
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.ok) {
+                this.list = res.data;
+              }
+            })
+            .finally(() => {
+              this.loading = false;
+            });
+        },
+        add: function () {
+          const params = {
+            title: this.form.title,
+            create_date: new Date().toLocaleString(),
+            done: false,
+            finish_date: "",
+          };
+          this.loading = true;
+          fetch("/api/todo/add", {
+            method: "POST",
+            body: JSON.stringify(params),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.ok) {
+                this.form.title = "";
+                this.refresh();
+              }
+            })
+            .finally(() => {
+              this.loading = false;
+            });
+        },
+      },
+    });
+  </script>
+</html>

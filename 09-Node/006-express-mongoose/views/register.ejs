@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>注册</title>
+  </head>
+  <body>
+    <h1>注册示例</h1>
+    <div>
+      <p>用户名：<input type="text" id="username" /></p>
+      <p>密码：<input type="password" id="password" /></p>
+      <button>注册</button>
+    </div>
+    <hr />
+    <div id="result">
+      <h3>Result</h3>
+      <p></p>
+    </div>
+  </body>
+  <script>
+    const username = document.querySelector("#username");
+    const password = document.querySelector("#password");
+
+    document.querySelector("button").addEventListener("click", () => {
+      fetch("/api/register", {
+        method: "POST",
+        body: JSON.stringify({
+          username: username.value,
+          password: password.value,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          document.querySelector("#result p").textContent = JSON.stringify(
+            res,
+            2
+          );
+        });
+    });
+  </script>
+</html>

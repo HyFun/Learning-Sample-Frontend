@@ -1,36 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>首页</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <div>
-      <div>用户名: <input type="text" id="name" /></div>
-      <div>性别: <input type="text" id="sex" /></div>
-      <div>年龄: <input type="text" id="age" /></div>
-      <button>注册</button>
-    </div>
+    <h1>首页</h1>
+    <ul>
+      <% for(var i=0; i<routes.length; i++){ %>
+        <li>
+          <a href=<%=routes[i].path%>>
+            <%=routes[i].title%>
+          </a>
+      </li>
+      <%}%>
+    </ul>
   </body>
-  <script>
-    const name = document.querySelector("#name");
-    const sex = document.querySelector("#sex");
-    const age = document.querySelector("#age");
-
-    document.querySelector("button").addEventListener("click", () => {
-      console.log(name.value, sex.value, age.value);
-      fetch("/user/register", {
-        method: "POST",
-        body: JSON.stringify({
-          name: name.value,
-          sex: sex.value,
-          age: age.value,
-        }),
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      });
-    });
-  </script>
 </html>

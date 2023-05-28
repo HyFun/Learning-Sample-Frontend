@@ -24,6 +24,10 @@ Stop service
 
 # Getting Start
 
+## init configuration
+
+https://blog.csdn.net/hbtj_1216/article/details/120875957
+
 ## Install Navicat
 
 https://www.zanglikun.com/14865.html

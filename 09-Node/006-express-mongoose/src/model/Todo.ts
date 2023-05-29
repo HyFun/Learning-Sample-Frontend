@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+import { model, Schema } from "mongoose";
 
 const schema = new Schema({
   title: String,
@@ -9,4 +9,4 @@ const schema = new Schema({
 
 const TodoModel = model("todo", schema);
 
-module.exports = TodoModel;
+export default TodoModel;

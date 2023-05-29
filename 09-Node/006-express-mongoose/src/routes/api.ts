@@ -1,8 +1,9 @@
-var express = require("express");
-var router = express.Router();
+import express = require("express");
 
-const UserModel = require("../model/User");
-const TodoModel = require("../model/Todo");
+import UserModel from "../model/User";
+import TodoModel from "../model/Todo";
+
+var router = express.Router();
 
 router.post("/register", async function (req, res, next) {
   const { username, password } = req.body;
@@ -13,7 +14,7 @@ router.post("/register", async function (req, res, next) {
     }
     const data = await UserModel.create({ username, password });
     res.send({ ok: 1, data });
-  } catch (error) {
+  } catch (error: any) {
     res.send({ ok: 0, errMsg: error.message });
   }
 });
@@ -57,4 +58,4 @@ router.delete("/todo", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

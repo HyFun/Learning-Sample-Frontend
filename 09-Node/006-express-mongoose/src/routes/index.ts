@@ -1,4 +1,5 @@
-var express = require("express");
+import express from "express";
+
 var router = express.Router();
 
 const pages = [
@@ -25,4 +26,4 @@ pages.forEach((v) => {
   });
 });
 
-module.exports = router;
+export default router;

@@ -4,12 +4,13 @@
  * Module dependencies.
  */
 
-var app = require("../app");
-var debug = require("debug")("006-express-mongoose:server");
-var http = require("http");
+import http from "http";
+import debugPlugin from "debug";
 
-// connect database
-require("../db");
+import { connectDB } from "../src/db";
+import app from "../src/app";
+
+const debug = debugPlugin("006-express-mongoose:server");
 
 /**
  * Get port from environment and store in Express.
@@ -36,7 +37,7 @@ server.on("listening", onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val) {
+function normalizePort(val: string) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -56,7 +57,7 @@ function normalizePort(val) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError(error: any) {
   if (error.syscall !== "listen") {
     throw error;
   }
@@ -82,8 +83,9 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
+async function onListening() {
   var addr = server.address();
-  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr?.port;
   debug("Listening on " + bind);
+  await connectDB();
 }

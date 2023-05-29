@@ -5,42 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>注册</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
   </head>
   <body>
-    <h1>注册示例</h1>
-    <div>
-      <p>用户名：<input type="text" id="username" /></p>
-      <p>密码：<input type="password" id="password" /></p>
-      <button>注册</button>
-    </div>
-    <hr />
-    <div id="result">
-      <h3>Result</h3>
-      <p></p>
+    <div id="app">
+      <h1>注册示例</h1>
+      <div>
+        <p v-if="errMsg" style="color: red">{{ errMsg }}</p>
+        <p>用户名：<input type="text" v-model="form.username" /></p>
+        <p>密码：<input type="password" v-model="form.password" /></p>
+        <button @click="register">注册</button>
+      </div>
+      <hr />
+      <div>
+        <h3>Result</h3>
+        <p>{{ result }}</p>
+      </div>
     </div>
   </body>
   <script>
-    const username = document.querySelector("#username");
-    const password = document.querySelector("#password");
-
-    document.querySelector("button").addEventListener("click", () => {
-      fetch("/api/register", {
-        method: "POST",
-        body: JSON.stringify({
-          username: username.value,
-          password: password.value,
-        }),
-        headers: {
-          "Content-Type": "application/json",
+    new Vue({
+      el: "#app",
+      data: {
+        form: {
+          username: "",
+          password: "",
         },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          document.querySelector("#result p").textContent = JSON.stringify(
-            res,
-            2
-          );
-        });
+        errMsg: "",
+        result: "",
+      },
+      methods: {
+        register: function () {
+          fetch("/api/register", {
+            method: "POST",
+            body: JSON.stringify(this.form),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.ok) {
+                this.result = JSON.stringify(res, 2);
+                this.form.username = "";
+                this.form.password = "";
+                this.errMsg = "";
+              } else {
+                this.errMsg = res.errMsg || "";
+              }
+            });
+        },
+      },
     });
   </script>
 </html>

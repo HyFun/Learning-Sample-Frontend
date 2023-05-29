@@ -37,12 +37,15 @@
       <hr />
       <div>
         <h3>新增</h3>
+        <p style="color: red" v-if="errMsg">{{ errMsg }}</p>
         <p>
           <input
+            ref="inputEl"
             :disabled="loading"
             type="text"
             placeholder="请输入标题"
             v-model="form.title"
+            @keyup.enter="add"
           />
           <button :disabled="loading" @click="add">提交</button>
         </p>
@@ -58,6 +61,7 @@
             <td>创建时间</td>
             <td>done</td>
             <td>完成时间</td>
+            <td>操作</td>
           </tr>
           <tr v-for="(data, index) in list" :key="data._id">
             <td>{{ data._id }}</td>
@@ -65,12 +69,28 @@
             <td>{{ data.create_date }}</td>
             <td>{{ data.done ? "✅" : "❌" }}</td>
             <td>{{ data.finish_date }}</td>
+            <td>
+              <button @click="()=>deleteRow(data._id)">删除</button>
+              <button
+                v-if="data.done"
+                @click="()=>updateRow(data._id, !data.done)"
+              >
+                未完成
+              </button>
+              <button v-else @click="()=>updateRow(data._id, !data.done)">
+                完成
+              </button>
+            </td>
           </tr>
         </table>
       </div>
     </div>
   </body>
   <script>
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
     new Vue({
       el: "#app",
       data: {
@@ -78,6 +98,7 @@
         loading: false,
         form: { title: "" },
         list: [],
+        errMsg: "",
       },
       created() {
         this.refresh();
@@ -90,6 +111,9 @@
             .then((res) => {
               if (res.ok) {
                 this.list = res.data;
+                setTimeout(() => {
+                  this.$refs.inputEl.focus();
+                });
               }
             })
             .finally(() => {
@@ -97,6 +121,12 @@
             });
         },
         add: function () {
+          this.errMsg = "";
+          if (!this.form.title.trim()) {
+            this.errMsg = "请填写内容";
+            return;
+          }
+
           const params = {
             title: this.form.title,
             create_date: new Date().toLocaleString(),
@@ -107,9 +137,7 @@
           fetch("/api/todo/add", {
             method: "POST",
             body: JSON.stringify(params),
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers,
           })
             .then((res) => res.json())
             .then((res) => {
@@ -120,6 +148,36 @@
             })
             .finally(() => {
               this.loading = false;
+            });
+        },
+
+        deleteRow: function (id) {
+          fetch("/api/todo", {
+            method: "DELETE",
+            body: JSON.stringify({ id }),
+            headers,
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.ok) {
+                this.refresh();
+              }
+            });
+        },
+
+        updateRow: function (id, done) {
+          const finish_date = done ? new Date().toLocaleString() : "";
+
+          fetch("/api/todo", {
+            method: "PATCH",
+            body: JSON.stringify({ id, finish_date, done }),
+            headers,
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.ok) {
+                this.refresh();
+              }
             });
         },
       },

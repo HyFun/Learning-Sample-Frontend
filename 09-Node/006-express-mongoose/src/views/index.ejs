@@ -5,7 +5,10 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1>首页</h1>
+    <div style="display:flex; align-items: center;">
+      <h1 style="flex-grow: 1;">首页</h1>
+      <a href="/api/logout">登出</a>
+    </div>
     <ul>
       <% for(var i=0; i<routes.length; i++){ %>
         <li>

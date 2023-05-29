@@ -7,6 +7,8 @@ import logger from "morgan";
 import indexRouter from "./routes";
 import apiRouter from "./routes/api";
 
+import { COOKIE_USER_ID, WHITE_ROUTES } from "./constant";
+
 const app = express();
 
 // view engine setup
@@ -18,6 +20,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use((req, res, next) => {
+  const userId = req.cookies[COOKIE_USER_ID];
+  const { pathname } = new URL(req.url, "http://127.0.0.1");
+  if (userId || WHITE_ROUTES.includes(pathname)) {
+    next();
+  } else {
+    res.redirect("/login?errMsg=请您先登录");
+  }
+});
 
 app.use("/", indexRouter);
 app.use("/api", apiRouter);

@@ -2,8 +2,34 @@ import express = require("express");
 
 import UserModel from "../model/User";
 import TodoModel from "../model/Todo";
+import { COOKIE_USER_ID } from "../constant";
 
 var router = express.Router();
+
+router.post("/login", async function (req, res) {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    res.redirect("/login?errMsg=请输入用户名/密码");
+    return;
+  }
+  try {
+    const user = await UserModel.findOne(req.body);
+    console.log(`user`, user);
+    if (user) {
+      res.cookie(COOKIE_USER_ID, user._id);
+      res.redirect("/");
+    } else {
+      throw new Error();
+    }
+  } catch (error) {
+    res.redirect("/login?errMsg=用户名/密码错误");
+  }
+});
+
+router.get("/logout", async function (req, res) {
+  res.cookie(COOKIE_USER_ID, "");
+  res.redirect("/");
+});
 
 router.post("/register", async function (req, res, next) {
   const { username, password } = req.body;

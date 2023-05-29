@@ -8,7 +8,7 @@ import http from "http";
 import debugPlugin from "debug";
 
 import { connectDB } from "../src/db";
-import app from "../src/app";
+import app from "../src/App";
 
 const debug = debugPlugin("006-express-mongoose:server");
 

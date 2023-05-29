@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      .panel {
+        width: 360px;
+        margin: 100px auto;
+      }
+
+      form > div {
+        margin-bottom: 22px;
+        display: flex;
+      }
+
+      form input {
+        display: block;
+        width: 100%;
+        height: 32px;
+      }
+
+      form button {
+        display: block;
+        width: 100%;
+        height: 36px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="panel">
+      <h1>Login</h1>
+      <% if(errMsg){ %>
+      <p style="color: red"><%=errMsg%></p>
+      <% } %>
+      <form action="/api/login" method="post">
+        <div>
+          <input type="text" name="username" placeholder="请输入账号" />
+        </div>
+        <div>
+          <input type="password" name="password" placeholder="请输入密码" />
+        </div>
+        <div style="flex-direction: column">
+          <button type="submit" id="login">登录</button>
+          <button type="button" id="register">注册</button>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+    document.querySelector("#register").addEventListener("click", () => {
+      location.href = "/register";
+    });
+  </script>
+</html>

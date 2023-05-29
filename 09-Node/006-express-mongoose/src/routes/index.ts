@@ -15,7 +15,11 @@ const pages = [
   },
 ];
 
-/* GET home page. */
+router.get("/login", function (req, res, next) {
+  const { errMsg } = req.query;
+  res.render("login", { errMsg });
+});
+
 router.get("/", function (req, res, next) {
   res.render("index", { routes: pages });
 });

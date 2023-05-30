@@ -2,32 +2,27 @@ import express from "express";
 
 var router = express.Router();
 
-const pages = [
-  {
-    name: "register",
-    path: "/register",
-    title: "注册",
-  },
-  {
-    name: "todo",
-    path: "/todo",
-    title: "Todo列表",
-  },
-];
+router.get("/", function (req, res) {
+  res.redirect("/todo");
+});
 
 router.get("/login", function (req, res, next) {
   const { errMsg } = req.query;
   res.render("login", { errMsg });
 });
 
-router.get("/", function (req, res, next) {
-  res.render("index", { routes: pages });
+router.get("/logout", function (req, res) {
+  req.session.user = undefined;
+  res.cookie("_user_id_", "");
+  res.redirect("/");
 });
 
-pages.forEach((v) => {
-  router.get(v.path, function (req, res, next) {
-    res.render(v.name);
-  });
+router.get("/register", function (req, res) {
+  res.render("register");
+});
+
+router.get("/todo", function (req, res) {
+  res.render("todo");
 });
 
 export default router;

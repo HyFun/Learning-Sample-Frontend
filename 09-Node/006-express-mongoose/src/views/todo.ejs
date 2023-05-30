@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TodoList</title>
     <style>
+      .header {
+        display: flex;
+        align-items: center;
+      }
+
+      .header h1 {
+        flex-grow: 1;
+      }
+
       .empty {
         height: 200px;
         text-align: center;
@@ -33,7 +42,11 @@
   </head>
   <body>
     <div id="app">
-      <h1>{{ title }}</h1>
+      <div class="header">
+        <h1>{{ title }}</h1>
+        <span>Welcome, {{ user.username }}</span>
+        <a href="/logout">退出</a>
+      </div>
       <hr />
       <div>
         <h3>新增</h3>
@@ -91,22 +104,53 @@
       "Content-Type": "application/json",
     };
 
+    function getCookie(key) {
+      const result = {};
+      const cookieString = document.cookie || "";
+      const list = cookieString.split("; ");
+      if (list.length) {
+        list.forEach((v) => {
+          const values = v.split("=");
+          console.log("values", values);
+          if (values.length === 2) {
+            result[values[0]] = values[1];
+          }
+        });
+      }
+
+      return result[key];
+    }
+
     new Vue({
       el: "#app",
       data: {
         title: "Todo列表",
         loading: false,
+        user: {},
         form: { title: "" },
         list: [],
         errMsg: "",
       },
       created() {
         this.refresh();
+        this.getUser();
       },
       methods: {
+        getUser: function () {
+          const userId = getCookie("_user_id_");
+          if (!userId) return;
+          fetch(`/api/user/${userId}`)
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.ok) {
+                this.user = res.data;
+              }
+            });
+        },
+
         refresh: function () {
           this.loading = true;
-          fetch("/api/todo/list")
+          fetch("/api/todo")
             .then((res) => res.json())
             .then((res) => {
               if (res.ok) {
@@ -127,16 +171,10 @@
             return;
           }
 
-          const params = {
-            title: this.form.title,
-            create_date: new Date().toLocaleString(),
-            done: false,
-            finish_date: "",
-          };
           this.loading = true;
-          fetch("/api/todo/add", {
+          fetch("/api/todo", {
             method: "POST",
-            body: JSON.stringify(params),
+            body: JSON.stringify(this.form),
             headers,
           })
             .then((res) => res.json())
@@ -152,9 +190,8 @@
         },
 
         deleteRow: function (id) {
-          fetch("/api/todo", {
+          fetch(`/api/todo/${id}`, {
             method: "DELETE",
-            body: JSON.stringify({ id }),
             headers,
           })
             .then((res) => res.json())
@@ -168,9 +205,9 @@
         updateRow: function (id, done) {
           const finish_date = done ? new Date().toLocaleString() : "";
 
-          fetch("/api/todo", {
+          fetch(`/api/todo/${id}`, {
             method: "PATCH",
-            body: JSON.stringify({ id, finish_date, done }),
+            body: JSON.stringify({ finish_date, done }),
             headers,
           })
             .then((res) => res.json())

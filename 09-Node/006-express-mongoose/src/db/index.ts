@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export async function connectDB() {
   console.log("mongoose 开始连接");
   mongoose
-    .connect(`mongodb://localhost:27017`, {
+    .connect(`mongodb://localhost:${process.env.NODE_MONGO_PORT}`, {
       dbName: "test",
       user: process.env.NODE_MONGO_USER,
       pass: process.env.NODE_MONGO_PWD,

@@ -11,48 +11,96 @@
         margin: 100px auto;
       }
 
-      form > div {
+      .form > div {
         margin-bottom: 22px;
         display: flex;
       }
 
-      form input {
+      .form input {
         display: block;
         width: 100%;
         height: 32px;
       }
 
-      form button {
+      .form button {
         display: block;
         width: 100%;
         height: 36px;
         margin-bottom: 10px;
       }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
   </head>
   <body>
-    <div class="panel">
+    <div class="panel" id="app">
       <h1>Login</h1>
-      <% if(errMsg){ %>
-      <p style="color: red"><%=errMsg%></p>
-      <% } %>
-      <form action="/api/login" method="post">
+      <p id="message" style="display: none"><%=errMsg%></p>
+      <p style="color: red" v-if="errMsg">{{ errMsg }}</p>
+      <div class="form">
         <div>
-          <input type="text" name="username" placeholder="请输入账号" />
+          <input
+            type="text"
+            v-model="form.username"
+            placeholder="请输入账号"
+            @keyup.enter="login"
+          />
         </div>
         <div>
-          <input type="password" name="password" placeholder="请输入密码" />
+          <input
+            type="password"
+            v-model="form.password"
+            placeholder="请输入密码"
+            @keyup.enter="login"
+          />
         </div>
         <div style="flex-direction: column">
-          <button type="submit" id="login">登录</button>
-          <button type="button" id="register">注册</button>
+          <button type="submit" @click="login">登录</button>
+          <button type="button" @click="goRegister">注册</button>
         </div>
-      </form>
+      </div>
     </div>
   </body>
   <script>
-    document.querySelector("#register").addEventListener("click", () => {
-      location.href = "/register";
+    new Vue({
+      el: "#app",
+      data: {
+        errMsg: "",
+        form: {
+          username: "",
+          password: "",
+        },
+      },
+      mounted() {
+        const errMsg = document.querySelector("#message").textContent;
+        this.errMsg = errMsg;
+      },
+      methods: {
+        login: function () {
+          this.errMsg = "";
+          if (!this.form.username.trim() || !this.form.password.trim()) {
+            this.errMsg = "请输入用户名/密码";
+            return;
+          }
+          fetch("/api/login", {
+            method: "POST",
+            body: JSON.stringify(this.form),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.ok) {
+                location.href = "/";
+              } else {
+                this.errMsg = res.errMsg;
+              }
+            });
+        },
+        goRegister: function () {
+          location.href = "/register";
+        },
+      },
     });
   </script>
 </html>

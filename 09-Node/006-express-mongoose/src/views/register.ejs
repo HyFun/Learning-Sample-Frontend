@@ -36,6 +36,12 @@
       },
       methods: {
         register: function () {
+          this.errMsg = "";
+          if (!this.form.username.trim() || !this.form.password.trim()) {
+            this.errMsg = "请填写用户名/密码";
+            return;
+          }
+
           fetch("/api/register", {
             method: "POST",
             body: JSON.stringify(this.form),

@@ -1,5 +1,6 @@
-import createError from "http-errors";
 import express from "express";
+import session from "express-session";
+import createError from "http-errors";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
@@ -7,7 +8,8 @@ import logger from "morgan";
 import indexRouter from "./routes";
 import apiRouter from "./routes/api";
 
-import { COOKIE_USER_ID, WHITE_ROUTES } from "./constant";
+import { WHITE_ROUTES } from "./constant";
+import { returnFailed } from "../utils/response";
 
 const app = express();
 
@@ -19,15 +21,35 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.resolve(__dirname, "../public")));
+app.use(
+  session({
+    secret: "talkdesk",
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60,
+      secure: false,
+    },
+    rolling: true,
+  })
+);
 
 app.use((req, res, next) => {
-  const userId = req.cookies[COOKIE_USER_ID];
-  const { pathname } = new URL(req.url, "http://127.0.0.1");
-  if (userId || WHITE_ROUTES.includes(pathname)) {
+  const user = req.session.user;
+  const { pathname } = new URL(req.url, `http://127.0.0.1:${process.env.PORT}`);
+  if (user && pathname === "/login") {
+    res.redirect("/");
+    return;
+  }
+  if (user || WHITE_ROUTES.includes(pathname)) {
     next();
   } else {
-    res.redirect("/login?errMsg=请您先登录");
+    if (/^\/api/.test(pathname)) {
+      res.status(401).send(returnFailed("鉴权失败"));
+    } else {
+      res.redirect("/login?errMsg=请您先登录");
+    }
   }
 });
 

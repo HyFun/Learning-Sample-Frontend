@@ -1,9 +1,12 @@
 import express from "express";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import createError from "http-errors";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+
+import { url, options } from "./db";
 
 import indexRouter from "./routes";
 import apiRouter from "./routes/api";
@@ -22,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.resolve(__dirname, "../public")));
+
 app.use(
   session({
     secret: "talkdesk",
@@ -32,6 +36,11 @@ app.use(
       secure: false,
     },
     rolling: true,
+    store: new MongoStore({
+      mongoUrl: url,
+      mongoOptions: options,
+      ttl: 1000 * 60 * 60,
+    }),
   })
 );
 

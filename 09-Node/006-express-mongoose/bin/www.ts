@@ -7,8 +7,8 @@
 import http from "http";
 import debugPlugin from "debug";
 
-import { connectDB } from "../src/db";
 import app from "../src/App";
+import mongooseClient from "../src/db";
 
 const debug = debugPlugin("006-express-mongoose:server");
 
@@ -87,5 +87,5 @@ async function onListening() {
   var addr = server.address();
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr?.port;
   debug("Listening on " + bind);
-  await connectDB();
+  await mongooseClient.connect();
 }

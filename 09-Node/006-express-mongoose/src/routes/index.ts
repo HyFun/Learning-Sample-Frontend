@@ -12,9 +12,12 @@ router.get("/login", function (req, res, next) {
 });
 
 router.get("/logout", function (req, res) {
-  req.session.user = undefined;
-  res.cookie("_user_id_", "");
-  res.redirect("/");
+  req.session.destroy((err) => {
+    if (!err) {
+      res.cookie("_user_id_", "");
+      res.redirect("/");
+    }
+  });
 });
 
 router.get("/register", function (req, res) {

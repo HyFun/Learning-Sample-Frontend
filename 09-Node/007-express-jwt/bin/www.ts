@@ -4,11 +4,14 @@
  * Module dependencies.
  */
 
-import app from "../src/app";
-import debugFn from "debug";
 import http from "http";
+import debugPlugin from "debug";
 
-const debug = debugFn("007-express-jwt:server");
+import app from "../src/App";
+import mongooseClient from "../src/plugin/db";
+
+const debug = debugPlugin("007-express-jwt");
+
 /**
  * Get port from environment and store in Express.
  */
@@ -80,8 +83,9 @@ function onError(error: any) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
+async function onListening() {
   var addr = server.address();
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr?.port;
   debug("Listening on " + bind);
+  await mongooseClient.connect();
 }

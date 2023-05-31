@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>注册</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>注册示例</h1>
+      <div>
+        <p v-if="errMsg" style="color: red">{{ errMsg }}</p>
+        <p>用户名：<input type="text" v-model="form.username" /></p>
+        <p>密码：<input type="password" v-model="form.password" /></p>
+        <button @click="register">注册</button>
+      </div>
+      <hr />
+      <div>
+        <h3>Result</h3>
+        <p>{{ result }}</p>
+      </div>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        form: {
+          username: "",
+          password: "",
+        },
+        errMsg: "",
+        result: "",
+      },
+      methods: {
+        register: function () {
+          this.errMsg = "";
+          if (!this.form.username.trim() || !this.form.password.trim()) {
+            this.errMsg = "请填写用户名/密码";
+            return;
+          }
+
+          fetch("/api/register", {
+            method: "POST",
+            body: JSON.stringify(this.form),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.ok) {
+                this.result = JSON.stringify(res, 2);
+                this.form.username = "";
+                this.form.password = "";
+                this.errMsg = "";
+              } else {
+                this.errMsg = res.errMsg || "";
+              }
+            });
+        },
+      },
+    });
+  </script>
+</html>

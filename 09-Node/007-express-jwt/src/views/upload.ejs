@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload</title>
+    <style>
+      .panel {
+        width: 360px;
+        margin: 100px auto;
+      }
+
+      .form > div {
+        margin-bottom: 22px;
+        display: flex;
+      }
+
+      .form input {
+        display: block;
+        width: 100%;
+        height: 32px;
+      }
+
+      .form button {
+        display: block;
+        width: 100%;
+        height: 36px;
+        margin-bottom: 10px;
+      }
+    </style>
+    <%- include("common.ejs") %>
+  </head>
+  <body>
+    <div class="panel" id="app">
+      <h1>Upload</h1>
+      <p style="color: red" v-if="errMsg">{{ errMsg }}</p>
+      <div class="form">
+        <div>
+          <input type="text" v-model="form.name" placeholder="请输入文件名" />
+        </div>
+        <div>
+          <input type="file" @change="onFileChange" multiple accept="image/*" />
+        </div>
+        <div style="flex-direction: column">
+          <button @click="save">保存</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        errMsg: "",
+        form: {
+          name: "",
+          files: [],
+        },
+      },
+      methods: {
+        onFileChange: function (event) {
+          this.form.files = Array.from(event.target.files);
+        },
+        save: function () {
+          this.errMsg = "";
+          if (!this.form.name.trim() || !this.form.files.length) {
+            this.errMsg = "请填写内容";
+            return;
+          }
+
+          const formData = new FormData();
+          formData.append("name", this.form.name);
+          this.form.files.forEach((file) => {
+            formData.append("file", file);
+          });
+
+          axios
+            .post("/api/upload", formData)
+            .then((res) => res.data)
+            .then((res) => {
+              console.log(res);
+            });
+        },
+      },
+    });
+  </script>
+</html>

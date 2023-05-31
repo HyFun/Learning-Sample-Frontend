@@ -5,47 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TodoList</title>
-    <style>
-      .header {
-        display: flex;
-        align-items: center;
-      }
-
-      .header h1 {
-        flex-grow: 1;
-      }
-
-      .empty {
-        height: 200px;
-        text-align: center;
-        color: #999;
-      }
-
-      table,
-      tbody {
-        display: block;
-      }
-
-      table tr {
-        display: flex;
-        border-bottom: 1px solid #eee;
-      }
-
-      table td {
-        padding: 8px;
-        flex-basis: 0;
-        flex-grow: 1;
-        word-break: break-all;
-      }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/todo.css" />
     <%- include("common.ejs") %>
   </head>
   <body>
     <div id="app">
       <div class="header">
         <h1>{{ title }}</h1>
-        <span>Welcome, {{ user.username }}</span>
         <button style="margin-left: 10px" @click="logout">退出</button>
+      </div>
+      <hr />
+      <div>
+        <h3>User</h3>
+        <div class="user">
+          <img v-if="user.avatar_url" :src="user.avatar_url" />
+          <h4>{{ user.username }}</h4>
+        </div>
       </div>
       <hr />
       <div>
@@ -96,6 +71,15 @@
             </td>
           </tr>
         </table>
+      </div>
+      <hr />
+      <div>
+        <h3>其他</h3>
+        <div>
+          <ul>
+            <li><a href="/register">注册</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>

@@ -3,18 +3,27 @@ import { RequestHandler } from "express";
 import { registerUser, loginUser, getUser } from "../service/UserService";
 import { returnFailed, returnSuccess } from "../utils/response";
 import { generate } from "../utils/jwt";
+import upload from "../plugin/multer";
+import multer from "multer";
 
 export const register: RequestHandler = async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
-    return returnFailed("用户名/密码不能为空");
-  }
-  try {
-    await registerUser(username, password);
-    res.send(returnSuccess("注册成功"));
-  } catch (error: any) {
-    res.send(returnFailed(error.message));
-  }
+  upload.single("file")(req, res, async function (err) {
+    if (err instanceof multer.MulterError) {
+      return returnFailed(err.message);
+    } else if (err) {
+      return returnFailed(err.message);
+    }
+    const fileUrl = req.file?.url;
+    const { username, password } = req.body;
+    console.log(`fileUrl`, fileUrl);
+
+    try {
+      await registerUser(username, password, fileUrl);
+      res.send(returnSuccess("注册成功"));
+    } catch (error: any) {
+      res.send(returnFailed(error.message));
+    }
+  });
 };
 
 export const login: RequestHandler = async (req, res) => {

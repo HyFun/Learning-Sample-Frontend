@@ -19,8 +19,4 @@ router.get("/todo", function (req, res) {
   res.render("todo");
 });
 
-router.get("/upload", function (req, res) {
-  res.render("upload");
-});
-
 export default router;

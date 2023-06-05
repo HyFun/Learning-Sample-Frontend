@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <%- include("common.ejs")%>
+    <style>
+      #app {
+        padding: 20px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="header">
+        <h1>Home</h1>
+        <button @click="logout">退出</button>
+      </div>
+      <h2>欢迎您, {{ username }}</h2>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        username: "",
+      },
+      created() {
+        this.getUser();
+      },
+      methods: {
+        getUser: function () {
+          axios
+            .get("/api/user")
+            .then((res) => res.data)
+            .then((res) => {
+              if (res.ok) {
+                this.username = res.data.username;
+              }
+            });
+        },
+        logout: function () {
+          localStorage.removeItem("token");
+          location.href = "/";
+        },
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <%- include("common.ejs")%>
+    <style>
+      #app {
+        padding: 20px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .user {
+        display: flex;
+        align-items: center;
+      }
+
+      .user img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 1px solid #eee;
+      }
+
+      table,
+      thead,
+      tbody {
+        display: block;
+        width: 100%;
+      }
+      tr {
+        display: flex;
+      }
+      td {
+        flex-basis: 0;
+        flex-grow: 1;
+        padding: 5px;
+      }
+      thead {
+        font-weight: bold;
+      }
+      table td {
+        border: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="header">
+        <h1>Home</h1>
+        <button @click="logout">退出</button>
+      </div>
+      <h2 v-if="user.username" class="user">
+        <span>欢迎您,</span>
+        <span v-if="user.avatar_url">
+          <img :src="user.avatar_url" alt="" />
+        </span>
+        <span>{{ user.username }}</span>
+      </h2>
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>头像</td>
+            <td>用户名</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item,index) in list" :key="item._id">
+            <td>{{ item._id }}</td>
+            <td>
+              <img
+                width="50"
+                height="50"
+                style="border-radius: 50%"
+                :src="item.avatar_url"
+                alt=""
+              />
+            </td>
+            <td>
+              {{ item.username }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        user: {},
+        list: [],
+      },
+      created() {
+        this.getUser();
+        this.getList();
+      },
+      methods: {
+        getUser: function () {
+          axios
+            .get("/api/user")
+            .then((res) => res.data)
+            .then((res) => {
+              if (res.ok) {
+                this.user = res.data;
+              }
+            });
+        },
+        getList: function () {
+          axios
+            .get("/api/users")
+            .then((res) => res.data)
+            .then((res) => {
+              if (res.ok) {
+                this.list = res.data;
+              }
+            });
+        },
+        logout: function () {
+          localStorage.removeItem("token");
+          location.href = "/";
+        },
+      },
+    });
+  </script>
+</html>

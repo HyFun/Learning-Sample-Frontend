@@ -1,0 +1,48 @@
+#app {
+  padding: 20px;
+}
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header h1 {
+  flex-grow: 1;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.user img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+}
+
+.empty {
+  height: 200px;
+  text-align: center;
+  color: #999;
+}
+
+table,
+tbody {
+  display: block;
+}
+
+table tr {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+table td {
+  padding: 8px;
+  flex-basis: 0;
+  flex-grow: 1;
+  word-break: break-all;
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList</title>
+    <link rel="stylesheet" href="/stylesheets/todo.css" />
+    <%- include("common.ejs") %>
+  </head>
+  <body>
+    <div id="app">
+      <div class="header">
+        <h1>{{ title }}</h1>
+        <button style="margin-left: 10px" @click="logout">退出</button>
+      </div>
+      <hr />
+      <div>
+        <h3>User</h3>
+        <div class="user">
+          <img v-if="user.avatar_url" :src="user.avatar_url" />
+          <h4>{{ user.username }}</h4>
+        </div>
+      </div>
+      <hr />
+      <div>
+        <h3>新增</h3>
+        <p style="color: red" v-if="errMsg">{{ errMsg }}</p>
+        <p>
+          <input
+            ref="inputEl"
+            :disabled="loading"
+            type="text"
+            placeholder="请输入标题"
+            v-model="form.title"
+            @keyup.enter="add"
+          />
+          <button :disabled="loading" @click="add">提交</button>
+        </p>
+      </div>
+      <hr />
+      <div>
+        <h3>列表</h3>
+        <p class="empty" v-if="list<=0">数据为空</p>
+        <table v-else>
+          <tr>
+            <td>ID</td>
+            <td>标题</td>
+            <td>创建时间</td>
+            <td>done</td>
+            <td>完成时间</td>
+            <td>操作</td>
+          </tr>
+          <tr v-for="(data, index) in list" :key="data._id">
+            <td>{{ data._id }}</td>
+            <td>{{ data.title }}</td>
+            <td>{{ data.create_date }}</td>
+            <td>{{ data.done ? "✅" : "❌" }}</td>
+            <td>{{ data.finish_date }}</td>
+            <td>
+              <button @click="()=>deleteRow(data._id)">删除</button>
+              <button
+                v-if="data.done"
+                @click="()=>updateRow(data._id, !data.done)"
+              >
+                未完成
+              </button>
+              <button v-else @click="()=>updateRow(data._id, !data.done)">
+                完成
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <hr />
+      <div>
+        <h3>其他</h3>
+        <div>
+          <ul>
+            <li><a href="/register">注册</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function getCookie(key) {
+      const result = {};
+      const cookieString = document.cookie || "";
+      const list = cookieString.split("; ");
+      if (list.length) {
+        list.forEach((v) => {
+          const values = v.split("=");
+          if (values.length === 2) {
+            result[values[0]] = values[1];
+          }
+        });
+      }
+
+      return result[key];
+    }
+
+    new Vue({
+      el: "#app",
+      data: {
+        title: "Todo列表",
+        loading: false,
+        user: {},
+        form: { title: "" },
+        list: [],
+        errMsg: "",
+      },
+      created() {
+        this.refresh();
+        this.getUser();
+      },
+      methods: {
+        getUser: function () {
+          const userId = getCookie("_user_id_");
+          if (!userId) return;
+          axios
+            .get(`/api/user/${userId}`)
+            .then((res) => res.data)
+            .then((res) => {
+              if (res.ok) {
+                this.user = res.data;
+              }
+            });
+        },
+
+        refresh: function () {
+          this.loading = true;
+          axios
+            .get("/api/todo")
+            .then((res) => res.data)
+            .then((res) => {
+              if (res.ok) {
+                this.list = res.data;
+                setTimeout(() => {
+                  this.$refs.inputEl.focus();
+                });
+              }
+            })
+            .finally(() => {
+              this.loading = false;
+            });
+        },
+        add: function () {
+          this.errMsg = "";
+          if (!this.form.title.trim()) {
+            this.errMsg = "请填写内容";
+            return;
+          }
+
+          this.loading = true;
+          axios
+            .post("/api/todo", this.form)
+            .then((res) => res.data)
+            .then((res) => {
+              if (res.ok) {
+                this.form.title = "";
+                this.refresh();
+              }
+            })
+            .finally(() => {
+              this.loading = false;
+            });
+        },
+
+        deleteRow: function (id) {
+          axios
+            .delete(`/api/todo/${id}`)
+            .then((res) => res.data)
+            .then((res) => {
+              if (res.ok) {
+                this.refresh();
+              }
+            });
+        },
+
+        updateRow: function (id, done) {
+          const finish_date = done ? new Date().toLocaleString() : "";
+
+          axios
+            .patch(`/api/todo/${id}`, { finish_date, done })
+            .then((res) => res.data)
+            .then((res) => {
+              if (res.ok) {
+                this.refresh();
+              }
+            });
+        },
+
+        logout: function () {
+          axios
+            .get("/api/logout")
+            .then((res) => res.data)
+            .then((res) => {
+              if (res.ok) {
+                localStorage.removeItem("token");
+                location.href = "/";
+              }
+            });
+        },
+      },
+    });
+  </script>
+</html>

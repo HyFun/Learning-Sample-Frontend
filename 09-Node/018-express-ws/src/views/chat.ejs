@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>聊天室</title>
+    <style></style>
+    <%- include("common.ejs") %>
+  </head>
+  <body>
+    <div class="panel" id="app">
+      <h1>聊天室</h1>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        ws: undefined,
+      },
+      mounted() {
+        const token = localStorage.getItem("token");
+        this.ws = new WebSocket(`ws://localhost:8089?token=${token}`);
+        this.ws.onopen = () => {
+          console.log("ws open");
+        };
+
+        this.ws.onmessage = (message) => {};
+
+        this.ws.onerror = (err) => {
+          console.log("ws err", err);
+        };
+      },
+      unmounted() {
+        this.ws?.close();
+      },
+    });
+  </script>
+</html>

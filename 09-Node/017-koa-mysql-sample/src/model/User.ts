@@ -9,6 +9,10 @@ const User = db.instance.define("users", {
     primaryKey: true,
     comment: "用户ID",
   },
+  avatar_url: {
+    type: STRING,
+    comment: "用户头像",
+  },
   username: {
     type: STRING,
     allowNull: false,

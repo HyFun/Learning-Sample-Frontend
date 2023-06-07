@@ -71,11 +71,13 @@
             <td>ID</td>
             <td>头像</td>
             <td>用户名</td>
+            <td>年龄</td>
+            <td>性别</td>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item,index) in list" :key="item._id">
-            <td>{{ item._id }}</td>
+          <tr v-for="(item,index) in list" :key="item.id">
+            <td>{{ item.id }}</td>
             <td>
               <img
                 width="50"
@@ -87,6 +89,12 @@
             </td>
             <td>
               {{ item.username }}
+            </td>
+            <td>
+              {{ item.age }}
+            </td>
+            <td>
+              {{ item.gender }}
             </td>
           </tr>
         </tbody>

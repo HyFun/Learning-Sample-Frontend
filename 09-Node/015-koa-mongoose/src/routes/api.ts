@@ -35,40 +35,29 @@ router
       };
     }
   })
-  .post(
-    "/register",
-    async (ctx, next) => {
-      const { username } = ctx.request.body as any;
+  .post("/register", upload.single("file"), async (ctx) => {
+    try {
+      const { username, password } = ctx.request.body as any;
+
       const user = await UserModel.findOne({ username });
       if (user) {
-        ctx.body = {
-          ok: 0,
-          errMsg: "用户已经存在",
-        };
-      } else {
-        await next();
+        throw new Error("该用户已经存在");
       }
-    },
-    upload.single("file"),
-    async (ctx) => {
-      try {
-        const { username, password } = ctx.request.body as any;
 
-        // @ts-ignore
-        const url = ctx.request.file?.url;
+      // @ts-ignore
+      const url = ctx.request.file?.url;
 
-        await UserModel.create({ username, password, avatar_url: url });
-        ctx.body = {
-          ok: 1,
-        };
-      } catch (error: any) {
-        ctx.body = {
-          ok: 0,
-          errMsg: error.message,
-        };
-      }
+      await UserModel.create({ username, password, avatar_url: url });
+      ctx.body = {
+        ok: 1,
+      };
+    } catch (error: any) {
+      ctx.body = {
+        ok: 0,
+        errMsg: error.message,
+      };
     }
-  );
+  });
 
 // 用户
 router

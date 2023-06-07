@@ -85,7 +85,7 @@
           const formData = new FormData();
           formData.append("username", this.form.username);
           formData.append("password", this.form.password);
-          this.form.files.forEach((file) => formData.append("file", file));
+          this.form.files.forEach((file) => formData.append("avatar", file));
 
           axios
             .post("/api/register", formData)

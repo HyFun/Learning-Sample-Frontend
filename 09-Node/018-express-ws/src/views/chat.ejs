@@ -5,19 +5,160 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>聊天室</title>
-    <style></style>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      .panel {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 100%;
+        margin: 0 auto;
+        border: 1px solid #eee;
+      }
+
+      .header {
+        border-bottom: 1px solid #eee;
+        padding: 10px;
+        margin: 0;
+      }
+
+      .content {
+        border-bottom: 1px solid #eee;
+        width: 100%;
+        height: 0;
+        flex-grow: 1;
+        padding: 10px;
+        overflow-y: auto;
+      }
+
+      /* bot */
+      .content .bot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+
+      .content .bot p {
+        background-color: #eee;
+        border-radius: 4px;
+        padding: 8px;
+        max-width: 80%;
+        word-break: break-all;
+      }
+
+      /* 消息 */
+      .content .message {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      .content .message .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .content .message .bubble {
+        padding: 5px 10px;
+        margin: 0 10px;
+        background-color: orange;
+        border-radius: 8px;
+        word-wrap: break-word;
+      }
+
+      .input {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+      }
+      .input .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      .input input {
+        height: 40px;
+        flex-grow: 1;
+        padding: 0 10px;
+      }
+      .input button {
+        width: 80px;
+        height: 40px;
+        margin-left: 10px;
+      }
+    </style>
     <%- include("common.ejs") %>
   </head>
   <body>
     <div class="panel" id="app">
-      <h1>聊天室</h1>
+      <h1 class="header">聊天室</h1>
+
+      <div class="content">
+        <div v-for="(item,index) in messages" :key="index">
+          <!-- boot -->
+          <div v-if="item.messageType==='BOT'" class="bot">
+            <p>{{ item.content }}</p>
+          </div>
+
+          <div
+            v-if="item.messageType==='MESSAGE'"
+            class="message"
+            :style="{
+              flexDirection: item.self ? 'row-reverse':'row',
+              justifyContent: item.self?'end':'start'
+            }"
+          >
+            <p class="avatar" :style="{backgroundColor: item.user.avatar}"></p>
+            <div class="bubble">{{ item.content }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input">
+        <div class="avatar" :style="{backgroundColor: user.avatar}"></div>
+        <input
+          type="text"
+          :disabled="!ws"
+          v-model="value"
+          @keyup.enter="send"
+        />
+        <button :disabled="!ws" @click="send">发送</button>
+      </div>
     </div>
   </body>
   <script>
+    // 消息类型
+    const Type = {
+      INVALID_TOKEN: 0,
+      WELCOME: 1,
+      MESSAGE: 2,
+    };
+
+    const MessageType = {
+      BOT: "BOT",
+      MESSAGE: "MESSAGE",
+    };
+
     new Vue({
       el: "#app",
       data: {
+        value: "",
         ws: undefined,
+        user: {},
+        messages: [],
       },
       mounted() {
         const token = localStorage.getItem("token");
@@ -26,11 +167,56 @@
           console.log("ws open");
         };
 
-        this.ws.onmessage = (message) => {};
+        this.ws.onmessage = (message) => {
+          console.log("ws onmessage", message);
+          const res = this.parse(message.data);
+          switch (res?.type) {
+            case Type.INVALID_TOKEN:
+              localStorage.removeItem("token");
+              location.href = "/login";
+              break;
+            case Type.WELCOME:
+              this.messages.push(this.createWelcome(res.data));
+              break;
+            case Type.MESSAGE:
+              this.messages.push(res.data);
+              break;
+          }
+        };
 
         this.ws.onerror = (err) => {
           console.log("ws err", err);
         };
+      },
+      methods: {
+        send: function () {
+          if (!this.value.trim()) {
+            return;
+          }
+          this.ws.send(this.value);
+          this.value = "";
+        },
+        parse: function (data) {
+          try {
+            return JSON.parse(data);
+          } catch (error) {
+            return null;
+          }
+        },
+        createWelcome: function (data) {
+          const messageType = data.messageType;
+          const { no, id, username } = data.user;
+          if (data.self) {
+            this.user = data.user;
+          }
+          const content = data.self
+            ? `👏🏻欢迎您[${username}]~,您的序号是: ${no},ID为: ${id}`
+            : `👏🏻欢迎新成员[${username}]加入~`;
+          return {
+            messageType,
+            content,
+          };
+        },
       },
       unmounted() {
         this.ws?.close();

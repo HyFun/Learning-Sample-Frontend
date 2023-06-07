@@ -13,6 +13,11 @@ import mongooseClient from "../src/plugin/db";
 const debug = debugPlugin("007-express-jwt");
 
 /**
+ * start ws
+ */
+import "./ws"
+
+/**
  * Get port from environment and store in Express.
  */
 

@@ -73,11 +73,7 @@
         },
         register: function () {
           this.errMsg = "";
-          if (
-            !this.form.username.trim() ||
-            !this.form.password.trim() ||
-            !this.form.files.length
-          ) {
+          if (!this.form.username.trim() || !this.form.password.trim()) {
             this.errMsg = "请填写用户名/密码";
             return;
           }
@@ -85,7 +81,7 @@
           const formData = new FormData();
           formData.append("username", this.form.username);
           formData.append("password", this.form.password);
-          this.form.files.forEach((file) => formData.append("file", file));
+          this.form.files.forEach((file) => formData.append("avatar", file));
 
           axios
             .post("/api/register", formData)

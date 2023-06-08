@@ -1,5 +1,6 @@
 import { WebSocketServer, WebSocket } from "ws";
 import { verify } from "../utils/jwt";
+import { getMessenger } from "./messenger";
 
 let no = 0;
 
@@ -19,27 +20,31 @@ enum MessageType {
 server.on("connection", (ws, req) => {
   const { searchParams } = new URL(req.url!, "http://localhost:8089");
   const token = searchParams.get("token") || "";
-  const user = verify(token);
-  if (!user) {
-    send(ws, { type: Type.INVALID_TOKEN, errMsg: "无效的token，请重新登陆" });
-    return;
-  }
 
-  // 生成用户信息
-  const newUser = generateInfo(user as any);
-  // @ts-ignore
-  ws._payload = { user: newUser };
-  // 发送给其他人
-  send(ws, { type: Type.WELCOME, data: { messageType: MessageType.BOT } });
+  getMessenger({ ws, token });
 
-  ws.on("message", (message) => {
-    const content = message.toString();
-    send(ws, {
-      type: Type.MESSAGE,
-      data: { messageType: MessageType.MESSAGE, content },
-    });
-  });
-  ws.on("close", () => {});
+  // const user = verify(token);
+
+  // if (!user) {
+  //   send(ws, { type: Type.INVALID_TOKEN, errMsg: "无效的token，请重新登陆" });
+  //   return;
+  // }
+
+  // // 生成用户信息
+  // const newUser = generateInfo(user as any);
+  // // @ts-ignore
+  // ws._payload = { user: newUser };
+  // // 发送给其他人
+  // send(ws, { type: Type.WELCOME, data: { messageType: MessageType.BOT } });
+
+  // ws.on("message", (message) => {
+  //   const content = message.toString();
+  //   send(ws, {
+  //     type: Type.MESSAGE,
+  //     data: { messageType: MessageType.MESSAGE, content },
+  //   });
+  // });
+  // ws.on("close", () => {});
 });
 
 /**

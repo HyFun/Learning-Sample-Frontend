@@ -6,10 +6,8 @@ import logger from "morgan";
 
 import { register, WHITE_LIST } from "./routes";
 
-import { returnFailed } from "./utils/response";
+import { failed } from "./utils/data";
 import { verify, generate } from "./utils/jwt";
-
-import "./plugin/multer";
 
 const app = express();
 
@@ -33,7 +31,7 @@ app.use((req, res, next) => {
 
   const handleRedirect = async () => {
     if (/^\/api/.test(pathname)) {
-      res.status(401).send(returnFailed("用户token验证失败"));
+      res.status(401).send(failed("用户token验证失败"));
     } else {
       next();
     }
@@ -45,10 +43,7 @@ app.use((req, res, next) => {
     const user = verify(token) as any;
     if (user) {
       // 重新生产token
-      const newToken = generate(
-        { username: user.username, id: user._id },
-        "1h"
-      );
+      const newToken = generate({ username: user.username, id: user.id }, "1h");
       res.setHeader("Authorization", newToken);
       if (pathname === "/login") {
         res.redirect("/");

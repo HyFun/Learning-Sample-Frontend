@@ -86,7 +86,7 @@
             .then((res) => res.data)
             .then((res) => {
               if (res.ok) {
-                localStorage.setItem("token", res.data);
+                // localStorage.setItem("token", res.data);
                 location.href = "/";
               } else {
                 this.errMsg = res.errMsg;

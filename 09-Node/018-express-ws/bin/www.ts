@@ -15,7 +15,7 @@ const debug = debugPlugin("007-express-jwt");
 /**
  * start ws
  */
-import "./ws"
+import "../src/ws"
 
 /**
  * Get port from environment and store in Express.

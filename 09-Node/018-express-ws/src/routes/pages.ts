@@ -15,10 +15,6 @@ router.get("/register", function (req, res) {
   res.render("register");
 });
 
-router.get("/todo", function (req, res) {
-  res.render("todo");
-});
-
 router.get("/chat", function (req, res) {
   res.render("chat");
 });

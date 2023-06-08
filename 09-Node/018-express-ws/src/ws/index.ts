@@ -1,5 +1,5 @@
 import { WebSocketServer, WebSocket } from "ws";
-import { verify } from "../src/utils/jwt";
+import { verify } from "../utils/jwt";
 
 let no = 0;
 

@@ -3,7 +3,7 @@ import { INTEGER, STRING, DATE } from "sequelize";
 import db from "../plugin/db";
 
 export interface UserModel {
-  id: string;
+  id: number;
   avatar_url: string;
   username: string;
   password: string;

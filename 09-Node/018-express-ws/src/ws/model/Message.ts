@@ -1,10 +1,6 @@
 import { UserModel } from "../../model/User";
-import { MessageType } from "./MessageType";
+import { MessageModel } from "../../model/Message";
 
-export interface Message {
-  id: string;
-  messageType: MessageType;
-  message: string;
-  user?: UserModel;
-  date: number;
+export interface MessageResponse extends MessageModel {
+  user: UserModel;
 }

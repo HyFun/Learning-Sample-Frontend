@@ -109,19 +109,22 @@
       <div class="content">
         <div v-for="(item,index) in messages" :key="index">
           <!-- boot -->
-          <div v-if="item.messageType==='BOT'" class="bot">
-            <p>{{ item.content }}</p>
+          <div v-if="item.messageType==='SYSTEM'" class="bot">
+            <p>{{ item.message }}</p>
           </div>
 
           <div
-            v-if="item.messageType==='MESSAGE'"
+            v-if="item.messageType==='USER'"
             class="message"
             :style="{
               flexDirection: item.self ? 'row-reverse':'row',
               justifyContent: item.self?'end':'start'
             }"
           >
-            <p class="avatar" :style="{backgroundColor: item.user.avatar}"></p>
+            <p
+              class="avatar"
+              :style="{backgroundColor: item.user.avatar_url}"
+            ></p>
             <div class="bubble">{{ item.content }}</div>
           </div>
         </div>
@@ -140,16 +143,9 @@
     </div>
   </body>
   <script>
-    // 消息类型
-    const Type = {
-      INVALID_TOKEN: 0,
-      WELCOME: 1,
-      MESSAGE: 2,
-    };
-
     const MessageType = {
-      BOT: "BOT",
-      MESSAGE: "MESSAGE",
+      SYSTEM: "SYSTEM",
+      USER: "USER",
     };
 
     new Vue({
@@ -160,6 +156,9 @@
         user: {},
         messages: [],
       },
+      created() {
+        this.getUser();
+      },
       mounted() {
         const token = localStorage.getItem("token");
         this.ws = new WebSocket(`ws://localhost:8089?token=${token}`);
@@ -168,20 +167,8 @@
         };
 
         this.ws.onmessage = (message) => {
-          console.log("ws onmessage", message);
-          const res = this.parse(message.data);
-          switch (res?.type) {
-            case Type.INVALID_TOKEN:
-              localStorage.removeItem("token");
-              location.href = "/login";
-              break;
-            case Type.WELCOME:
-              this.messages.push(this.createWelcome(res.data));
-              break;
-            case Type.MESSAGE:
-              this.messages.push(res.data);
-              break;
-          }
+          console.log("ws onmessage", message.data);
+          this.parse(message.data);
         };
 
         this.ws.onerror = (err) => {
@@ -198,24 +185,33 @@
         },
         parse: function (data) {
           try {
-            return JSON.parse(data);
+            data = JSON.parse(data);
           } catch (error) {
-            return null;
+            data = null;
+          }
+
+          if (data.status === 401) {
+            localStorage.removeItem("token");
+            location.href = "/login";
+            return;
+          }
+
+          // 说明是消息
+          if (data.status === 200) {
+            const message = data.data.data;
+            this.messages.push(message);
+            return;
           }
         },
-        createWelcome: function (data) {
-          const messageType = data.messageType;
-          const { no, id, username } = data.user;
-          if (data.self) {
-            this.user = data.user;
-          }
-          const content = data.self
-            ? `👏🏻欢迎您[${username}]~,您的序号是: ${no},ID为: ${id}`
-            : `👏🏻欢迎新成员[${username}]加入~`;
-          return {
-            messageType,
-            content,
-          };
+        getUser: function () {
+          axios
+            .get("/api/user")
+            .then((res) => res.data)
+            .then((res) => {
+              if (res.ok) {
+                this.user = res.data;
+              }
+            });
         },
       },
       unmounted() {

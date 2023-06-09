@@ -36,7 +36,7 @@ export function getMessenger(option: Option) {
       cn.destroy();
     }
   }
-  const connect = new Connection({ ws, userId, service });
+  const connect = new Connection({ ws, userId, service, connectionMap: map });
   map.set(userId, connect);
   return connect;
 }

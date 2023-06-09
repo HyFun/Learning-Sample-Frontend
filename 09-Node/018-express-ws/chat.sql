@@ -11,11 +11,39 @@
  Target Server Version : 50742 (5.7.42)
  File Encoding         : 65001
 
- Date: 08/06/2023 23:47:09
+ Date: 09/06/2023 18:38:31
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for messages
+-- ----------------------------
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE `messages` (
+  `id` varchar(64) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `messageType` varchar(32) NOT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of messages
+-- ----------------------------
+BEGIN;
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('2951cdc8-0a64-4f7f-b462-657e26cf280d', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:37:26');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('6374fe1e-79e7-493d-9ecb-0130b3c91e07', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:31:32');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('8372d351-6d9a-4da1-b2ce-60de828044af', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:31:18');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('bec27f0d-90db-432a-b930-6c50a490dc40', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:32:07');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('dc47264f-b245-437c-8f92-0f346ccfd7a6', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:36:09');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('e3b6c203-e840-476b-8f9c-1209387626b6', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:36:41');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('efbc10f2-cf48-42d0-a5bb-7fdee43f9bf5', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:36:59');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for users
@@ -23,12 +51,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `avatar_url` varchar(255) DEFAULT NULL,
-  `username` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `avatar_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `username` varchar(32) CHARACTER SET utf8 NOT NULL,
+  `password` varchar(32) CHARACTER SET utf8 NOT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of users

@@ -1,8 +1,8 @@
 import express = require("express");
 
-import User from "../model/User";
+import User, { UserModel } from "../model/User";
 import { failed, success } from "../utils/data";
-import { generate } from "../utils/jwt";
+import { generate, verify } from "../utils/jwt";
 import upload from "../plugin/multer";
 
 var router = express.Router();
@@ -51,10 +51,24 @@ router
 
         res.send(success("注册成功"));
       } catch (error: any) {
-        res.send(error.message);
+        res.send(failed(error.message));
       }
     });
   })
-  .get("/user", (req, res) => {});
+  .get("/user", async (req, res) => {
+    try {
+      const token = req.get("authorization")?.split(" ")[1]!;
+
+      const user = verify(token) as UserModel;
+      const result = await User.findOne({ where: { id: user.id } });
+      if (result?.dataValues) {
+        res.send(success(result.dataValues));
+      } else {
+        throw new Error("查询失败");
+      }
+    } catch (error: any) {
+      res.send(failed(error.message));
+    }
+  });
 
 export default router;

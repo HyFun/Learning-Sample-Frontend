@@ -11,7 +11,7 @@
  Target Server Version : 50742 (5.7.42)
  File Encoding         : 65001
 
- Date: 09/06/2023 18:38:31
+ Date: 10/06/2023 02:45:02
 */
 
 SET NAMES utf8mb4;
@@ -36,13 +36,26 @@ CREATE TABLE `messages` (
 -- Records of messages
 -- ----------------------------
 BEGIN;
-INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('2951cdc8-0a64-4f7f-b462-657e26cf280d', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:37:26');
-INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('6374fe1e-79e7-493d-9ecb-0130b3c91e07', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:31:32');
-INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('8372d351-6d9a-4da1-b2ce-60de828044af', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:31:18');
-INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('bec27f0d-90db-432a-b930-6c50a490dc40', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:32:07');
-INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('dc47264f-b245-437c-8f92-0f346ccfd7a6', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:36:09');
-INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('e3b6c203-e840-476b-8f9c-1209387626b6', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:36:41');
-INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('efbc10f2-cf48-42d0-a5bb-7fdee43f9bf5', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 10:36:59');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('0544cdb7-5433-442c-8f7c-87c39d59cb78', 1, 'zhangsan', 'USER', '2023-06-09 17:57:54');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('163a2780-2886-451b-9444-dcced3465c93', 1, '你是？', 'USER', '2023-06-09 17:58:00');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('181a7251-1ef3-4283-908c-ca2c8421cd5a', 1, '我就是我啊', 'USER', '2023-06-09 18:37:47');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('1bfa0d63-c67e-4268-b0ef-44c475c02186', 1, 'haha', 'USER', '2023-06-09 18:37:26');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('1d91a673-207d-4e1e-bad7-f30e17d19496', 2, '哦哦哦', 'USER', '2023-06-09 17:58:13');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('3233f701-52ca-42b7-bbf2-78c0f65d6df7', 2, 'hello？', 'USER', '2023-06-09 17:57:26');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('412f18fd-dd6b-4b0a-b095-37c86e98919b', 2, 'hellp', 'USER', '2023-06-09 17:57:22');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('539f2865-948a-4e22-a80b-3e8ec102c8fe', 2, '有人吗', 'USER', '2023-06-09 17:57:19');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('5e738d36-195b-49fc-8040-a9cef7d1324e', 1, '我是zhangsna', 'USER', '2023-06-09 17:57:48');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('7cc5ac5a-f297-4b1f-b211-29a5035f8bdd', 1, '哈哈哈', 'USER', '2023-06-09 17:57:44');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('7d2727ca-d22f-4c02-b5c1-fccb7b1a804a', 2, '👋 欢迎[admin]加入群聊~', 'SYSTEM', '2023-06-09 17:57:13');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('7fad11ad-f629-4c70-9327-443cd406b9d8', 1, '有人的有人的', 'USER', '2023-06-09 17:57:42');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('86ed9197-d286-4d7e-b1c0-0ab07c6eb8ba', 2, '叫做admin', 'USER', '2023-06-09 17:58:08');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('87781761-bb5a-42d7-b06b-7ee9544984ec', 2, '是吗', 'USER', '2023-06-09 18:37:52');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('aee1258e-a1ba-44e8-9de1-5b21cbc0160a', 1, '你好', 'USER', '2023-06-09 17:57:45');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('b1c8e602-f762-4458-8341-e6b98a4c4eb4', 1, '👋 欢迎[zhangsan]加入群聊~', 'SYSTEM', '2023-06-09 17:57:28');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('b7dea4e8-4f85-48b8-8128-c65ce5c734dc', 2, 'haha ', 'USER', '2023-06-09 18:35:13');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('c76d12fd-8eba-4987-9113-e90d67278919', 2, '呵呵', 'USER', '2023-06-09 17:58:10');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('cbf8b78f-64f5-482a-8ca6-c7265b4f935c', 2, '我是管理员啊', 'USER', '2023-06-09 17:58:05');
+INSERT INTO `messages` (`id`, `user_id`, `message`, `messageType`, `create_time`) VALUES ('d764017c-219b-4b61-95db-32b294675185', 2, '请问你是？', 'USER', '2023-06-09 18:37:41');
 COMMIT;
 
 -- ----------------------------

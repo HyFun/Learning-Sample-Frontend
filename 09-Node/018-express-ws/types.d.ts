@@ -1,4 +1,5 @@
 import "multer";
+import { UserModel } from "./src/model/User";
 
 declare global {
   namespace Express {
@@ -7,5 +8,11 @@ declare global {
         url?: string;
       }
     }
+  }
+}
+
+declare module "ws" {
+  interface WebSocket {
+    _user: UserModel;
   }
 }

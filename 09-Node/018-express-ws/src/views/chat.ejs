@@ -88,6 +88,7 @@
         height: 40px;
         border-radius: 50%;
         margin-right: 10px;
+        border: 1px solid #ccc;
       }
       .input input {
         height: 40px;
@@ -106,32 +107,30 @@
     <div class="panel" id="app">
       <h1 class="header">聊天室</h1>
 
-      <div class="content">
-        <div v-for="(item,index) in messages" :key="index">
+      <div class="content" ref="scroller">
+        <div v-for="(item) in messages" :key="item.id">
           <!-- boot -->
           <div v-if="item.messageType==='SYSTEM'" class="bot">
             <p>{{ item.message }}</p>
           </div>
 
+          <!-- user -->
           <div
             v-if="item.messageType==='USER'"
             class="message"
             :style="{
-              flexDirection: item.self ? 'row-reverse':'row',
-              justifyContent: item.self?'end':'start'
+              flexDirection: item.user.id===user.id ? 'row-reverse':'row',
+              justifyContent: item.user.id===user.id?'end':'start'
             }"
           >
-            <p
-              class="avatar"
-              :style="{backgroundColor: item.user.avatar_url}"
-            ></p>
-            <div class="bubble">{{ item.content }}</div>
+            <img class="avatar" :src="item.user.avatar_url" />
+            <div class="bubble">{{ item.message }}</div>
           </div>
         </div>
       </div>
 
       <div class="input">
-        <div class="avatar" :style="{backgroundColor: user.avatar}"></div>
+        <img class="avatar" :src="user.avatar_url" alt="" />
         <input
           type="text"
           :disabled="!ws"
@@ -150,16 +149,17 @@
 
     new Vue({
       el: "#app",
-      data: {
-        value: "",
-        ws: undefined,
-        user: {},
-        messages: [],
-      },
-      created() {
-        this.getUser();
+      data() {
+        return {
+          value: "",
+          ws: undefined,
+          user: {},
+          messages: [],
+        };
       },
       mounted() {
+        this.getUser();
+
         const token = localStorage.getItem("token");
         this.ws = new WebSocket(`ws://localhost:8089?token=${token}`);
         this.ws.onopen = () => {
@@ -200,11 +200,26 @@
           if (data.status === 200) {
             const message = data.data.data;
             this.messages.push(message);
+            this.$nextTick(() => {
+              this.goBottom();
+            });
+            return;
+          }
+
+          // 历史消息
+          if (data.status === 201) {
+            const messages = data.data.data;
+            this.messages.push(...messages);
+            this.$nextTick(() => {
+              this.goBottom();
+            });
             return;
           }
         },
         getUser: function () {
-          axios
+          const start = Date.now();
+
+          window.axios
             .get("/api/user")
             .then((res) => res.data)
             .then((res) => {
@@ -212,6 +227,10 @@
                 this.user = res.data;
               }
             });
+        },
+        goBottom: function () {
+          const ele = this.$refs.scroller;
+          ele.scrollTop = ele.scrollHeight;
         },
       },
       unmounted() {

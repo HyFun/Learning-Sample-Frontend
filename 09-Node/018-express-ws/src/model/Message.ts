@@ -1,7 +1,7 @@
 import { INTEGER, STRING, DATE, Model } from "sequelize";
 
 import db from "../plugin/db";
-import { MessageType } from "../ws/model/MessageType";
+import { MessageType } from "../ws/types";
 import User from "./User";
 
 export interface MessageModel {

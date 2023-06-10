@@ -125,10 +125,12 @@ export class Connection {
 
   private bind() {
     this.ws.on("message", this.onReceiveMessage);
+    this.ws.on("close", this.onClose);
   }
 
   private unbind() {
     this.ws.off("message", this.onReceiveMessage);
+    this.ws.off("close", this.onClose);
   }
 
   private onReceiveMessage = async (message: RawData) => {
@@ -153,5 +155,11 @@ export class Connection {
     this.connectionMap.forEach((connect, userId) => {
       connect.send(response);
     });
+  };
+
+  private onClose = () => {
+    this.destroy();
+    this.connectionMap.delete(`${this.user?.id}`);
+    
   };
 }

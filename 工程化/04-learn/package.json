@@ -1,7 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "packages": [
+  "workspaces": [
     "packages/*",
     "libs/*"
   ],

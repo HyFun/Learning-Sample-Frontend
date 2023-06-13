@@ -1,0 +1,26 @@
+{
+  "name": "@test/sum",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "TD-Yofun <yongfeng.he@china.talkdesk.com>",
+  "homepage": "https://github.com/Yofun/learn-web#readme",
+  "license": "ISC",
+  "main": "lib/sum.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yofun/learn-web.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/sum.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/Yofun/learn-web/issues"
+  }
+}

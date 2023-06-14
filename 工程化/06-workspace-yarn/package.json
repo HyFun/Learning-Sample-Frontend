@@ -1,0 +1,16 @@
+{
+  "name": "root",
+  "private": true,
+  "version": "0.0.1",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "preinstall": "npx only-allow yarn",
+    "deploy": "yarn workspaces run build & yarn workspaces run deploy"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  }
+}

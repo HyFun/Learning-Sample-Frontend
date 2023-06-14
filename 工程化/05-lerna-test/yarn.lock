@@ -57,6 +57,16 @@
   resolved "http://localhost:4873/@test/decrease/-/decrease-0.0.1.tgz#6442ddc5e0270359b50e3cab91f5a8e728213a2b"
   integrity sha512-8zBe4KLt4PD7bfuodm9uCWaPEb7uRzHuoVo7gTOTLbmhSC/nBhon/znJMeq6FKhEpQ64PG3cIcZCKvGtOt5FdQ==
 
+"@test/division@^0.0.1":
+  version "0.0.1"
+  resolved "http://localhost:4873/@test/division/-/division-0.0.1.tgz#26dc6d182b7b3b7b988b4e08014d3aeeb06e637e"
+  integrity sha512-m234Mra64n/fOWCOPVOZRu6XwQXtJ7PeYGazKV/OQG/+kfSikR5uxP+DGg00nd9ggppkl6qOgh0dilKB63/jMQ==
+
+"@test/multiplication@^0.0.1":
+  version "0.0.1"
+  resolved "http://localhost:4873/@test/multiplication/-/multiplication-0.0.1.tgz#d5a585fbb13c86a123508de4b0b13c71b13c4677"
+  integrity sha512-TMGEB63u63gTV64avdXaB6PyL3s47vaPyUnOPT1FJbKzNns29AjJjnxySTdrsjPmpPSsei6DBHgU1fgCCoi7ww==
+
 "@test/sum@^0.0.1":
   version "0.0.1"
   resolved "http://localhost:4873/@test/sum/-/sum-0.0.1.tgz#584d9c9e0ab3cc2688e87a7fc566d8cd6387193e"

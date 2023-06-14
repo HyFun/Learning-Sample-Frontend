@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": "."
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   }
 }

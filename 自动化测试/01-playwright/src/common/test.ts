@@ -1,9 +1,10 @@
 import { test as base } from "@playwright/test";
+import Session from "./session";
+import { Channel } from "../model";
 
 const test = base.extend({
-  digital: async ({ page }, use) => {
-    console.log(`start digital`);
-    await use(page);
+  chatSession: async ({}, use) => {
+    await Session.start(Channel.CHAT, use);
   },
 });
 

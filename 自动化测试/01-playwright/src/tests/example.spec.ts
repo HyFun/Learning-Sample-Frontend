@@ -1,7 +1,7 @@
-import { expect } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import test from "../common/test";
 
-let chatPage;
+let chatPage: Page;
 
 test.beforeAll(async ({ chatSession }) => {
   chatPage = await chatSession;

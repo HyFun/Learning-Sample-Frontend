@@ -1,10 +1,10 @@
 import { test as base } from "@playwright/test";
-import Session from "./session";
-import { Channel } from "../model";
+import { SessionType } from "../types";
+import session from "../session";
 
 const test = base.extend({
   chatSession: async ({}, use) => {
-    await Session.start(Channel.CHAT, use);
+    await session.start(SessionType.CHAT, use);
   },
 });
 

@@ -1,4 +1,4 @@
-import { Channel } from "../model";
+import { SessionType } from "../types";
 
 class Configuration {
   region() {}

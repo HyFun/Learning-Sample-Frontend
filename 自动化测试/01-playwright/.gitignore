@@ -1,7 +1,6 @@
-node_modules/
-/test-results/
-/playwright-report/
-/playwright/.cache/
+/node_modules
+/playwright-report
+/test-results
 
-src/assets/storage
-env
+/env
+/src/**/*-session.json

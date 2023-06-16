@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebpack_base=self.webpackChunkwebpack_base||[]).push([[946],{6946:function(e,a,t){t.r(a),a.default=function(){return(new Date).toLocaleDateString()}}}]);

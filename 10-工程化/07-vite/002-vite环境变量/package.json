@@ -3,12 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "start": "vite",
+    "test": "vite -m test",
     "build": "vite build"
   },
   "devDependencies": {
+    "@types/node": "^20.3.1",
     "typescript": "^5.1.3",
     "vite": "^4.3.9"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "vue": "2"
   }
 }

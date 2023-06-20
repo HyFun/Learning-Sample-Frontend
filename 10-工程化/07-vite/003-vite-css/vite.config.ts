@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import postcssPresetEnv from "postcss-preset-env";
 
 export default defineConfig({
   css: {
@@ -14,6 +15,10 @@ export default defineConfig({
           mainColor: "blue",
         },
       },
+    },
+    devSourcemap: true,
+    postcss: {
+      plugins: [postcssPresetEnv()],
     },
   },
 });

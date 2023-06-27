@@ -1,14 +1,10 @@
 import { defineConfig } from "vite";
-import { join } from "path";
 import react from "@vitejs/plugin-react";
 
+import ProjectInfo from "./plugin/ProjectInfo";
+
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": join(__dirname, "src"),
-    },
-  },
+  plugins: [react(), ProjectInfo()],
   server: {
     port: 3000,
     host: "localhost",

@@ -1,0 +1,9 @@
+$mainColor: red;
+
+.title {
+  color: $mainColor;
+
+  span {
+    background-color: pink;
+  }
+}

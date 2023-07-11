@@ -1,0 +1,12 @@
+{
+  "name": "007-vite-hmr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "vite"
+  },
+  "devDependencies": {
+    "vite": "^4.3.9"
+  }
+}

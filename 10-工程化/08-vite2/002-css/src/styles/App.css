@@ -1,0 +1,8 @@
+@import url(@styles/global.css);
+
+.title {
+  color: var(--main-color);
+  span {
+    color: orange;
+  }
+}
